@@ -17,7 +17,54 @@ public class WarringStatesGame {
      */
     static boolean isCardPlacementWellFormed(String cardPlacement) {
         // FIXME Task 2: determine whether a card placement is well-formed
-        return false;
+        boolean d = false;
+        if(cardPlacement.length()!=3){
+            d = false;
+        }else {
+            char a = cardPlacement.charAt(0);
+            char b = cardPlacement.charAt(1);
+            char c = cardPlacement.charAt(2);
+
+            if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')) {
+                switch(a){
+                    case 'a':
+                        if  (b>='0' && b<='7'){
+                            d = true;
+                        }
+                    case 'b':
+                        if  (b>='0' && b<='6'){
+                            d = true;
+                        }
+                    case 'c':
+                        if  (b>='0' && b<='5'){
+                            d = true;
+                        }
+                    case 'd':
+                        if  (b>='0' && b<='4'){
+                            d = true;
+                        }
+                    case 'e':
+                        if  (b>='0' && b<='3'){
+                            d = true;
+                        }
+                    case 'f':
+                        if  (b>='0' && b<='2'){
+                            d = true;
+                        }
+                    case 'g':
+                        if (b>='0' && b<='1'){
+                            d = true;
+                        }
+                    case 'z':
+                        if (b=='9'){
+                            d = true;
+                        }
+                }
+            } else {
+                d = false;
+            }
+        }
+        return d;
     }
 
     /**
@@ -32,7 +79,37 @@ public class WarringStatesGame {
      */
     static boolean isPlacementWellFormed(String placement) {
         // FIXME Task 3: determine whether a placement is well-formed
-        return false;
+        boolean b = true;
+        if (placement != null && placement.length() >= 3 && placement.length() <= 108 && placement.length() % 3 == 0) {
+            for (int i = 0; i < placement.length() / 3 & b == true; i++) {
+                String sub_i = placement.substring(3 * i, 3 * i + 3);
+                String sub_i_1 = sub_i.substring(0, 2);
+                String sub_i_2 = sub_i.substring(2);
+                if (isCardPlacementWellFormed(sub_i) == true) {
+                    if (placement.length() == 3) {
+                        b = true;
+                    } else {
+                        for (int j = i + 1; j < placement.length() / 3; j++) {
+                            String sub_j = placement.substring(3 * j, 3 * j + 3);
+                            String sub_j_1 = sub_j.substring(0, 2);
+                            String sub_j_2 = sub_j.substring(2);
+                            if ((sub_j_1.equals(sub_i_1)) || (sub_j_2.equals(sub_i_2))) {
+                                b = false;
+                                break;
+                            } else {
+                                b = true;
+                            }
+                        }
+                    }
+                } else {
+                    b = false;
+                    break;
+                }
+            }
+        } else {
+            b = false;
+        }
+        return b;
     }
 
     /**
