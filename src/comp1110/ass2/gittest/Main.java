@@ -1,5 +1,9 @@
 package comp1110.ass2.gittest;
 
 public class Main {
-    C c = new C();
+    public static void main(String[] args) {
+
+
+        B b = new B();
+    }
 }
