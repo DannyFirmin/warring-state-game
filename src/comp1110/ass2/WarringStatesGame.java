@@ -1,5 +1,7 @@
 package comp1110.ass2;
 
+import java.util.Arrays;
+
 /**
  * This class provides the text interface for the Warring States game
  */
@@ -126,7 +128,130 @@ public class WarringStatesGame {
      */
     public static boolean isMoveLegal(String placement, char locationChar) {
         // FIXME Task 5: determine whether a given move is legal
-        return false;
+        boolean result = false;//return
+        char a;//zhangyi's 1st character
+        char b;//zhangyi's 2nd character
+        char c='0';//zhangyi's 3rd character
+        char x;//destination's 1st character
+        char y;//destination's 2nd character
+        char z;//destination's 3rd character
+        int d=0; //recode variables
+        int l=0;
+        int m = 0;//index of zhangyi's location
+        int n = 0;//index of destination's location
+        boolean hasCard=false;//whether destination has card
+        boolean further=false;//whether futher card of same kingdom
+
+        //find Zhangyi
+        for(int i=0;i<placement.length();i=i+3){
+            if(placement.charAt(i)=='z'){
+                a='z';
+                b=placement.charAt(i+1);
+                c=placement.charAt(i+2);
+                m=i+2;
+                break;
+            }
+        }
+
+        //find destination
+        for(int i=0;i<placement.length();i=i+3){
+            if(placement.charAt(i+2)==locationChar){
+                x=placement.charAt(i);
+                y=placement.charAt(i+1);
+                z=locationChar;
+                n=i+2;
+                break;
+            }
+        }
+
+        //whether there's card on location
+        for(int i=0;i<placement.length();i=i+3) {
+            if (placement.charAt(i + 2) == locationChar) {
+                hasCard = true;
+                break;
+            }
+        }
+
+        //recode the location
+        int[] location=new int[placement.length()/3];
+        for(int i=0;i<placement.length()/3;i++){
+            if(placement.charAt(3*i+2)>='A' &&  placement.charAt(3*i+2)<='Z') {
+                location[i] = (int) placement.charAt(3*i+2) - 65;
+            }
+            if(placement.charAt(3*i+2)>='0' &&  placement.charAt(3*i+2)<='9'){
+                location[i] = (int)placement.charAt(3*i+2)-22;
+            }
+        }
+/*        for(char i='A';i<='Z';i++){
+            placement.charAt(i);
+        }
+        if(c >='A'&& c<='Z'){
+            d = (int) (c - 65);
+        }
+        if(c >='0'&& c<='9'){
+            d = (int) (c - 12);
+        }
+        if(locationChar>='A'&& locationChar<='Z'){
+            l = (int) (locationChar - 65);
+        }
+        if(locationChar>='0'&& locationChar<='0'){
+            l = (int) (locationChar - 12);
+        }*/
+
+        //whether same kingdom card further
+        d=location[(m-2)/3];
+        l=location[(n-2)/3];
+        if((d%6)==(l%6)) {
+            if (d > l) {
+                for (int i = l-6; (i % 6) != (d % 6); i=i-6) {
+                    if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
+                        further = false;
+                        break;
+                    }
+                }
+            }if (d < l) {
+                for (int i = l + 6; i < 36; i = i + 6) {
+                    if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
+                        further = false;
+                        break;
+                    }
+                }
+            }
+        }
+        if((d/6)==(l/6)) {
+            if (d > l) {
+                for (int i = l-1; (i / 6) !=(d / 6); i--) {
+                    if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
+                        further = false;
+                        break;
+                    }
+                }
+            }if(d < l) {
+                for (int i = l+1; (i / 6) !=(d / 6); i++) {
+                    if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
+                        further = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+
+        //check
+        if(isPlacementWellFormed(placement)) {
+            if(locationChar!='\0') {
+                if (d >= 0 && d <= 35 && l >= 0 && l <= 35) {
+                    if (hasCard) {
+                        if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) {
+                            if (further) {
+                                result = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     /**
