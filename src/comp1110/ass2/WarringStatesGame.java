@@ -20,45 +20,45 @@ public class WarringStatesGame {
     static boolean isCardPlacementWellFormed(String cardPlacement) {
         // FIXME Task 2: determine whether a card placement is well-formed
         boolean d = false;
-        if(cardPlacement.length()!=3){
+        if (cardPlacement.length() != 3) {
             d = false;
-        }else {
+        } else {
             char a = cardPlacement.charAt(0);
             char b = cardPlacement.charAt(1);
             char c = cardPlacement.charAt(2);
 
             if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')) {
-                switch(a){
+                switch (a) {
                     case 'a':
-                        if  (b>='0' && b<='7'){
+                        if (b >= '0' && b <= '7') {
                             d = true;
                         }
                     case 'b':
-                        if  (b>='0' && b<='6'){
+                        if (b >= '0' && b <= '6') {
                             d = true;
                         }
                     case 'c':
-                        if  (b>='0' && b<='5'){
+                        if (b >= '0' && b <= '5') {
                             d = true;
                         }
                     case 'd':
-                        if  (b>='0' && b<='4'){
+                        if (b >= '0' && b <= '4') {
                             d = true;
                         }
                     case 'e':
-                        if  (b>='0' && b<='3'){
+                        if (b >= '0' && b <= '3') {
                             d = true;
                         }
                     case 'f':
-                        if  (b>='0' && b<='2'){
+                        if (b >= '0' && b <= '2') {
                             d = true;
                         }
                     case 'g':
-                        if (b>='0' && b<='1'){
+                        if (b >= '0' && b <= '1') {
                             d = true;
                         }
                     case 'z':
-                        if (b=='9'){
+                        if (b == '9') {
                             d = true;
                         }
                 }
@@ -120,8 +120,9 @@ public class WarringStatesGame {
      * - there is a card at the chosen location;
      * - the location is in the same row or column of the grid as Zhang Yi's current position; and
      * - drawing a line from Zhang Yi's current location through the card at the chosen location,
-     *   there are no other cards along the line from the same kingdom as the chosen card
-     *   that are further away from Zhang Yi.
+     * there are no other cards along the line from the same kingdom as the chosen card
+     * that are further away from Zhang Yi.
+     *
      * @param placement    the current placement string
      * @param locationChar a location for Zhang Yi to move to
      * @return true if Zhang Yi may move to that location
@@ -131,41 +132,41 @@ public class WarringStatesGame {
         boolean result = false;//return
         char a;//zhangyi's 1st character
         char b;//zhangyi's 2nd character
-        char c='0';//zhangyi's 3rd character
+        char c = '0';//zhangyi's 3rd character
         char x;//destination's 1st character
         char y;//destination's 2nd character
         char z;//destination's 3rd character
-        int d=0; //recode variables
-        int l=0;
+        int d = 0; //recode variables
+        int l = 0;
         int m = 0;//index of zhangyi's location
         int n = 0;//index of destination's location
-        boolean hasCard=false;//whether destination has card
-        boolean further=false;//whether futher card of same kingdom
+        boolean hasCard = false;//whether destination has card
+        boolean further = false;//whether futher card of same kingdom
 
         //find Zhangyi
-        for(int i=0;i<placement.length();i=i+3){
-            if(placement.charAt(i)=='z'){
-                a='z';
-                b=placement.charAt(i+1);
-                c=placement.charAt(i+2);
-                m=i+2;
+        for (int i = 0; i < placement.length(); i = i + 3) {
+            if (placement.charAt(i) == 'z') {
+                a = 'z';
+                b = placement.charAt(i + 1);
+                c = placement.charAt(i + 2);
+                m = i + 2;
                 break;
             }
         }
 
         //find destination
-        for(int i=0;i<placement.length();i=i+3){
-            if(placement.charAt(i+2)==locationChar){
-                x=placement.charAt(i);
-                y=placement.charAt(i+1);
-                z=locationChar;
-                n=i+2;
+        for (int i = 0; i < placement.length(); i = i + 3) {
+            if (placement.charAt(i + 2) == locationChar) {
+                x = placement.charAt(i);
+                y = placement.charAt(i + 1);
+                z = locationChar;
+                n = i + 2;
                 break;
             }
         }
 
         //whether there's card on location
-        for(int i=0;i<placement.length();i=i+3) {
+        for (int i = 0; i < placement.length(); i = i + 3) {
             if (placement.charAt(i + 2) == locationChar) {
                 hasCard = true;
                 break;
@@ -173,13 +174,13 @@ public class WarringStatesGame {
         }
 
         //recode the location
-        int[] location=new int[placement.length()/3];
-        for(int i=0;i<placement.length()/3;i++){
-            if(placement.charAt(3*i+2)>='A' &&  placement.charAt(3*i+2)<='Z') {
-                location[i] = (int) placement.charAt(3*i+2) - 65;
+        int[] location = new int[placement.length() / 3];
+        for (int i = 0; i < placement.length() / 3; i++) {
+            if (placement.charAt(3 * i + 2) >= 'A' && placement.charAt(3 * i + 2) <= 'Z') {
+                location[i] = (int) placement.charAt(3 * i + 2) - 65;
             }
-            if(placement.charAt(3*i+2)>='0' &&  placement.charAt(3*i+2)<='9'){
-                location[i] = (int)placement.charAt(3*i+2)-22;
+            if (placement.charAt(3 * i + 2) >= '0' && placement.charAt(3 * i + 2) <= '9') {
+                location[i] = (int) placement.charAt(3 * i + 2) - 22;
             }
         }
 /*        for(char i='A';i<='Z';i++){
@@ -199,17 +200,18 @@ public class WarringStatesGame {
         }*/
 
         //whether same kingdom card further
-        d=location[(m-2)/3];
-        l=location[(n-2)/3];
-        if((d%6)==(l%6)) {
+        d = location[(m - 2) / 3];
+        l = location[(n - 2) / 3];
+        if ((d % 6) == (l % 6)) {
             if (d > l) {
-                for (int i = l-6; (i % 6) != (d % 6); i=i-6) {
+                for (int i = l - 6; (i % 6) != (d % 6); i = i - 6) {
                     if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
                         further = false;
                         break;
                     }
                 }
-            }if (d < l) {
+            }
+            if (d < l) {
                 for (int i = l + 6; i < 36; i = i + 6) {
                     if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
                         further = false;
@@ -218,16 +220,17 @@ public class WarringStatesGame {
                 }
             }
         }
-        if((d/6)==(l/6)) {
+        if ((d / 6) == (l / 6)) {
             if (d > l) {
-                for (int i = l-1; (i / 6) !=(d / 6); i--) {
+                for (int i = l - 1; (i / 6) != (d / 6); i--) {
                     if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
                         further = false;
                         break;
                     }
                 }
-            }if(d < l) {
-                for (int i = l+1; (i / 6) !=(d / 6); i++) {
+            }
+            if (d < l) {
+                for (int i = l + 1; (i / 6) != (d / 6); i++) {
                     if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
                         further = false;
                         break;
@@ -238,8 +241,8 @@ public class WarringStatesGame {
 
 
         //check
-        if(isPlacementWellFormed(placement)) {
-            if(locationChar!='\0') {
+        if (isPlacementWellFormed(placement)) {
+            if (locationChar != '\0') {
                 if (d >= 0 && d <= 35 && l >= 0 && l <= 35) {
                     if (hasCard) {
                         if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) {
@@ -320,6 +323,7 @@ public class WarringStatesGame {
      * there are no other cards along the line from the same kingdom as the chosen card
      * that are further away from Zhang Yi.
      * If there is no legal move available, return the null character '\0'.
+     *
      * @param placement the current placement string
      * @return a location character representing Zhang Yi's destination for the move
      */
