@@ -1,9 +1,5 @@
 package comp1110.ass2;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * This class provides the text interface for the Warring States game
@@ -120,7 +116,7 @@ public class WarringStatesGame {
     /**
      * Change the board encode all to numbers from 0-35
      *
-     * @param origin    the origin board encode
+     * @param origin the origin board encode
      * @return newcode the new number encode
      */
     private static int reEncode(char origin) {
@@ -206,63 +202,67 @@ public class WarringStatesGame {
 
 */
         //whether furthest same kingdom card
-        d=reEncode(c);
-        l=reEncode(z);
-        List<Character> store1 = new ArrayList<>();
+        d = reEncode(c);
+        l = reEncode(z);
         if ((d % 6) == (l % 6)) {
             if (d > l) {
-                for (int i = l - 6; i>=0; i = i - 6) {
-                    store1.add(placement.charAt(i));}
-                    HashMap<Character, Integer> sameElement = new HashMap<>();
-                for(Character character:store1){
-                    Integer value = hashMap.get(character)
+                for (int i = l - 6; i >= 0; i = i - 6) {
+                    for (int j = i - 6; j >= 0; j = j - 6) {
+                        if (placement.charAt(i) == placement.charAt(j)) ;
+                        {
+                            noFurther = false;
+                        }
+                    }
+
                 }
 
-
-                        if(store1.get(i)==store1.get(j))
-
-                    }
-                    if (placement.charAt(i) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
-                        noFurther = false;
-                        break;
-                    }
-                }
             }
+
             if (d < l) {
-                for (int i = l + 6; i < 36; i = i + 6) {
-                    if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
-                        noFurther = false;
-                        break;
+                for (int i = l + 6; i <= 35; i = i + 6) {
+                    for (int j = i + 6; j <= 35; j = j + 6) {
+                        if (placement.charAt(i) == placement.charAt(j)) ;
+                        {
+                            noFurther = false;
+                        }
                     }
                 }
             }
         }
+
         if ((d / 6) == (l / 6)) {
             if (d > l) {
-                for (int i = l - 1; (i / 6) != (d / 6); i--) {
-                    if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
-                        noFurther = false;
-                        break;
+
+                for (int i = l + 1; (i / 6) != (l / 6); i = i + 1) {
+                    for (int j = i + 1; (j / 6) != (l / 6); j = j + 1) {
+                        if (placement.charAt(i) == placement.charAt(j)) ;
+                        {
+                            noFurther = false;
+                        }
                     }
                 }
             }
             if (d < l) {
-                for (int i = l + 1; (i / 6) != (d / 6); i++) {
-                    if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
-                        noFurther = false;
-                        break;
+
+                for (int i = l - 1; (i / 6) != (l / 6); i = i - 1) {
+                    for (int j = i - 1; (j / 6) != (l / 6); j = j - 1) {
+                        if (placement.charAt(i) == placement.charAt(j)) ;
+                        {
+                            noFurther = false;
+                        }
                     }
                 }
+
             }
         }
 
 
         //check
-        if (isPlacementWellFormed(placement)) {
+     //   if (isPlacementWellFormed(placement)) {
             if (locationChar != '\0') {
                 if (d >= 0 && d <= 35 && l >= 0 && l <= 35) {
                     if (hasCard) {
-                        if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) { //Danny: Same row and column
+                        if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) { //Same row and column
                             if (noFurther) {
                                 result = true;
                             }
@@ -270,7 +270,7 @@ public class WarringStatesGame {
                     }
                 }
             }
-        }
+  //      }
         return result;
     }
 
