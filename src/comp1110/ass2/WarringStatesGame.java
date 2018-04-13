@@ -130,18 +130,19 @@ public class WarringStatesGame {
     public static boolean isMoveLegal(String placement, char locationChar) {
         // FIXME Task 5: determine whether a given move is legal
         boolean result = false;//return
-        char a;//zhangyi's 1st character
+        char a;//zhangyi's 1st character  //Danny: It will always be z I don't think it's necessary
         char b;//zhangyi's 2nd character
-        char c = '0';//zhangyi's 3rd character
+        char c = '0';//zhangyi's 3rd character , location, board code
         char x;//destination's 1st character
         char y;//destination's 2nd character
-        char z;//destination's 3rd character
-        int d = 0; //recode variables
-        int l = 0;
+        char z = '0';//destination's 3rd character
+        int d; //recoded variables for c //Danny: I deleted d=0 because it is redundant
+        int l;//Danny: I deleted l=0 because it is redundant
+        int z2; //recoded variables for z
         int m = 0;//index of zhangyi's location
         int n = 0;//index of destination's location
         boolean hasCard = false;//whether destination has card
-        boolean further = false;//whether futher card of same kingdom
+        boolean further = false;//whether further card of same kingdom
 
         //find Zhangyi
         for (int i = 0; i < placement.length(); i = i + 3) {
@@ -183,21 +184,30 @@ public class WarringStatesGame {
                 location[i] = (int) placement.charAt(3 * i + 2) - 22;
             }
         }
-/*        for(char i='A';i<='Z';i++){
-            placement.charAt(i);
+        //     for (char i = 'A'; i <= 'Z'; i++) {
+        //         placement.charAt(i); // Danny: what is this for? I don't think it is doing the right thing now so I comment it.
+
+        if (c >= 'A' && c <= 'Z') {
+            d = (int) (c - 65); //d is the recoded c
         }
-        if(c >='A'&& c<='Z'){
-            d = (int) (c - 65);
-        }
-        if(c >='0'&& c<='9'){
+        if (c >= '0' && c <= '9') {
             d = (int) (c - 12);
         }
-        if(locationChar>='A'&& locationChar<='Z'){
+        if (locationChar >= 'A' && locationChar <= 'Z') {
             l = (int) (locationChar - 65);
         }
-        if(locationChar>='0'&& locationChar<='0'){
+        if (locationChar >= '0' && locationChar <= '0') {
             l = (int) (locationChar - 12);
-        }*/
+        }
+
+        if (locationChar >= 'A' && locationChar <= 'Z') {
+            z2 = (int) (z - 65);
+        }
+        if (locationChar >= '0' && locationChar <= '0') {
+            z2 = (int) (z - 12);
+        }
+
+        //       }
 
         //whether same kingdom card further
         d = location[(m - 2) / 3];
