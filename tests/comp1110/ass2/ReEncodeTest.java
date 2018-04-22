@@ -2,7 +2,7 @@ package comp1110.ass2;
 
 import org.junit.Test;
 import static comp1110.ass2.WarringStatesGame.reEncode;
-import static org.testng.Assert.assertEquals;
+import static junit.framework.TestCase.assertEquals;
 
 public class ReEncodeTest {
     @Test
