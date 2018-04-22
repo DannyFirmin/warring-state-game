@@ -213,8 +213,8 @@ public class WarringStatesGame {
 
 */
         //whether furthest same kingdom card
-        d = reEncode(c);
-        l = reEncode(z);
+        d = reEncode(c); // c- zhangyi location char
+        l = reEncode(z); // z - destination location char
         if ((d % 6) == (l % 6)) {
             if (d > l) {
                 for (int i = l - 6; i >= 0 && i <= 6; i = i - 6) {
@@ -224,10 +224,13 @@ public class WarringStatesGame {
                     for (i = 2; i < placement.length(); i = i + 3) {
                         placement3 = placement3 + placement.charAt(i);
                     }
-                    int pos1 = placement3.indexOf(p1) * 3 + 2;
-                    int pos2 = placement3.indexOf(p2) * 3 + 2;
-
-                    if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
+                    int pos1 = (placement3.indexOf(p1) * 3) + 2;
+                    int pos2 = (placement3.indexOf(p2) * 3) + 2;
+                    if(pos1 <0 || pos2 <0){
+                        noFurther = true;
+                        break;
+                    }
+                    else if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                         noFurther = false;
                         break;
                     }
@@ -244,9 +247,13 @@ public class WarringStatesGame {
                     for (i = 2; i < placement.length(); i = i + 3) {
                         placement3 = placement3 + placement.charAt(i);
                     }
-                    int pos1 = placement3.indexOf(p1) * 3 + 2;
-                    int pos2 = placement3.indexOf(p2) * 3 + 2;
-                    if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
+                    int pos1 = (placement3.indexOf(p1) * 3) + 2;
+                    int pos2 = (placement3.indexOf(p2) * 3) + 2;
+                    if(pos1 <0 || pos2 <0){
+                        noFurther = true;
+                        break;
+                    }
+                    else if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                         noFurther = false;
                         break;
 
@@ -266,9 +273,13 @@ public class WarringStatesGame {
                     for (i = 2; i < placement.length(); i = i + 3) {
                         placement3 = placement3 + placement.charAt(i);
                     }
-                    int pos1 = placement3.indexOf(p1) * 3 + 2;
-                    int pos2 = placement3.indexOf(p2) * 3 + 2;
-                    if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
+                    int pos1 = (placement3.indexOf(p1) * 3) + 2;
+                    int pos2 = (placement3.indexOf(p2) * 3) + 2;
+                    if(pos1 <0 || pos2 <0){
+                        noFurther = true;
+                        break;
+                    }
+                    else if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                         noFurther = false;
                         break;
                     }
@@ -284,10 +295,14 @@ public class WarringStatesGame {
                     for (i = 2; i < placement.length(); i = i + 3) {
                         placement3 = placement3 + placement.charAt(i);
                     }
-                    int pos1 = placement3.indexOf(p1) * 3 + 2;
-                    int pos2 = placement3.indexOf(p2) * 3 + 2;
+                    int pos1 = (placement3.indexOf(p1) * 3) + 2;
+                    int pos2 = (placement3.indexOf(p2) * 3) + 2;
+                    if(pos1 <0 || pos2 <0){
+                        noFurther = true;
+                        break;
+                    }
 
-                    if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
+                   else if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                         noFurther = false;
                         break;
 
