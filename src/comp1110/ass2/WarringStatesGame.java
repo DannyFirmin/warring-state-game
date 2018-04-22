@@ -223,12 +223,12 @@ public class WarringStatesGame {
         l = reEncode(z);
         if ((d % 6) == (l % 6)) {
             if (d > l) {
-                for (int i = d - 6; (i >= 0 || i<=l); i = i - 6) {
+                for (int i = d - 6; (i >= 0 || i<=6); i = i - 6) {
                     for (int j = i-6; j >= 0; j = j - 6) {
-                        char x = decode(i);
-                        char y = decode(j);
-                        int pos1 = placement.indexOf(x);
-                        int pos2 = placement.indexOf(y);
+                        char p1 = decode(i);
+                        char p2 = decode(j);
+                        int pos1 = placement.indexOf(p1);
+                        int pos2 = placement.indexOf(p2);
 
                         if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                             noFurther = false;
@@ -245,10 +245,10 @@ public class WarringStatesGame {
             if (d < l) {
                 for (int i = l + 6; i <= 35; i = i + 6) {
                     for (int j = l; j <= 35; j = j + 6) {
-                        char x = decode(i);
-                        char y = decode(j);
-                        int pos1 = placement.indexOf(x);
-                        int pos2 = placement.indexOf(y);
+                        char p1 = decode(i);
+                        char p2 = decode(j);
+                        int pos1 = placement.indexOf(p1);
+                        int pos2 = placement.indexOf(p2);
 
                         if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                             noFurther = false;
@@ -263,10 +263,10 @@ public class WarringStatesGame {
 
                 for (int i = l + 1; (i / 6) != (l / 6); i = i + 1) {
                     for (int j = i; (j / 6) != (l / 6); j = j + 1) {
-                        char x = decode(i);
-                        char y = decode(j);
-                        int pos1 = placement.indexOf(x);
-                        int pos2 = placement.indexOf(y);
+                        char p1 = decode(i);
+                        char p2 = decode(j);
+                        int pos1 = placement.indexOf(p1);
+                        int pos2 = placement.indexOf(p2);
 
                         if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                             noFurther = false;
@@ -278,10 +278,10 @@ public class WarringStatesGame {
 
                 for (int i = l - 1; (i / 6) != (l / 6); i = i - 1) {
                     for (int j = i; (j / 6) != (l / 6); j = j - 1) {
-                        char x = decode(i);
-                        char y = decode(j);
-                        int pos1 = placement.indexOf(x);
-                        int pos2 = placement.indexOf(y);
+                        char p1 = decode(i);
+                        char p2 = decode(j);
+                        int pos1 = placement.indexOf(p1);
+                        int pos2 = placement.indexOf(p2);
 
                         if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                             noFurther = false;
