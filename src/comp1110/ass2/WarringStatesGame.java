@@ -119,26 +119,24 @@ public class WarringStatesGame {
      * @param origin the origin board encode
      * @return newcode the new number encode
      */
-    private static int reEncode(char origin) {
+    public static int reEncode(char origin) {
         int newcode = 0;
         if (origin >= 'A' && origin <= 'Z') {
             newcode = origin - 65;
         } else if (origin >= '0' && origin <= '9') {
-            newcode = origin - 12;
+            newcode = origin - 22;
         }
         return newcode;
     }
 
-    private static char decode(int encode) {
+    public static char decode(int encode) {
         if (encode >= 0 && encode <= 25) {
             encode = encode + 65;
-            if (encode >= 26 && encode <= 35) {
-                encode = encode + 22;
-            }
+        } else if (encode >= 26 && encode <= 35) {
+            encode = encode + 22;
         }
         char c = (char) encode;
         return c;
-
     }
 
 
@@ -219,15 +217,15 @@ public class WarringStatesGame {
         l = reEncode(z);
         if ((d % 6) == (l % 6)) {
             if (d > l) {
-                for (int i = l - 6; i>=0 && i <= 6; i = i - 6) {
+                for (int i = l - 6; i >= 0 && i <= 6; i = i - 6) {
                     char p1 = decode(l);
                     char p2 = decode(i);
                     String placement3 = "";
                     for (i = 2; i < placement.length(); i = i + 3) {
                         placement3 = placement3 + placement.charAt(i);
                     }
-                    int pos1 = placement3.indexOf(p1) * 3+2;
-                    int pos2 = placement3.indexOf(p2) * 3+2;
+                    int pos1 = placement3.indexOf(p1) * 3 + 2;
+                    int pos2 = placement3.indexOf(p2) * 3 + 2;
 
                     if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                         noFurther = false;
@@ -239,15 +237,15 @@ public class WarringStatesGame {
 
 
             if (d < l) {
-                for (int i = l + 6; i >= 30&&i<=35; i = i + 6) {
+                for (int i = l + 6; i >= 30 && i <= 35; i = i + 6) {
                     char p1 = decode(l);
                     char p2 = decode(i);
                     String placement3 = "";
                     for (i = 2; i < placement.length(); i = i + 3) {
                         placement3 = placement3 + placement.charAt(i);
                     }
-                    int pos1 = placement3.indexOf(p1) * 3+2;
-                    int pos2 = placement3.indexOf(p2) * 3+2;
+                    int pos1 = placement3.indexOf(p1) * 3 + 2;
+                    int pos2 = placement3.indexOf(p2) * 3 + 2;
                     if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                         noFurther = false;
                         break;
@@ -268,8 +266,8 @@ public class WarringStatesGame {
                     for (i = 2; i < placement.length(); i = i + 3) {
                         placement3 = placement3 + placement.charAt(i);
                     }
-                    int pos1 = placement3.indexOf(p1) * 3+2;
-                    int pos2 = placement3.indexOf(p2) * 3+2;
+                    int pos1 = placement3.indexOf(p1) * 3 + 2;
+                    int pos2 = placement3.indexOf(p2) * 3 + 2;
                     if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                         noFurther = false;
                         break;
@@ -279,21 +277,21 @@ public class WarringStatesGame {
             if (d < l) {
 
                 for (int i = l - 1; (i / 6) != (l / 6); i = i - 1) {
-                        char p1 = decode(l);
-                        char p2 = decode(i);
+                    char p1 = decode(l);
+                    char p2 = decode(i);
 
-                        String placement3="";
-                        for (i=2;i<placement.length();i=i+3){
-                            placement3=placement3+placement.charAt(i);
-                        }
-                        int pos1 = placement3.indexOf(p1)*3+2;
-                        int pos2 = placement3.indexOf(p2)*3+2;
+                    String placement3 = "";
+                    for (i = 2; i < placement.length(); i = i + 3) {
+                        placement3 = placement3 + placement.charAt(i);
+                    }
+                    int pos1 = placement3.indexOf(p1) * 3 + 2;
+                    int pos2 = placement3.indexOf(p2) * 3 + 2;
 
-                        if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
-                            noFurther = false;
-                            break;
+                    if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
+                        noFurther = false;
+                        break;
 
-                        }
+                    }
 
                 }
 
@@ -304,15 +302,15 @@ public class WarringStatesGame {
         //check
         //if (isPlacementWellFormed(placement)) {
         //if (locationChar != '\0') {
-            if (d >= 0 && d <= 35 && l >= 0 && l <= 35) {
-                if (hasCard) {
-                    if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) { //Same row and column
-                        if (noFurther) {
-                            result = true;
-                        }
+        if (d >= 0 && d <= 35 && l >= 0 && l <= 35) {
+            if (hasCard) {
+                if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) { //Same row and column
+                    if (noFurther) {
+                        result = true;
                     }
                 }
             }
+        }
         //}
         //      }
         return result;
