@@ -1,8 +1,6 @@
 package comp1110.ass2;
 
 
-import java.util.Arrays;
-
 /**
  * This class provides the text interface for the Warring States game
  */
@@ -126,11 +124,10 @@ public class WarringStatesGame {
         if (origin >= 'A' && origin <= 'Z') {
             newcode = origin - 65;
         } else if (origin >= '0' && origin <= '9') {
-            newcode = origin - 22;
+            newcode = origin - 12;
         }
         return newcode;
     }
-
     private static char decode(int encode) {
         if (encode >= 0 && encode <= 25) {
             encode = encode + 65;
@@ -143,8 +140,6 @@ public class WarringStatesGame {
 
     }
 
-
-}
 
     /**
      * Determine whether a given move is legal given a provided valid placement:
@@ -232,15 +227,13 @@ public class WarringStatesGame {
 
                         if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                             noFurther = false;
+
                         }
                     }
 
                 }
 
             }
-
-
-
 
             if (d < l) {
                 for (int i = l + 6; i <= 35; i = i + 6) {
@@ -252,6 +245,7 @@ public class WarringStatesGame {
 
                         if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                             noFurther = false;
+
                         }
                     }
                 }
@@ -270,6 +264,7 @@ public class WarringStatesGame {
 
                         if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                             noFurther = false;
+
                         }
                     }
                 }
@@ -285,6 +280,7 @@ public class WarringStatesGame {
 
                         if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                             noFurther = false;
+
                         }
                     }
                 }
