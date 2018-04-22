@@ -1,6 +1,8 @@
 package comp1110.ass2;
 
 
+import java.util.Arrays;
+
 /**
  * This class provides the text interface for the Warring States game
  */
@@ -129,6 +131,21 @@ public class WarringStatesGame {
         return newcode;
     }
 
+    private static char decode(int encode) {
+        if (encode >= 0 && encode <= 25) {
+            encode = encode + 65;
+            if (encode >= 26 && encode <= 35) {
+                encode = encode + 22;
+            }
+        }
+        char c = (char) encode;
+        return c;
+
+    }
+
+
+}
+
     /**
      * Determine whether a given move is legal given a provided valid placement:
      * - the location char is in the range A .. Z or 0..9
@@ -205,11 +222,15 @@ public class WarringStatesGame {
         d = reEncode(c);
         l = reEncode(z);
         if ((d % 6) == (l % 6)) {
-            if ((d > l) && (l>5) ) {
-                for (int i = l - 6; i > 0; i = i - 6) {
-                    for (int j = i; j >= 0; j = j - 6) {
-                        if (placement.charAt(i) == placement.charAt(j)) ; // need to modify this part
-                        {
+            if (d > l) {
+                for (int i = d - 6; (i >= 0 || i<=l); i = i - 6) {
+                    for (int j = i-6; j >= 0; j = j - 6) {
+                        char x = decode(i);
+                        char y = decode(j);
+                        int pos1 = placement.indexOf(x);
+                        int pos2 = placement.indexOf(y);
+
+                        if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                             noFurther = false;
                         }
                     }
@@ -218,11 +239,18 @@ public class WarringStatesGame {
 
             }
 
+
+
+
             if (d < l) {
                 for (int i = l + 6; i <= 35; i = i + 6) {
-                    for (int j = i + 6; j <= 35; j = j + 6) {
-                        if (placement.charAt(i) == placement.charAt(j)) ;
-                        {
+                    for (int j = l; j <= 35; j = j + 6) {
+                        char x = decode(i);
+                        char y = decode(j);
+                        int pos1 = placement.indexOf(x);
+                        int pos2 = placement.indexOf(y);
+
+                        if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                             noFurther = false;
                         }
                     }
@@ -234,9 +262,13 @@ public class WarringStatesGame {
             if (d > l) {
 
                 for (int i = l + 1; (i / 6) != (l / 6); i = i + 1) {
-                    for (int j = i + 1; (j / 6) != (l / 6); j = j + 1) {
-                        if (placement.charAt(i) == placement.charAt(j)) ;
-                        {
+                    for (int j = i; (j / 6) != (l / 6); j = j + 1) {
+                        char x = decode(i);
+                        char y = decode(j);
+                        int pos1 = placement.indexOf(x);
+                        int pos2 = placement.indexOf(y);
+
+                        if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                             noFurther = false;
                         }
                     }
@@ -245,9 +277,13 @@ public class WarringStatesGame {
             if (d < l) {
 
                 for (int i = l - 1; (i / 6) != (l / 6); i = i - 1) {
-                    for (int j = i - 1; (j / 6) != (l / 6); j = j - 1) {
-                        if (placement.charAt(i) == placement.charAt(j)) ;
-                        {
+                    for (int j = i; (j / 6) != (l / 6); j = j - 1) {
+                        char x = decode(i);
+                        char y = decode(j);
+                        int pos1 = placement.indexOf(x);
+                        int pos2 = placement.indexOf(y);
+
+                        if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                             noFurther = false;
                         }
                     }
@@ -258,19 +294,19 @@ public class WarringStatesGame {
 
 
         //check
-     //   if (isPlacementWellFormed(placement)) {
-            if (locationChar != '\0') {
-                if (d >= 0 && d <= 35 && l >= 0 && l <= 35) {
-                    if (hasCard) {
-                        if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) { //Same row and column
-                            if (noFurther) {
-                                result = true;
-                            }
+        //   if (isPlacementWellFormed(placement)) {
+        if (locationChar != '\0') {
+            if (d >= 0 && d <= 35 && l >= 0 && l <= 35) {
+                if (hasCard) {
+                    if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) { //Same row and column
+                        if (noFurther) {
+                            result = true;
                         }
                     }
                 }
             }
-  //      }
+        }
+        //      }
         return result;
     }
 
