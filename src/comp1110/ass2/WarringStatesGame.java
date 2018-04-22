@@ -1,6 +1,5 @@
 package comp1110.ass2;
 
-import java.util.Arrays;
 
 /**
  * This class provides the text interface for the Warring States game
@@ -115,6 +114,22 @@ public class WarringStatesGame {
     }
 
     /**
+     * Change the board encode all to numbers from 0-35
+     *
+     * @param origin the origin board encode
+     * @return newcode the new number encode
+     */
+    private static int reEncode(char origin) {
+        int newcode = 0;
+        if (origin >= 'A' && origin <= 'Z') {
+            newcode = origin - 65;
+        } else if (origin >= '0' && origin <= '9') {
+            newcode = origin - 22;
+        }
+        return newcode;
+    }
+
+    /**
      * Determine whether a given move is legal given a provided valid placement:
      * - the location char is in the range A .. Z or 0..9
      * - there is a card at the chosen location;
@@ -137,12 +152,12 @@ public class WarringStatesGame {
         char y;//destination's 2nd character
         char z = '0';//destination's 3rd character
         int d; //recoded variables for c //Danny: I deleted d=0 because it is redundant
-        int l;//Danny: I deleted l=0 because it is redundant
+        int l;//Danny: recoded variables for locationChar. I deleted l=0 because it is redundant
         int z2; //recoded variables for z
-        int m = 0;//index of zhangyi's location
+        int m = 0;//index of zhangyi's location  XX
         int n = 0;//index of destination's location
         boolean hasCard = false;//whether destination has card
-        boolean further = false;//whether further card of same kingdom
+        boolean noFurther = false;//whether further card of same kingdom
 
         //find Zhangyi
         for (int i = 0; i < placement.length(); i = i + 3) {
@@ -173,7 +188,7 @@ public class WarringStatesGame {
                 break;
             }
         }
-
+/*
         //recode the location
         int[] location = new int[placement.length() / 3];
         for (int i = 0; i < placement.length() / 3; i++) {
@@ -184,86 +199,78 @@ public class WarringStatesGame {
                 location[i] = (int) placement.charAt(3 * i + 2) - 22;
             }
         }
-        //     for (char i = 'A'; i <= 'Z'; i++) {
-        //         placement.charAt(i); // Danny: what is this for? I don't think it is doing the right thing now so I comment it.
 
-        if (c >= 'A' && c <= 'Z') {
-            d = (int) (c - 65); //d is the recoded c
-        }
-        if (c >= '0' && c <= '9') {
-            d = (int) (c - 12);
-        }
-        if (locationChar >= 'A' && locationChar <= 'Z') {
-            l = (int) (locationChar - 65);
-        }
-        if (locationChar >= '0' && locationChar <= '0') {
-            l = (int) (locationChar - 12);
-        }
-
-        if (locationChar >= 'A' && locationChar <= 'Z') {
-            z2 = (int) (z - 65);
-        }
-        if (locationChar >= '0' && locationChar <= '0') {
-            z2 = (int) (z - 12);
-        }
-
-        //       }
-
-        //whether same kingdom card further
-        d = location[(m - 2) / 3];
-        l = location[(n - 2) / 3];
+*/
+        //whether furthest same kingdom card
+        d = reEncode(c);
+        l = reEncode(z);
         if ((d % 6) == (l % 6)) {
-            if (d > l) {
-                for (int i = l - 6; (i % 6) != (d % 6); i = i - 6) {
-                    if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
-                        further = false;
-                        break;
+            if ((d > l) && (l>5) ) {
+                for (int i = l - 6; i > 0; i = i - 6) {
+                    for (int j = i; j >= 0; j = j - 6) {
+                        if (placement.charAt(i) == placement.charAt(j)) ; // need to modify this part
+                        {
+                            noFurther = false;
+                        }
                     }
+
                 }
+
             }
+
             if (d < l) {
-                for (int i = l + 6; i < 36; i = i + 6) {
-                    if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
-                        further = false;
-                        break;
+                for (int i = l + 6; i <= 35; i = i + 6) {
+                    for (int j = i + 6; j <= 35; j = j + 6) {
+                        if (placement.charAt(i) == placement.charAt(j)) ;
+                        {
+                            noFurther = false;
+                        }
                     }
                 }
             }
         }
+
         if ((d / 6) == (l / 6)) {
             if (d > l) {
-                for (int i = l - 1; (i / 6) != (d / 6); i--) {
-                    if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
-                        further = false;
-                        break;
+
+                for (int i = l + 1; (i / 6) != (l / 6); i = i + 1) {
+                    for (int j = i + 1; (j / 6) != (l / 6); j = j + 1) {
+                        if (placement.charAt(i) == placement.charAt(j)) ;
+                        {
+                            noFurther = false;
+                        }
                     }
                 }
             }
             if (d < l) {
-                for (int i = l + 1; (i / 6) != (d / 6); i++) {
-                    if (placement.charAt(n - 2) == placement.charAt(Arrays.binarySearch(location, i) * 3)) {
-                        further = false;
-                        break;
+
+                for (int i = l - 1; (i / 6) != (l / 6); i = i - 1) {
+                    for (int j = i - 1; (j / 6) != (l / 6); j = j - 1) {
+                        if (placement.charAt(i) == placement.charAt(j)) ;
+                        {
+                            noFurther = false;
+                        }
                     }
                 }
+
             }
         }
 
 
         //check
-        if (isPlacementWellFormed(placement)) {
+     //   if (isPlacementWellFormed(placement)) {
             if (locationChar != '\0') {
                 if (d >= 0 && d <= 35 && l >= 0 && l <= 35) {
                     if (hasCard) {
-                        if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) {
-                            if (further) {
+                        if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) { //Same row and column
+                            if (noFurther) {
                                 result = true;
                             }
                         }
                     }
                 }
             }
-        }
+  //      }
         return result;
     }
 
