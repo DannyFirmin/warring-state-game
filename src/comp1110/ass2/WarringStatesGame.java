@@ -166,11 +166,11 @@ public class WarringStatesGame {
         char z = '0';//destination's 3rd character
         int d; //recoded variables for c //Danny: I deleted d=0 because it is redundant
         int l;//Danny: recoded variables for locationChar. I deleted l=0 because it is redundant
-        int z2; //recoded variables for z
+        //int z2; //recoded variables for z
         int m = 0;//index of zhangyi's location  XX
         int n = 0;//index of destination's location
         boolean hasCard = false;//whether destination has card
-        boolean noFurther = false;//whether further card of same kingdom
+        boolean noFurther = true;//whether further card of same kingdom
 
         //find Zhangyi
         for (int i = 0; i < placement.length(); i = i + 3) {
@@ -219,71 +219,82 @@ public class WarringStatesGame {
         l = reEncode(z);
         if ((d % 6) == (l % 6)) {
             if (d > l) {
-                for (int i = d - 6; (i >= 0 || i <= 6); i = i - 6) {
-                    for (int j = i - 6; j >= 0; j = j - 6) {
-                        char p1 = decode(i);
-                        char p2 = decode(j);
-                        int pos1 = placement.indexOf(p1);
-                        int pos2 = placement.indexOf(p2);
-
-                        if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
-                            noFurther = false;
-
-                        }
+                for (int i = l - 6; i>=0 && i <= 6; i = i - 6) {
+                    char p1 = decode(l);
+                    char p2 = decode(i);
+                    String placement3 = "";
+                    for (i = 2; i < placement.length(); i = i + 3) {
+                        placement3 = placement3 + placement.charAt(i);
                     }
+                    int pos1 = placement3.indexOf(p1) * 3+2;
+                    int pos2 = placement3.indexOf(p2) * 3+2;
 
+                    if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
+                        noFurther = false;
+                        break;
+                    }
                 }
 
             }
 
+
             if (d < l) {
-                for (int i = l + 6; i <= 35; i = i + 6) {
-                    for (int j = l; j <= 35; j = j + 6) {
-                        char p1 = decode(i);
-                        char p2 = decode(j);
-                        int pos1 = placement.indexOf(p1);
-                        int pos2 = placement.indexOf(p2);
+                for (int i = l + 6; i >= 30&&i<=35; i = i + 6) {
+                    char p1 = decode(l);
+                    char p2 = decode(i);
+                    String placement3 = "";
+                    for (i = 2; i < placement.length(); i = i + 3) {
+                        placement3 = placement3 + placement.charAt(i);
+                    }
+                    int pos1 = placement3.indexOf(p1) * 3+2;
+                    int pos2 = placement3.indexOf(p2) * 3+2;
+                    if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
+                        noFurther = false;
+                        break;
 
-                        if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
-                            noFurther = false;
-
-                        }
                     }
                 }
             }
         }
 
+
         if ((d / 6) == (l / 6)) {
             if (d > l) {
 
                 for (int i = l + 1; (i / 6) != (l / 6); i = i + 1) {
-                    for (int j = i; (j / 6) != (l / 6); j = j + 1) {
-                        char p1 = decode(i);
-                        char p2 = decode(j);
-                        int pos1 = placement.indexOf(p1);
-                        int pos2 = placement.indexOf(p2);
-
-                        if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
-                            noFurther = false;
-
-                        }
+                    char p1 = decode(l);
+                    char p2 = decode(i);
+                    String placement3 = "";
+                    for (i = 2; i < placement.length(); i = i + 3) {
+                        placement3 = placement3 + placement.charAt(i);
+                    }
+                    int pos1 = placement3.indexOf(p1) * 3+2;
+                    int pos2 = placement3.indexOf(p2) * 3+2;
+                    if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
+                        noFurther = false;
+                        break;
                     }
                 }
             }
             if (d < l) {
 
                 for (int i = l - 1; (i / 6) != (l / 6); i = i - 1) {
-                    for (int j = i; (j / 6) != (l / 6); j = j - 1) {
-                        char p1 = decode(i);
-                        char p2 = decode(j);
-                        int pos1 = placement.indexOf(p1);
-                        int pos2 = placement.indexOf(p2);
+                        char p1 = decode(l);
+                        char p2 = decode(i);
+
+                        String placement3="";
+                        for (i=2;i<placement.length();i=i+3){
+                            placement3=placement3+placement.charAt(i);
+                        }
+                        int pos1 = placement3.indexOf(p1)*3+2;
+                        int pos2 = placement3.indexOf(p2)*3+2;
 
                         if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
                             noFurther = false;
+                            break;
 
                         }
-                    }
+
                 }
 
             }
@@ -291,8 +302,8 @@ public class WarringStatesGame {
 
 
         //check
-        //   if (isPlacementWellFormed(placement)) {
-        if (locationChar != '\0') {
+        //if (isPlacementWellFormed(placement)) {
+        //if (locationChar != '\0') {
             if (d >= 0 && d <= 35 && l >= 0 && l <= 35) {
                 if (hasCard) {
                     if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) { //Same row and column
@@ -302,7 +313,7 @@ public class WarringStatesGame {
                     }
                 }
             }
-        }
+        //}
         //      }
         return result;
     }
