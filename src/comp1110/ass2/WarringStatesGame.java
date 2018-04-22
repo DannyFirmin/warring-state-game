@@ -128,6 +128,7 @@ public class WarringStatesGame {
         }
         return newcode;
     }
+
     private static char decode(int encode) {
         if (encode >= 0 && encode <= 25) {
             encode = encode + 65;
@@ -218,8 +219,8 @@ public class WarringStatesGame {
         l = reEncode(z);
         if ((d % 6) == (l % 6)) {
             if (d > l) {
-                for (int i = d - 6; (i >= 0 || i<=6); i = i - 6) {
-                    for (int j = i-6; j >= 0; j = j - 6) {
+                for (int i = d - 6; (i >= 0 || i <= 6); i = i - 6) {
+                    for (int j = i - 6; j >= 0; j = j - 6) {
                         char p1 = decode(i);
                         char p2 = decode(j);
                         int pos1 = placement.indexOf(p1);
