@@ -124,7 +124,7 @@ public class WarringStatesGame {
         if (origin >= 'A' && origin <= 'Z') {
             newcode = origin - 65;
         } else if (origin >= '0' && origin <= '9') {
-            newcode = origin - 12;
+            newcode = origin - 22;
         }
         return newcode;
     }
@@ -205,10 +205,10 @@ public class WarringStatesGame {
         d = reEncode(c);
         l = reEncode(z);
         if ((d % 6) == (l % 6)) {
-            if (d > l) {
-                for (int i = l - 6; i >= 0; i = i - 6) {
-                    for (int j = i - 6; j >= 0; j = j - 6) {
-                        if (placement.charAt(i) == placement.charAt(j)) ;
+            if ((d > l) && (l>5) ) {
+                for (int i = l - 6; i > 0; i = i - 6) {
+                    for (int j = i; j >= 0; j = j - 6) {
+                        if (placement.charAt(i) == placement.charAt(j)) ; // need to modify this part
                         {
                             noFurther = false;
                         }
