@@ -234,7 +234,7 @@ public class WarringStatesGame {
                     }
                 }
             } else {
-                for (int i = lcol + 1; i <= 6; i++) {
+                for (int i = lcol + 1; i < 6; i++) {
                     if (occupation[zrow][i].charAt(0) == kingdom) {
                         noFurther = false;
                         break;
@@ -251,7 +251,7 @@ public class WarringStatesGame {
                     }
                 }
             } else {
-                for (int i = lrow + 1; i <= 6; i++) {
+                for (int i = lrow + 1; i < 6; i++) {
                     if (occupation[i][zcol].charAt(0) == kingdom) {
                         noFurther = false;
                         break;
@@ -260,18 +260,16 @@ public class WarringStatesGame {
             }
         }
 
-        if((locationChar<='9'&&locationChar>='0')||(locationChar>='A'&&locationChar<='Z')){
+
+        if((locationChar<='9'&&locationChar>='0')||(locationChar>='A'&&locationChar<='Z')){//in the range
             if(hasCard){
-                if(zrow==lrow||zcol==lcol){
+                if(zrow==lrow||zcol==lcol){//same row or column
                     if(noFurther){
                         result=true;
                     }
                 }
             }
         }
-
-
-
 
         return result;
     }
