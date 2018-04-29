@@ -158,165 +158,138 @@ public class WarringStatesGame {
     public static boolean isMoveLegal(String placement, char locationChar) {
         // FIXME Task 5: determine whether a given move is legal
         boolean result = false;//return
-        char a;//zhangyi's 1st character  //Danny: It will always be z I don't think it's necessary
-        char b;//zhangyi's 2nd character
-        char c = '0';//zhangyi's 3rd character , location, board code
-        char x;//destination's 1st character
-        char y;//destination's 2nd character
-        char z = '0';//destination's 3rd character
-        int d; //recoded variables for c //Danny: I deleted d=0 because it is redundant
-        int l;//Danny: recoded variables for locationChar. I deleted l=0 because it is redundant
-        //int z2; //recoded variables for z
-        int m = 0;//index of zhangyi's location  XX
-        int n = 0;//index of destination's location
+        char b;
+        char c='0'; //Zhangyi's 3rd card
+        int zrow=0;//Zhangyi's row on board
+        int zcol=0;//Zhangyi's column on board
+        int lrow=0;//destination's row on board
+        int lcol=0;//destination's column on board
+        char kingdom='z';//kingdom card of destination
         boolean hasCard = false;//whether destination has card
         boolean noFurther = true;//whether further card of same kingdom
 
+        char[][] board = {{'4', 'Y', 'S', 'M', 'G', 'A'},
+                {'5', 'Z', 'T', 'N', 'H', 'B'},
+                {'6', '0', 'U', 'O', 'I', 'C'},
+                {'7', '1', 'V', 'P', 'J', 'D'},
+                {'8', '2', 'W', 'Q', 'K', 'E'},
+                {'9', '3', 'X', 'R', 'L', 'F'}};
+
+        String[][] occupation = placementToOccupation(placement, board);
+
         //find Zhangyi
-        for (int i = 0; i < placement.length(); i = i + 3) {
-            if (placement.charAt(i) == 'z') {
-                a = 'z';
-                b = placement.charAt(i + 1);
-                c = placement.charAt(i + 2);
-                m = i + 2;
+        for (int i=0;i<placement.length();i=i+3){
+            if(placement.charAt(i)=='z'){
+                b=placement.charAt(i+1);
+                c=placement.charAt(i+2);
                 break;
             }
         }
 
-        //find destination
-        for (int i = 0; i < placement.length(); i = i + 3) {
-            if (placement.charAt(i + 2) == locationChar) {
-                x = placement.charAt(i);
-                y = placement.charAt(i + 1);
-                z = locationChar;
-                n = i + 2;
-                break;
+        //find Zhangyi on board
+        for(int i=0;i<6;i++){
+            for(int j=0;j<6;j++){
+                if(board[i][j]==c){
+                    zrow=i;
+                    zcol=j;
+                    break;
+                }
             }
         }
 
         //whether there's card on location
-        for (int i = 0; i < placement.length(); i = i + 3) {
-            if (placement.charAt(i + 2) == locationChar) {
-                hasCard = true;
+        for (int i=0;i<placement.length();i=i+3){
+            if(placement.charAt(i+2)==locationChar){
+                hasCard=true;
                 break;
             }
         }
-/*
-        //recode the location
-        int[] location = new int[placement.length() / 3];
-        for (int i = 0; i < placement.length() / 3; i++) {
-            if (placement.charAt(3 * i + 2) >= 'A' && placement.charAt(3 * i + 2) <= 'Z') {
-                location[i] = (int) placement.charAt(3 * i + 2) - 65;
-            }
-            if (placement.charAt(3 * i + 2) >= '0' && placement.charAt(3 * i + 2) <= '9') {
-                location[i] = (int) placement.charAt(3 * i + 2) - 22;
-            }
-        }
 
-*/
-        //whether furthest same kingdom card
-        d = reEncode(c);
-        l = reEncode(z);
-        if ((d % 6) == (l % 6)) {
-            if (d > l) {
-                for (int i = l - 6; i>=0 && i <= 6; i = i - 6) {
-                    char p1 = decode(l);
-                    char p2 = decode(i);
-                    String placement3 = "";
-                    for (i = 2; i < placement.length(); i = i + 3) {
-                        placement3 = placement3 + placement.charAt(i);
-                    }
-                    int pos1 = placement3.indexOf(p1) * 3+2;
-                    int pos2 = placement3.indexOf(p2) * 3+2;
-
-                    if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
-                        noFurther = false;
-                        break;
-                    }
-                }
-
-            }
-
-
-            if (d < l) {
-                for (int i = l + 6; i >= 30&&i<=35; i = i + 6) {
-                    char p1 = decode(l);
-                    char p2 = decode(i);
-                    String placement3 = "";
-                    for (i = 2; i < placement.length(); i = i + 3) {
-                        placement3 = placement3 + placement.charAt(i);
-                    }
-                    int pos1 = placement3.indexOf(p1) * 3+2;
-                    int pos2 = placement3.indexOf(p2) * 3+2;
-                    if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
-                        noFurther = false;
-                        break;
-
-                    }
+        //find the kingdom card on the destination
+        for(int i=0;i<6;i++){
+            for(int j=0;j<6;j++){
+                if(board[i][j]==locationChar){
+                    kingdom=occupation[i][j].charAt(0);
                 }
             }
         }
 
+        //find destination on board
+        for(int i=0;i<6;i++){
+            for(int j=0;j<6;j++){
+                if(board[i][j]==locationChar){
+                    lrow=i;
+                    lcol=j;
+                }
+            }
+        }
 
-        if ((d / 6) == (l / 6)) {
-            if (d > l) {
-
-                for (int i = l + 1; (i / 6) != (l / 6); i = i + 1) {
-                    char p1 = decode(l);
-                    char p2 = decode(i);
-                    String placement3 = "";
-                    for (i = 2; i < placement.length(); i = i + 3) {
-                        placement3 = placement3 + placement.charAt(i);
+        //whether furthest kingdom
+        if(zrow==lrow) {
+            if (zcol > lcol) {
+                for (int i = lcol - 1; i >= 0; i--) {
+                    if (occupation[zrow][i].charAt(0) == kingdom) {
+                        noFurther = false;
+                        break;
                     }
-                    int pos1 = placement3.indexOf(p1) * 3+2;
-                    int pos2 = placement3.indexOf(p2) * 3+2;
-                    if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
+                }
+            } else {
+                for (int i = lcol + 1; i <= 6; i++) {
+                    if (occupation[zrow][i].charAt(0) == kingdom) {
                         noFurther = false;
                         break;
                     }
                 }
             }
-            if (d < l) {
-
-                for (int i = l - 1; (i / 6) != (l / 6); i = i - 1) {
-                        char p1 = decode(l);
-                        char p2 = decode(i);
-
-                        String placement3="";
-                        for (i=2;i<placement.length();i=i+3){
-                            placement3=placement3+placement.charAt(i);
-                        }
-                        int pos1 = placement3.indexOf(p1)*3+2;
-                        int pos2 = placement3.indexOf(p2)*3+2;
-
-                        if (placement.charAt(pos1 - 2) == placement.charAt(pos2 - 2)) {
-                            noFurther = false;
-                            break;
-
-                        }
-
+        }
+        if (zcol == lcol) {
+            if (zrow > lrow) {
+                for (int i = lrow - 1; i >= 0; i--) {
+                    if (occupation[i][zcol].charAt(0) == kingdom) {
+                        noFurther = false;
+                        break;
+                    }
                 }
+            } else {
+                for (int i = lrow + 1; i <= 6; i++) {
+                    if (occupation[i][zcol].charAt(0) == kingdom) {
+                        noFurther = false;
+                        break;
+                    }
+                }
+            }
+        }
 
+        if((locationChar<='9'&&locationChar>='0')||(locationChar>='A'&&locationChar<='Z')){
+            if(hasCard){
+                if(zrow==lrow||zcol==lcol){
+                    if(noFurther){
+                        result=true;
+                    }
+                }
             }
         }
 
 
-        //check
-        //if (isPlacementWellFormed(placement)) {
-        //if (locationChar != '\0') {
-            if (d >= 0 && d <= 35 && l >= 0 && l <= 35) {
-                if (hasCard) {
-                    if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) { //Same row and column
-                        if (noFurther) {
-                            result = true;
-                        }
-                    }
-                }
-            }
-        //}
-        //      }
+
+
         return result;
     }
+
+    static public String[][] placementToOccupation(String placement, char[][] board) {
+        String[][] occupation = new String[6][6];
+        for (int i = 2; i < placement.length(); i = i + 3) {
+            for (int j = 0; j < 6; j++) {
+                for (int k = 0; k < 6; k++) {
+                    if (board[j][k] == placement.charAt(i)) occupation[j][k] = placement.substring(i - 2, i);
+                }
+            }
+        }
+        return occupation;
+    }
+
+
+
 
     /**
      * Determine whether a move sequence is valid.
