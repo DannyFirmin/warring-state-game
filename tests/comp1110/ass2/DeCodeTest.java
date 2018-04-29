@@ -22,11 +22,11 @@ public class DeCodeTest {
 
     @Test
     public void testNumbers(){
-        int one = 27;
+        int one = 49;
         char x = decode(one);
         assertEquals(x, '1');
 
-        int nine = 35;
+        int nine = 57;
         char y = decode(nine);
         assertEquals(y,'9');
 
