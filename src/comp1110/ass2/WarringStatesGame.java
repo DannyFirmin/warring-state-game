@@ -179,7 +179,7 @@ public class WarringStatesGame {
             if (placement.charAt(i) == 'z') {
                 b = placement.charAt(i + 1);
                 c = placement.charAt(i + 2);
-                break;
+                //break;
             }
         }
 
@@ -189,7 +189,7 @@ public class WarringStatesGame {
                 if (board[i][j] == c) {
                     zrow = i;
                     zcol = j;
-                    break;
+                    //break;
                 }
             }
         }
@@ -198,7 +198,7 @@ public class WarringStatesGame {
         for (int i = 0; i < placement.length(); i = i + 3) {
             if (placement.charAt(i + 2) == locationChar) {
                 hasCard = true;
-                break;
+                //break;
             }
         }
 
@@ -227,14 +227,14 @@ public class WarringStatesGame {
                 for (int i = lcol - 1; i >= 0; i--) {
                     if (occupation[zrow][i].charAt(0) == kingdom) {
                         noFurther = false;
-                        break;
+                        //break;
                     }
                 }
             } else {
                 for (int i = lcol + 1; i < 6; i++) {
                     if (occupation[zrow][i].charAt(0) == kingdom) {
                         noFurther = false;
-                        break;
+                        //break;
                     }
                 }
             }
@@ -244,14 +244,14 @@ public class WarringStatesGame {
                 for (int i = lrow - 1; i >= 0; i--) {
                     if (occupation[i][zcol].charAt(0) == kingdom) {
                         noFurther = false;
-                        break;
+                        //break;
                     }
                 }
             } else {
                 for (int i = lrow + 1; i < 6; i++) {
                     if (occupation[i][zcol].charAt(0) == kingdom) {
                         noFurther = false;
-                        break;
+                        //break;
                     }
                 }
             }
@@ -304,72 +304,159 @@ public class WarringStatesGame {
      */
     static boolean isMoveSequenceValid(String setup, String moveSequence) {
         // FIXME Task 6: determine whether a placement sequence is valid
-        boolean sameRNC = false;
-        boolean hasCard = false;
-        boolean result = true;
-        int[] setupInt = new int[setup.length() / 3];
-        int[] moveSeqInt = new int[moveSequence.length()];
-        ArrayList<Boolean> sameRNCal = new ArrayList<>();
+        char b;
+        char c = '0';
+        int zrow = '0';
+        int zcol = '0';
+        int lrow = '0';
+        int lcol = '0';
+        boolean result = false;
 
-        for (int i = 0; i < setup.length() / 3; i++) {
-            if (setup.charAt(3 * i + 2) >= 'A' && setup.charAt(3 * i + 2) <= 'Z') {
-                setupInt[i] = (int) setup.charAt(3 * i + 2) - 65;
-            }
-            if (setup.charAt(3 * i + 2) >= '0' && setup.charAt(3 * i + 2) <= '9') {
-                setupInt[i] = (int) setup.charAt(3 * i + 2) - 22;
+                char[][]board = {
+                {'4', 'Y', 'S', 'M', 'G', 'A'},
+                {'5', 'Z', 'T', 'N', 'H', 'B'},
+                {'6', '0', 'U', 'O', 'I', 'C'},
+                {'7', '1', 'V', 'P', 'J', 'D'},
+                {'8', '2', 'W', 'Q', 'K', 'E'},
+                {'9', '3', 'X', 'R', 'L', 'F'}
+        };
+
+
+        //find Zhangyi
+        for (int i = 0; i < setup.length(); i = i + 3) {
+            if (setup.charAt(i) == 'z') {
+                b = setup.charAt(i + 1);
+                c = setup.charAt(i + 2);
             }
         }
 
-
-        for (int i = 0; i < moveSequence.length(); i++) {
-            if (moveSequence.charAt(i) >= 'A' && moveSequence.charAt(i) <= 'Z') {
-                moveSeqInt[i] = (int) moveSequence.charAt(i) - 65;
-            }
-            if (moveSequence.charAt(i) >= '0' && moveSequence.charAt(i) <= '9') {
-                moveSeqInt[i] = (int) moveSequence.charAt(i) - 22;
-            }
-        }
-
-        boolean sameRNCtemp;
-        for (int i = 0; i < moveSeqInt.length - 1; i++) {
-            if (moveSeqInt[i] % 6 == moveSeqInt[i + 1] % 6 || moveSeqInt[i] / 6 == moveSeqInt[i + 1] / 6) {
-                sameRNCtemp = true;
-            } else {
-                sameRNCtemp = false;
-            }
-            sameRNCal.add(sameRNCtemp);
-        }
-
-        if (sameRNCal.contains(false)) {
-            sameRNC = false;
-        }
-
-        for (int i = 0; i < moveSeqInt.length; i++) {
-            for (int j = 0; j < setupInt.length; j++)
-                if (moveSeqInt[i] == setupInt[j]) {
-                    hasCard = true;
+        //find Zhangyi on board
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == c) {
+                    zrow = i;
+                    zcol = j;
                 }
+            }
         }
 
-        if (sameRNC && hasCard) {
-            result = false;
+        //find destination on board
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == moveSequence.charAt(0)) {
+                    lrow = i;
+                    lcol = j;
+                }
+            }
         }
-        return result;
+
+
+        if(isMoveLegal(setup,moveSequence.charAt(0))){
+            zrow = lrow;
+            zcol = lcol;
+            //setupchar.remove(0);
+
+        }
+    return result;
     }
 //
-//        //whether there's card on location
-//        for (int i = 0; i < setup.length(); i = i + 3) {
-//            if (placement.charAt(i + 2) == locationChar) {
-//                hasCard = true;
-//                break;
+////        char a;
+////        char b;
+////        char c;
+////        int row = 0;
+////        int col = 0;
+////        int rowX = 0;
+////        int colX = 0;
+//
+//        boolean sameRNC = false;
+//        boolean hasCard = false;
+//        boolean result = false;
+//        ArrayList <Integer> setupInt = new ArrayList<>();
+//        ArrayList <Integer> moveSeqInt = new ArrayList<>();
+//        ArrayList<Boolean> sameRNCal = new ArrayList<>();
+//
+////
+////
+////
+////        //find first position
+////        for (int i = 0; i < setup.length()-3; i=i+3) {
+////            if (setup.charAt(i+3) == moveSequence.charAt(i))
+////            c = setup.charAt(i+2);
+////
+////                for (int j = 0; j<6;j++) {
+////                    for(int k = 0; k<6;k++) {
+////                        if (board[j][k] == setup.charAt(i)){
+////                            row = j;
+////                            col = k;
+////                        }
+////                    }
+////                }
+////
+////            for (int m = 0; m<6;m++) {
+////                for(int n = 0; n<6;n++) {
+////                    if (board[m][n] == setup.charAt(i+3)){
+////                        rowX = m;
+////                        colX = n;
+////                    }
+////                }
+////            }
+////                if (row == rowX || col == colX){
+////                    sameRNC = true;
+////                    setup.charAt(i)==moveSequence.charAt(i-3)
+////                }
+////
+////        }
+//
+//        for (int i = 0; i < setup.length() / 3; i++) {
+//            if (setup.charAt(3 * i + 2) >= 'A' && setup.charAt(3 * i + 2) <= 'Z') {
+//                setupInt.add((int) setup.charAt(3 * i + 2) - 65);
+//            }
+//            if (setup.charAt(3 * i + 2) >= '0' && setup.charAt(3 * i + 2) <= '9') {
+//                setupInt.add((int) setup.charAt(3 * i + 2) - 22);
 //            }
 //        }
 //
-//        if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) { //Same row and column
-//            result = true;
+//
+//        for (int i = 0; i < moveSequence.length(); i++) {
+//            if (moveSequence.charAt(i) >= 'A' && moveSequence.charAt(i) <= 'Z') {
+//                moveSeqInt.add((int) moveSequence.charAt(i) - 65);
+//            }
+//            if (moveSequence.charAt(i) >= '0' && moveSequence.charAt(i) <= '9') {
+//                moveSeqInt.add((int) moveSequence.charAt(i) - 22);
+//            }
+//        }
+//
+//
+//        for (int i = 0; i < moveSeqInt.size() - 1; i++) {
+//            if (moveSeqInt.get(i) % 6 == moveSeqInt.get(i + 1) % 6 || moveSeqInt.get(i) / 6 == moveSeqInt.get(i + 1) / 6) {
+//                for (int j = 0; j < moveSeqInt.size()-1; j++) {
+//                    for (int k = 0; k < setupInt.size()-1; k++)
+//                        if (moveSeqInt.get(j) == setupInt.get(k)) {
+//                            hasCard = true;
+//                            moveSeqInt.remove(j);
+//                            result = true;
+//                        }
+//                }
+//
+//            }
 //        }
 //        return result;
+//
 //    }
+////
+////        //whether there's card on location
+////        for (int i = 0; i < setup.length(); i = i + 3) {
+////            if (placement.charAt(i + 2) == locationChar) {
+////                hasCard = true;
+////                break;
+////            }
+////        }
+////
+////        if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) { //Same row and column
+////            result = true;
+////        }
+////        return result;}
+
 
     /**
      * Get the list of supporters for the chosen player, given the provided
