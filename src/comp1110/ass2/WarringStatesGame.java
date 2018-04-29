@@ -1,6 +1,8 @@
 package comp1110.ass2;
 
 
+import java.util.ArrayList;
+
 /**
  * This class provides the text interface for the Warring States game
  */
@@ -339,8 +341,72 @@ public class WarringStatesGame {
      */
     static boolean isMoveSequenceValid(String setup, String moveSequence) {
         // FIXME Task 6: determine whether a placement sequence is valid
-        return false;
+        boolean sameRNC = false;
+        boolean hasCard = false;
+        boolean result = true;
+        int[] setupInt = new int[setup.length() / 3];
+        int[] moveSeqInt = new int[moveSequence.length()];
+        ArrayList<Boolean> sameRNCal = new ArrayList<>();
+
+        for (int i = 0; i < setup.length() / 3; i++) {
+            if (setup.charAt(3 * i + 2) >= 'A' && setup.charAt(3 * i + 2) <= 'Z') {
+                setupInt[i] = (int) setup.charAt(3 * i + 2) - 65;
+            }
+            if (setup.charAt(3 * i + 2) >= '0' && setup.charAt(3 * i + 2) <= '9') {
+                setupInt[i] = (int) setup.charAt(3 * i + 2) - 22;
+            }
+        }
+
+
+        for (int i = 0; i < moveSequence.length(); i++) {
+            if (moveSequence.charAt(i) >= 'A' && moveSequence.charAt(i) <= 'Z') {
+                moveSeqInt[i] = (int) moveSequence.charAt(i) - 65;
+            }
+            if (moveSequence.charAt(i) >= '0' && moveSequence.charAt(i) <= '9') {
+                moveSeqInt[i] = (int) moveSequence.charAt(i) - 22;
+            }
+        }
+
+        boolean sameRNCtemp;
+        for (int i = 0; i < moveSeqInt.length-1; i++) {
+            if (moveSeqInt[i] % 6 == moveSeqInt[i + 1] % 6 || moveSeqInt[i] / 6 == moveSeqInt[i + 1] / 6) {
+               sameRNCtemp = true;
+            } else{
+                sameRNCtemp = false;
+            }
+                sameRNCal.add(sameRNCtemp);
+            }
+
+            if (sameRNCal.contains(false)){
+            sameRNC = false;
+            }
+
+        for (int i = 0; i < moveSeqInt.length; i++) {
+            for (int j = 0; j < setupInt.length; j++)
+                if (moveSeqInt[i] == setupInt[j]) {
+                    hasCard = true;
+                }
+        }
+
+        if (sameRNC && hasCard) {
+            result = false;
+        }
+        return result;
     }
+//
+//        //whether there's card on location
+//        for (int i = 0; i < setup.length(); i = i + 3) {
+//            if (placement.charAt(i + 2) == locationChar) {
+//                hasCard = true;
+//                break;
+//            }
+//        }
+//
+//        if (((d % 6) == (l % 6)) || ((d / 6) == (l / 6))) { //Same row and column
+//            result = true;
+//        }
+//        return result;
+//    }
 
     /**
      * Get the list of supporters for the chosen player, given the provided
