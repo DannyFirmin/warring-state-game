@@ -278,10 +278,17 @@ public class WarringStatesGame {
 
     static public String[][] placementToOccupation(String placement, char[][] board) {
         String[][] occupation = new String[6][6];
+        for(int i=0;i<6;i++){
+            for(int j=0;j<6;j++){
+                occupation[i][j]="~~";
+            }
+        }
         for (int i = 2; i < placement.length(); i = i + 3) {
             for (int j = 0; j < 6; j++) {
                 for (int k = 0; k < 6; k++) {
-                    if (board[j][k] == placement.charAt(i)) occupation[j][k] = placement.substring(i - 2, i);
+                    if (board[j][k] == placement.charAt(i)) {
+                        occupation[j][k] = placement.substring(i - 2, i);
+                    }
                 }
             }
         }
