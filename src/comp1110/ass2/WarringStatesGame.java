@@ -121,17 +121,17 @@ public class WarringStatesGame {
      * @param origin the origin board encode
      * @return newcode the new number encode
      */
-    private static int reEncode(char origin) {
+    public static int reEncode(char origin) {
         int newcode = 0;
         if (origin >= 'A' && origin <= 'Z') {
             newcode = origin - 65;
         } else if (origin >= '0' && origin <= '9') {
-            newcode = origin - 12;
+            newcode = origin - 22;
         }
         return newcode;
     }
 
-    private static char decode(int encode) {
+    public static char decode(int encode) {
         if (encode >= 0 && encode <= 25) {
             encode = encode + 65;
             if (encode >= 26 && encode <= 35) {
