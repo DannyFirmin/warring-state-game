@@ -304,62 +304,85 @@ public class WarringStatesGame {
      */
     static boolean isMoveSequenceValid(String setup, String moveSequence) {
         // FIXME Task 6: determine whether a placement sequence is valid
-        char b;
-        char c = '0';
-        int zrow = '0';
-        int zcol = '0';
-        int lrow = '0';
-        int lcol = '0';
-        boolean result = false;
-
-                char[][]board = {
-                {'4', 'Y', 'S', 'M', 'G', 'A'},
-                {'5', 'Z', 'T', 'N', 'H', 'B'},
-                {'6', '0', 'U', 'O', 'I', 'C'},
-                {'7', '1', 'V', 'P', 'J', 'D'},
-                {'8', '2', 'W', 'Q', 'K', 'E'},
-                {'9', '3', 'X', 'R', 'L', 'F'}
-        };
+        int zi = 0; //zhangyi's index
+        int li = 0; //location's index
+        char l; //destination's board location char
+        char z = '0';//zhangyi's board location char
+//        int zrow = '0';
+//        int zcol = '0';
+//        int lrow = '0';
+//        int lcol = '0';
+        boolean result = true;
 
 
-        //find Zhangyi
-        for (int i = 0; i < setup.length(); i = i + 3) {
-            if (setup.charAt(i) == 'z') {
-                b = setup.charAt(i + 1);
-                c = setup.charAt(i + 2);
-            }
-        }
+        for (int i = 0; i < moveSequence.length(); i++) {
 
-        //find Zhangyi on board
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 6; j++) {
-                if (board[i][j] == c) {
-                    zrow = i;
-                    zcol = j;
+
+            //legal move
+            if (isMoveLegal(setup, moveSequence.charAt(i))) {
+                l = moveSequence.charAt(i);//where to go now, take the location char
+
+                //find Zhangyi
+                for (int j = 0; j < setup.length() - 3; j = j + 3) {
+                    if (setup.charAt(j) == 'z') {
+                        zi = j;//zhangyi's current index
+                        z = setup.charAt(j + 2);//zhangyi's current board location char
+                    }
                 }
-            }
-        }
 
-        //find destination on board
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 6; j++) {
-                if (board[i][j] == moveSequence.charAt(0)) {
-                    lrow = i;
-                    lcol = j;
+                //find location char in setup string
+                for (int j = 2; j < setup.length(); j = j + 3) {
+                    if (setup.charAt(j) == l) {
+                        li = j;//location's current index
+                    }
                 }
+
+                if (li < zi) { //if zhangyi goes left in setup string
+                    StringBuilder sb = new StringBuilder(setup).delete(zi, zi + 3).insert(li - 2, setup.substring(zi, zi + 2)).delete(li, li + 2);
+                    setup = sb.toString();
+                }
+
+                if (li < zi) { //if zhangyi goes right in setup string
+                    StringBuilder sb = new StringBuilder(setup).delete(zi, zi + 3).insert(li - 5, setup.substring(zi, zi + 2)).delete(li - 3, li - 1);
+                    setup = sb.toString();
+                }
+
+            } else {
+                result = false;
             }
         }
-
-
-        if(isMoveLegal(setup,moveSequence.charAt(0))){
-            zrow = lrow;
-            zcol = lcol;
-            //setupchar.remove(0);
-
-        }
-    return result;
+        return result;
     }
+//        //find Zhangyi on board
+//        for (int i = 0; i < 6; i++) {
+//            for (int j = 0; j < 6; j++) {
+//                if (board[i][j] == c) {
+//                    zrow = i;
+//                    zcol = j;
+//                }
+//            }
+//        }
 //
+//        //find destination on board
+//        for (int i = 0; i < 6; i++) {
+//            for (int j = 0; j < 6; j++) {
+//                if (board[i][j] == moveSequence.charAt(0)) {
+//                    lrow = i;
+//                    lcol = j;
+//                }
+//            }
+//        }
+//
+//
+//        if(isMoveLegal(setup,moveSequence.charAt(0))){
+//            zrow = lrow;
+//            zcol = lcol;
+//            //setupchar.remove(0);
+//
+//        }
+//    return result;
+//    }
+////
 ////        char a;
 ////        char b;
 ////        char c;
