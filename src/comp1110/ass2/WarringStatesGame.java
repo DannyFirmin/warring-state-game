@@ -161,73 +161,68 @@ public class WarringStatesGame {
         // FIXME Task 5: determine whether a given move is legal
         boolean result = false;//return
         char b;
-        char c='0'; //Zhangyi's 3rd card
-        int zrow=0;//Zhangyi's row on board
-        int zcol=0;//Zhangyi's column on board
-        int lrow=0;//destination's row on board
-        int lcol=0;//destination's column on board
-        char kingdom='z';//kingdom card of destination
+        char c = '0'; //Zhangyi's 3rd card
+        int zrow = 0;//Zhangyi's row on board
+        int zcol = 0;//Zhangyi's column on board
+        int lrow = 0;//destination's row on board
+        int lcol = 0;//destination's column on board
+        char kingdom = 'z';//kingdom card of destination
         boolean hasCard = false;//whether destination has card
         boolean noFurther = true;//whether further card of same kingdom
 
-        char[][] board = {{'4', 'Y', 'S', 'M', 'G', 'A'},
-                {'5', 'Z', 'T', 'N', 'H', 'B'},
-                {'6', '0', 'U', 'O', 'I', 'C'},
-                {'7', '1', 'V', 'P', 'J', 'D'},
-                {'8', '2', 'W', 'Q', 'K', 'E'},
-                {'9', '3', 'X', 'R', 'L', 'F'}};
+        char[][] board = Board.board;
 
         String[][] occupation = placementToOccupation(placement, board);
 
         //find Zhangyi
-        for (int i=0;i<placement.length();i=i+3){
-            if(placement.charAt(i)=='z'){
-                b=placement.charAt(i+1);
-                c=placement.charAt(i+2);
+        for (int i = 0; i < placement.length(); i = i + 3) {
+            if (placement.charAt(i) == 'z') {
+                b = placement.charAt(i + 1);
+                c = placement.charAt(i + 2);
                 break;
             }
         }
 
         //find Zhangyi on board
-        for(int i=0;i<6;i++){
-            for(int j=0;j<6;j++){
-                if(board[i][j]==c){
-                    zrow=i;
-                    zcol=j;
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == c) {
+                    zrow = i;
+                    zcol = j;
                     break;
                 }
             }
         }
 
         //whether there's card on location
-        for (int i=0;i<placement.length();i=i+3){
-            if(placement.charAt(i+2)==locationChar){
-                hasCard=true;
+        for (int i = 0; i < placement.length(); i = i + 3) {
+            if (placement.charAt(i + 2) == locationChar) {
+                hasCard = true;
                 break;
             }
         }
 
         //find the kingdom card on the destination
-        for(int i=0;i<6;i++){
-            for(int j=0;j<6;j++){
-                if(board[i][j]==locationChar){
-                    kingdom=occupation[i][j].charAt(0);
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == locationChar) {
+                    kingdom = occupation[i][j].charAt(0);
                 }
             }
         }
 
         //find destination on board
-        for(int i=0;i<6;i++){
-            for(int j=0;j<6;j++){
-                if(board[i][j]==locationChar){
-                    lrow=i;
-                    lcol=j;
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == locationChar) {
+                    lrow = i;
+                    lcol = j;
                 }
             }
         }
 
         //whether furthest kingdom
-        if(zrow==lrow) {
+        if (zrow == lrow) {
             if (zcol > lcol) {
                 for (int i = lcol - 1; i >= 0; i--) {
                     if (occupation[zrow][i].charAt(0) == kingdom) {
@@ -263,11 +258,11 @@ public class WarringStatesGame {
         }
 
 
-        if((locationChar<='9'&&locationChar>='0')||(locationChar>='A'&&locationChar<='Z')){//in the range
-            if(hasCard){
-                if(zrow==lrow||zcol==lcol){//same row or column
-                    if(noFurther){
-                        result=true;
+        if ((locationChar <= '9' && locationChar >= '0') || (locationChar >= 'A' && locationChar <= 'Z')) {//in the range
+            if (hasCard) {
+                if (zrow == lrow || zcol == lcol) {//same row or column
+                    if (noFurther) {
+                        result = true;
                     }
                 }
             }
@@ -278,9 +273,9 @@ public class WarringStatesGame {
 
     static public String[][] placementToOccupation(String placement, char[][] board) {
         String[][] occupation = new String[6][6];
-        for(int i=0;i<6;i++){
-            for(int j=0;j<6;j++){
-                occupation[i][j]="~~";
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                occupation[i][j] = "~~";
             }
         }
         for (int i = 2; i < placement.length(); i = i + 3) {
@@ -294,8 +289,6 @@ public class WarringStatesGame {
         }
         return occupation;
     }
-
-
 
 
     /**
@@ -338,18 +331,18 @@ public class WarringStatesGame {
         }
 
         boolean sameRNCtemp;
-        for (int i = 0; i < moveSeqInt.length-1; i++) {
+        for (int i = 0; i < moveSeqInt.length - 1; i++) {
             if (moveSeqInt[i] % 6 == moveSeqInt[i + 1] % 6 || moveSeqInt[i] / 6 == moveSeqInt[i + 1] / 6) {
-               sameRNCtemp = true;
-            } else{
+                sameRNCtemp = true;
+            } else {
                 sameRNCtemp = false;
             }
-                sameRNCal.add(sameRNCtemp);
-            }
+            sameRNCal.add(sameRNCtemp);
+        }
 
-            if (sameRNCal.contains(false)){
+        if (sameRNCal.contains(false)) {
             sameRNC = false;
-            }
+        }
 
         for (int i = 0; i < moveSeqInt.length; i++) {
             for (int j = 0; j < setupInt.length; j++)
