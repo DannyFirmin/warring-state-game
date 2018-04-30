@@ -2,6 +2,7 @@ package comp1110.ass2;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * This class provides the text interface for the Warring States game
@@ -501,38 +502,32 @@ public class WarringStatesGame {
         int n = moveSequence.length();
         String playerCards = "";
         int i;
-        int j= numPlayers;
+        int j = numPlayers;
         String locations = "";
 
-        for(i=2; i<=n; i=i+3){
+        for (i = 2; i <= n; i = i + 3) {
 
             char a = setup.charAt(i);
-            locations = locations +a;
-
+            locations = locations + a;
 
 
         }
 
 
+        if (numPlayers >= 2 && numPlayers < 5) {
 
-
-
-        if(numPlayers>=2 && numPlayers <5){
-
-            for(i = x; i < n; i = i+j ){
+            for (i = x; i < n; i = i + j) {
                 char y = moveSequence.charAt(i);
 
 
-
                 int position = locations.indexOf(y);
-                position = (position*3) + 2;
+                position = (position * 3) + 2;
 
-                char z = setup.charAt(position-2);
-                char z1 = setup.charAt(position-1);
+                char z = setup.charAt(position - 2);
+                char z1 = setup.charAt(position - 1);
 
 
-
-                playerCards = playerCards + z +z1;
+                playerCards = playerCards + z + z1;
 
 
             }
@@ -562,7 +557,131 @@ public class WarringStatesGame {
      */
     public static int[] getFlags(String setup, String moveSequence, int numPlayers) {
         // FIXME Task 8: determine which player controls the flag of each kingdom after a given sequence of moves
-        return null;
+        int[] getFlags = {0, 0, 0, 0, 0, 0, 0};
+        char c = '0'; //Zhangyi's 3rd card
+        int zrow = 0;//Zhangyi's row on board
+        int zcol = 0;//Zhangyi's column on board
+//        int lrow = 0;//destination's row on board
+//        int lcol = 0;//destination's column on board
+        char[][] board = Board.board;//board in 2 dimensional array
+        String[][] occupation = placementToOccupation(setup, board);//transform string of setup to 2 dimensional array on board
+        int[][] cards = {{0, 0, 0, 0, 0, 0, 0},//initialize the cards in every players hands as all-0
+                {0, 0, 0, 0, 0, 0, 0},//rows represent players,columns represent kingdoms
+                {0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0}};
+
+
+        //find Zhangyi in setup
+        for (int i = 0; i < setup.length(); i = i + 3) {
+            if (setup.charAt(i) == 'z') {
+                c = setup.charAt(i + 2);
+                //break;
+            }
+        }
+        //find Zhangyi on board at first place
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == c) {
+                    zrow = i;
+                    zcol = j;
+                    //break;
+                }
+            }
+        }
+
+        /*move each step,
+        1.cards in hand change;
+        2.occupation change;
+        3.Zhangyi's location change;
+        4.flags may change.*/
+        for (int i = 0; i < moveSequence.length(); i++) {//for each step in the moveSequence
+            for (int j = 0; j < 6; j++) {
+                for (int k = 0; k < 6; k++) {//for each location on board
+                    if (moveSequence.charAt(i) == board[j][k]) {//for one character in moveSequence, find the location on board
+                        int m = cards[0][occupation[j][k].charAt(0) - 97];//number of cards of kingdom on location that plaer 0 have
+                        char kingdom = occupation[j][k].charAt(0);
+                        if (zrow == j) {//Zhangyi and location in the same row
+                            if (zcol > k) {//Zhangyi is on the right of location
+                                for (int l = k; l <= zcol; l++) {
+                                    if ((int) occupation[j][k].charAt(0) == (int) occupation[j][l].charAt(0) && !occupation[j][l].equals("~~")) {
+                                        cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;//add 1 card to certain player
+                                        occupation[j][l] = "~~";//delete data of related location on occupation
+                                    }
+                                }
+                                int ID = 0;//initialize the playerID as 0
+                                for (int n = 0; n < numPlayers; n++) {//check every player
+                                    if (cards[n][kingdom - 97] >= m) {
+                                        m = cards[n][kingdom - 97];//player n has the most cards till now
+                                        ID = n;//player n should get the flag
+                                    }
+                                }
+                                zcol = k;//change Zhangyi on board
+                                getFlags[kingdom - 97] = ID;//change flag
+                            }
+
+                            if (zcol < k) {//Zhangyi is on the left of location
+                                for (int l = zcol; l <= k; l++) {
+                                    if ((int) occupation[j][k].charAt(0) == (int) occupation[j][l].charAt(0) && !occupation[j][l].equals("~~")) {
+                                        cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;
+                                        occupation[j][l] = "~~";
+                                    }
+                                }
+                                int ID = 0;//initialize the playerID as 0
+                                for (int n = 0; n < numPlayers; n++) {//check every player
+                                    if (cards[n][kingdom - 97] >= m) {
+                                        m = cards[n][kingdom - 97];//player n has the most cards till now
+                                        ID = n;//player n should get the flag
+                                    }
+                                }
+                                zcol = k;//change Zhangyi on board
+                                getFlags[kingdom - 97] = ID;//change flag
+                            }
+                        }
+
+                        if (zcol == k) {//Zhangyi and location in the same column
+                            if (zrow > j) {//Zhangyi is on the lowerside of location
+                                for (int l = j; l <= zrow; l++) {
+                                    if (occupation[j][k].charAt(0) - 97 >= 0 && occupation[j][k].charAt(0) - 97 < numPlayers) {
+                                        if ((int) occupation[j][k].charAt(0) == (int) occupation[l][k].charAt(0) && !occupation[l][k].equals("~~")) {
+                                            cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;
+                                            occupation[l][k] = "~~";
+                                        }
+                                    }
+                                }
+                                int ID = 0;//initialize the playerID as 0
+                                for (int n = 0; n < numPlayers; n++) {//check every player
+                                    if (cards[n][kingdom - 97] >= m) {
+                                        m = cards[n][kingdom - 97];//player n has the most cards till now
+                                        ID = n;//player n should get the flag
+                                    }
+                                }
+                                zrow = j;//change Zhangyi on board
+                                getFlags[kingdom - 97] = ID;//change flag
+                            }
+
+                            if (zrow < j) {//Zhangyi is on the upperside of location
+                                for (int l = zrow; l <= j; l++) {
+                                    if ((int) occupation[j][k].charAt(0) == (int) occupation[l][k].charAt(0) && !occupation[l][k].equals("~~")) {
+                                        cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;
+                                        occupation[l][k] = "~~";
+                                    }
+                                }
+                                int ID = 0;//initialize the playerID as 0
+                                for (int n = 0; n < numPlayers; n++) {//check every player
+                                    if (cards[n][kingdom - 97] >= m) {
+                                        m = cards[n][kingdom - 97];//player n has the most cards till now
+                                        ID = n;//player n should get the flag
+                                    }
+                                }
+                                zrow = j;//change Zhangyi on board
+                                getFlags[kingdom - 97] = ID;//change flag
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return getFlags;
     }
 
     /**
