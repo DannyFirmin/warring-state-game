@@ -495,6 +495,51 @@ public class WarringStatesGame {
      */
     public static String getSupporters(String setup, String moveSequence, int numPlayers, int playerId) {
         // FIXME Task 7: get the list of supporters for a given player after a sequence of moves
+
+        // for number of players
+        int x = playerId;
+        int n = moveSequence.length();
+        String playerCards = "";
+        int i;
+        int j= numPlayers;
+        String locations = "";
+
+        for(i=2; i<=n; i=i+3){
+
+            char a = setup.charAt(i);
+            locations = locations +a;
+
+
+
+        }
+
+
+
+
+
+        if(numPlayers>=2 && numPlayers <5){
+
+            for(i = x; i < n; i = i+j ){
+                char y = moveSequence.charAt(i);
+
+
+
+                int position = locations.indexOf(y);
+                position = (position*3) + 2;
+
+                char z = setup.charAt(position-2);
+                char z1 = setup.charAt(position-1);
+
+
+
+                playerCards = playerCards + z +z1;
+
+
+            }
+            return playerCards;
+
+        }
+
         return null;
     }
 
