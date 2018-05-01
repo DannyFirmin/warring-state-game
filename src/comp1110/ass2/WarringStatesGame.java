@@ -498,43 +498,53 @@ public class WarringStatesGame {
         // FIXME Task 7: get the list of supporters for a given player after a sequence of moves
 
         // for number of players
-        int x = playerId;
+
+
+        int k = setup.length();
+        int x = playerId +1;
         int n = moveSequence.length();
+        int endterms = n%x;
+        String newSequence = moveSequence.substring(0, moveSequence.length() - endterms);
+
+        int m = newSequence.length();
+
         String playerCards = "";
         int i;
-        int j = numPlayers;
+        int j= numPlayers;
         String locations = "";
 
-        for (i = 2; i <= n; i = i + 3) {
+        for(i=2; i<=k; i=i+3){
 
             char a = setup.charAt(i);
-            locations = locations + a;
+            locations = locations +a;
+            System.out.println(locations);
+
 
 
         }
 
+        if(numPlayers>=2 && numPlayers <5){
 
-        if (numPlayers >= 2 && numPlayers < 5) {
+            for(i = playerId; i < m; i = i+j ){
+                char y = newSequence.charAt(i);
 
-            for (i = x; i < n; i = i + j) {
-                char y = moveSequence.charAt(i);
 
 
                 int position = locations.indexOf(y);
-                position = (position * 3) + 2;
+                position = (position*3) + 2;
 
-                char z = setup.charAt(position - 2);
-                char z1 = setup.charAt(position - 1);
+                char z = setup.charAt(position-2);
+                char z1 = setup.charAt(position-1);
 
 
-                playerCards = playerCards + z + z1;
+
+                playerCards = playerCards + z +z1;
 
 
             }
             return playerCards;
 
         }
-
         return null;
     }
 
