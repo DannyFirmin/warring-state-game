@@ -498,54 +498,164 @@ public class WarringStatesGame {
 
         // for number of players
 
+        char[][] board = Board.board;
+        int zrow=0;
+        int zcol=0;
+        int player0LocationAtStartrow =0;
+        int player0LocationAtStartcol =0;
 
+
+        String output = "";
         int k = setup.length();
-        int x = playerId +1;
+        int x = playerId + 1;
         int n = moveSequence.length();
-        int endterms = n%x;
-        String newSequence = moveSequence.substring(0, moveSequence.length() - endterms);
+        int endTerms = n % x; // probably not required
+        String newSequence = moveSequence.substring(0, moveSequence.length() - endTerms); // making it fool proof
 
         int m = newSequence.length();
 
         String playerCards = "";
         int i;
-        int j= numPlayers;
+        int j = numPlayers;
         String locations = "";
 
-        for(i=2; i<=k; i=i+3){
+
+        char locationOfPreviousPlayer = 0;
+        char locationOfCurrentPlayer = 0;
+        char locationOfZhangyi = 0;
+        String locationsInBetween = "";
+
+
+        for (i = 2; i <= k; i = i + 3) {
 
             char a = setup.charAt(i);
-            locations = locations +a;
-            System.out.println(locations);
-
+            locations = locations + a;
 
 
         }
 
-        if(numPlayers>=2 && numPlayers <5){
 
-            for(i = playerId; i < m; i = i+j ){
+        // FIND ZHANGYI LOCATION FROM SETUP before the game begins
+
+        for(i=0;i<m ; i=i+3){
+            char zhangi = setup.charAt(i);
+            if(zhangi == 'z'){
+                 locationOfZhangyi = setup.charAt(i+2);
+            }
+        }
+
+
+        for ( i = 0; i < 6; i++) {
+            for (j = 0; j < 6; j++) {
+                if (board[i][j] == locationOfZhangyi) {
+                    zrow = i;
+                    zcol = j;
+                }
+            }
+        }
+
+        // location of player0 at the start of the game
+
+        char player0LocationAtStart = moveSequence.charAt(0);
+
+
+        for ( i = 0; i < 6; i++) {
+            for (j = 0; j < 6; j++) {
+                if (board[i][j] == player0LocationAtStart) {
+                    player0LocationAtStartrow = i;
+                    player0LocationAtStartcol = j;
+                }
+            }
+        }
+
+        // finding the locations between zhangyi and player0  // a new method can be created to find the location between
+        //two different sequences based on this.
+
+if(zcol == player0LocationAtStartcol || zrow == player0LocationAtStartrow){
+            if(zcol==player0LocationAtStartcol){
+                if(zrow > player0LocationAtStartrow){
+                    for(j= zrow; j<= player0LocationAtStartrow; j--){
+                        locationsInBetween = locationsInBetween +  board[zcol][j];
+
+
+                    }
+                }
+                if(zrow < player0LocationAtStartrow){
+                    for(j= zrow; j<=player0LocationAtStartrow; j++){
+                        locationsInBetween = locationsInBetween + board[zcol][j];
+
+                    }
+                }
+            }
+
+            if(zrow == player0LocationAtStartrow){
+                if(zcol > player0LocationAtStartcol){
+                    for(i=zcol; i<=player0LocationAtStartcol;i--){
+                        locationsInBetween = locationsInBetween + board[i][zrow];
+
+
+                    }
+                }
+                if(zcol < player0LocationAtStartcol){
+                    for(i=zcol; i<=player0LocationAtStartcol;i++){
+                        locationsInBetween = locationsInBetween + board[i][zrow];
+                    }
+                }
+            }
+}
+         // test
+
+        System.out.println(locationsInBetween);
+//
+
+
+
+
+
+
+
+        // this block is kept on hold
+
+        /*if (numPlayers >= 2 && numPlayers < 5) {
+            for (i = playerId - 1; i < m; i = i + j) {
+                char y1 = newSequence.charAt(i);
+                int position1 = locations.indexOf(y1);
+                position1 = (position1 * 3) + 2; // position of previous game player
+                locationOfPreviousPlayer = setup.charAt(position1);
+
+
+
+            }
+        }*/
+
+
+        if (numPlayers >= 2 && numPlayers < 5) {
+
+            for (i = playerId; i < m; i = i + j) {
                 char y = newSequence.charAt(i);
 
 
 
                 int position = locations.indexOf(y);
-                position = (position*3) + 2;
-
-                char z = setup.charAt(position-2);
-                char z1 = setup.charAt(position-1);
+                position = (position * 3) + 2; // position of current game player
+                locationOfCurrentPlayer = setup.charAt(position);
 
 
+                char z = setup.charAt(position - 2);
+                char z1 = setup.charAt(position - 1);
 
-                playerCards = playerCards + z +z1;
+
+                playerCards = playerCards + z + z1;
 
 
             }
-            return playerCards;
+            output = playerCards;
 
         }
-        return null;
+
+        return output;
     }
+
 
     /**
      * Given a setup and move sequence, determine which player controls the flag of each kingdom
