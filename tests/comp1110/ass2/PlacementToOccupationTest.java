@@ -78,7 +78,7 @@ public class PlacementToOccupationTest {
                     if (test3 == false) break;
                 }
             }
-            assertTrue("Occupation is not correctly transformed  when placement is '" + placement2 + "'.", test2 && test3);
+            assertFalse("Occupation is not correctly transformed  when placement is '" + placement2 + "'.", test2 && test3);
         }
 
         boolean test5 = WarringStatesGame.placementToOccupation(placement4, board)[0][3].equals("a5");
@@ -93,7 +93,7 @@ public class PlacementToOccupationTest {
                     if (test7 == false) break;
                 }
             }
-            assertTrue("Occupation is not correctly transformed  when placement is '" + placement4 + "'.", test5 && test6 && test7);
+            assertFalse("Occupation is not correctly transformed  when placement is '" + placement4 + "'.", test5 && test6 && test7);
         }
 
         boolean test8 = true;
@@ -103,7 +103,7 @@ public class PlacementToOccupationTest {
                 if (test8 == false) break;
             }
         }
-        assertTrue("Occupation is not correctly transformed  when placement is '" + placement3 + "'.", test8);
+        assertFalse("Occupation is not correctly transformed  when placement is '" + placement3 + "'.", test8);
 
     }
 
@@ -122,7 +122,7 @@ public class PlacementToOccupationTest {
                 }
             }
         }
-        assertTrue("The placement '" + placement3 + "' is not completely transformed on board .", test9);
+        assertFalse("The placement '" + placement3 + "' is not completely transformed on board .", test9);
     }
 
     @Test
@@ -140,6 +140,6 @@ public class PlacementToOccupationTest {
                 }
             }
         }
-        assertTrue("There exists cards not in the placement '" + placement3 + "' .", test10);
+        assertFalse("There exists cards not in the placement '" + placement3 + "' .", test10);
     }
 }

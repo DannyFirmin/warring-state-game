@@ -5,9 +5,9 @@ Group members:
 * Vishnuvardhan Jasti(u6611697),
 * Chi Ben (u6555078);
 
-Roles: decide later
+Roles: Everybody is a Coder
 
-Meeting time: Everyweek after lab, Wed 6 p.m
+Meeting time: Every Sunday (whole day)
 
 Contacts:
 * Danny Feng - 0431950830
