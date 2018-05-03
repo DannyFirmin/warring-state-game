@@ -308,7 +308,7 @@ public class WarringStatesGame {
         int zi = 0; //zhangyi's index
         int li = 0; //location's index
         char l; //destination's board location char
-        char z = '0';//zhangyi's board location char
+        char z9x = '0';//zhangyi's board location char
 //        int zrow = '0';
 //        int zcol = '0';
 //        int lrow = '0';
@@ -323,17 +323,18 @@ public class WarringStatesGame {
             if (isMoveLegal(setup, moveSequence.charAt(i))) {
                 l = moveSequence.charAt(i);//where to go now, take the location char
 
-                //find Zhangyi
+                //find the index of z9x in current setup, record the index of x, x means z9's location code in board. Here I use variable z9x.
                 for (int j = 0; j < setup.length() - 3; j = j + 3) {
                     if (setup.charAt(j) == 'z') {
                         zi = j;//zhangyi's current index
-                        z = setup.charAt(j + 2);//zhangyi's current board location char
+                        z9x = setup.charAt(j + 2);//zhangyi's current board location char
                     }
                 }
 
                 //find location char in setup string
                 for (int j = 2; j < setup.length(); j = j + 3) {
                     if (setup.charAt(j) == l) {
+                       // moveSequence.charAt(i) go to setup to find where is this
                         li = j;//location's current index
                     }
                 }
@@ -350,6 +351,7 @@ public class WarringStatesGame {
 
             } else {
                 result = false;
+                break;
             }
         }
         return result;
