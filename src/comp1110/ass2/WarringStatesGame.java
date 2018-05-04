@@ -181,7 +181,7 @@ public class WarringStatesGame {
             if (placement.charAt(i) == 'z') {
                 b = placement.charAt(i + 1);
                 c = placement.charAt(i + 2);
-                //break;
+                break;
             }
         }
 
@@ -191,7 +191,7 @@ public class WarringStatesGame {
                 if (board[i][j] == c) {
                     zrow = i;
                     zcol = j;
-                    //break;
+                    break;
                 }
             }
         }
@@ -200,7 +200,7 @@ public class WarringStatesGame {
         for (int i = 0; i < placement.length(); i = i + 3) {
             if (placement.charAt(i + 2) == locationChar) {
                 hasCard = true;
-                //break;
+                break;
             }
         }
 
@@ -229,14 +229,14 @@ public class WarringStatesGame {
                 for (int i = lcol - 1; i >= 0; i--) {
                     if (occupation[zrow][i].charAt(0) == kingdom) {
                         noFurther = false;
-                        //break;
+                        break;
                     }
                 }
             } else {
                 for (int i = lcol + 1; i < 6; i++) {
                     if (occupation[zrow][i].charAt(0) == kingdom) {
                         noFurther = false;
-                        //break;
+                        break;
                     }
                 }
             }
@@ -246,14 +246,14 @@ public class WarringStatesGame {
                 for (int i = lrow - 1; i >= 0; i--) {
                     if (occupation[i][zcol].charAt(0) == kingdom) {
                         noFurther = false;
-                        //break;
+                        break;
                     }
                 }
             } else {
                 for (int i = lrow + 1; i < 6; i++) {
                     if (occupation[i][zcol].charAt(0) == kingdom) {
                         noFurther = false;
-                        //break;
+                        break;
                     }
                 }
             }
@@ -600,7 +600,7 @@ public class WarringStatesGame {
         for (int i = 0; i < setup.length(); i = i + 3) {
             if (setup.charAt(i) == 'z') {
                 c = setup.charAt(i + 2);
-                //break;
+                break;
             }
         }
         //find Zhangyi on board at first place
@@ -609,7 +609,7 @@ public class WarringStatesGame {
                 if (board[i][j] == c) {
                     zrow = i;
                     zcol = j;
-                    //break;
+                    break;
                 }
             }
         }
