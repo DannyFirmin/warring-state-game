@@ -3,6 +3,7 @@ package comp1110.ass2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * This class provides the text interface for the Warring States game
@@ -499,17 +500,16 @@ public class WarringStatesGame {
     public static String getSupporters(String setup, String moveSequence, int numPlayers, int playerId) {
         // FIXME Task 7: get the list of supporters for a given player after a sequence of moves
 
-        // for number of players
 
         char[][] board = Board.board;
-        int zrow=0;
-        int zcol=0;
-        int player0LocationAtStartrow =0;
-        int player0LocationAtStartcol =0;
+        int zrow=0; // zhangyi  row
+        int zcol=0; // zhangyi column
+        int player0LocationAtStartrow =0;  // player0 row before the game begins
+        int player0LocationAtStartcol =0;  // player 0 column before the game begins
 
 
-        String output = "";
-        int k = setup.length();
+        String output = "";  // the final return value
+        int k = setup.length();  // length of the setup string
         int x = playerId + 1;
         int n = moveSequence.length();
         int endTerms = n % x; // probably not required
@@ -519,6 +519,8 @@ public class WarringStatesGame {
 
         String playerCards = "";
         int i;
+        int v;
+
         int j = numPlayers;
         String locations = "";
 
@@ -529,7 +531,7 @@ public class WarringStatesGame {
         String locationsInBetween = "";
 
 
-        for (i = 2; i <= k; i = i + 3) {
+        for (i = 2; i <= k; i = i + 3) {    // finding the location characters from the setup string
 
             char a = setup.charAt(i);
             locations = locations + a;
@@ -538,7 +540,7 @@ public class WarringStatesGame {
         }
 
 
-        // FIND ZHANGYI LOCATION FROM SETUP before the game begins
+        // FIND ZHANGYI LOCATION FROM SETUP string  before the game begins
 
         for(i=0;i<m ; i=i+3){
             char zhangi = setup.charAt(i);
@@ -549,10 +551,10 @@ public class WarringStatesGame {
 
 
         for ( i = 0; i < 6; i++) {
-            for (j = 0; j < 6; j++) {
+            for (v = 0; v < 6; v++) {
                 if (board[i][j] == locationOfZhangyi) {
                     zrow = i;
-                    zcol = j;
+                    zcol = v;
                 }
             }
         }
@@ -563,10 +565,10 @@ public class WarringStatesGame {
 
 
         for ( i = 0; i < 6; i++) {
-            for (j = 0; j < 6; j++) {
-                if (board[i][j] == player0LocationAtStart) {
+            for (v = 0; v < 6; v++) {
+                if (board[i][v] == player0LocationAtStart) {
                     player0LocationAtStartrow = i;
-                    player0LocationAtStartcol = j;
+                    player0LocationAtStartcol = v;
                 }
             }
         }
@@ -577,15 +579,15 @@ public class WarringStatesGame {
 if(zcol == player0LocationAtStartcol || zrow == player0LocationAtStartrow){
             if(zcol==player0LocationAtStartcol){
                 if(zrow > player0LocationAtStartrow){
-                    for(j= zrow; j<= player0LocationAtStartrow; j--){
-                        locationsInBetween = locationsInBetween +  board[zcol][j];
+                    for(v= zrow; v<= player0LocationAtStartrow; v--){
+                        locationsInBetween = locationsInBetween +  board[zcol][v];
 
 
                     }
                 }
                 if(zrow < player0LocationAtStartrow){
-                    for(j= zrow; j<=player0LocationAtStartrow; j++){
-                        locationsInBetween = locationsInBetween + board[zcol][j];
+                    for(v= zrow; v<=player0LocationAtStartrow; v++){
+                        locationsInBetween = locationsInBetween + board[zcol][v];
 
                     }
                 }
@@ -605,10 +607,63 @@ if(zcol == player0LocationAtStartcol || zrow == player0LocationAtStartrow){
                     }
                 }
             }
-}
-         // test
 
-        System.out.println(locationsInBetween);
+    System.out.println(locationsInBetween);
+}
+
+
+
+
+         // finding kingdom cards of the locations
+
+
+        //int numberOfLocations = locationsInBetween.length();
+
+        String kingdomCards ="";
+           // locationsInBetween = locationsInBetween.substring(1,locationsInBetween.length());
+            //char[] locationArray = locationsInBetween.toCharArray();
+            for(i=0;i< locationsInBetween.length();i++){
+
+                char y = locationsInBetween.charAt(i);
+
+
+
+                int position = locations.indexOf(y);
+                position = (position * 3) + 2; // position of current game player
+
+
+                char z = setup.charAt(position - 2);
+                char z1 = setup.charAt(position-1);
+
+
+                kingdomCards  = kingdomCards + z +z1 ;
+
+
+
+            }
+        System.out.println(kingdomCards);
+
+
+            // checking if the kingdom cards are same in the locations inbetwen
+
+        String KingdomCardNumbers = "";
+
+        if(kingdomCards.length() > 4 ) {
+            for (i = 2; i < kingdomCards.length()-1; i=i+2) {
+                if (kingdomCards.charAt(i) == kingdomCards.charAt(kingdomCards.length() - 2)) {
+
+                    KingdomCardNumbers = KingdomCardNumbers + kingdomCards.charAt(i) +kingdomCards.charAt(i+1);
+
+
+                }
+            }
+            System.out.println(KingdomCardNumbers);
+        }
+
+
+
+
+
 //
 
 

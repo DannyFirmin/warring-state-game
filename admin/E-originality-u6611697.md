@@ -5,4 +5,5 @@ following documented exceptions:
 
 * The code in class <...> uses an idea suggested by <...>
 
-Signed: Vishnuvardhan Jasti(u6611697)
+Signed: Vishnuvardhan Jasti(u6611697).
+ 
