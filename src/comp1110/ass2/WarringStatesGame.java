@@ -185,6 +185,10 @@ public class WarringStatesGame {
             }
         }
 
+        if (c == locationChar) {
+            return false;
+        }
+
         //find Zhangyi on board
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
@@ -310,11 +314,7 @@ public class WarringStatesGame {
         int li = 0; //location's index
         char l; //destination's board location char
         boolean result = true;
-
-
         for (int i = 0; i < moveSequence.length(); i++) {
-
-
             //legal move
             if (isMoveLegal(setup, moveSequence.charAt(i))) {
                 l = moveSequence.charAt(i);//where to go now, take the location char
@@ -326,7 +326,6 @@ public class WarringStatesGame {
                         break;
                     }
                 }
-
                 //find location char in setup string
                 for (int j = 2; j < setup.length(); j = j + 3) {
                     if (setup.charAt(j) == l) {
