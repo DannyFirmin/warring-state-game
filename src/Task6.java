@@ -2,8 +2,8 @@ import static comp1110.ass2.WarringStatesGame.isMoveLegal;
 
 public class Task6 {
     public static void main(String[] args) {
-        System.out.println(isMoveSequenceValid("b25b67e2Of18d09e1Ac5Tg0Hb5Mz92c23b0Xa0Gb4Ja2Rb1Ve30a56d4Uc1Lc4Ca7Fc3Ig1Ed3Kd1Pf2Bd2Qb3Sf0Wc0Na1Ye0Da3Za41a64",
-        "W8EQMRX3Y446579FASTNBC0UIGHJL"));
+        System.out.println(isMoveSequenceValid("g0Aa0Bf1Ca1Dc5Ee1Fa4Ge3He2Ia2Jc2Kd0Lf0Mb4Nd4Oa6Pc3Qe0Ra5Sc1Td1Uc4Vb5Wb0Xa7Yf2Zb10a31z92b33b64d35g16b27d28c09",
+        "W845HGAYMNZ1VDFEBTUOI0C69RLKQ"));
     }
 
     static boolean isMoveSequenceValid(String setup, String moveSequence) {
