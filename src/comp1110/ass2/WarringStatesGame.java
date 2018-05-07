@@ -334,7 +334,9 @@ public class WarringStatesGame {
                         break;
                     }
                 }
+                //replace previous king to z9
                 setup = setup.replace(setup.substring(li - 2, li), "z9");
+                //delete previous z9x
                 StringBuilder sb = new StringBuilder(setup).delete(zi, zi + 3);
                 setup = sb.toString();
             } else {
