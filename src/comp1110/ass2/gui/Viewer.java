@@ -4,7 +4,9 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -33,6 +35,7 @@ public class Viewer extends Application {
     /* Loop in public domain */
     private static final String LOOP_URI = Viewer.class.getResource(URI_BASE + "BGM.wav").toString();
     private AudioClip loop;
+    private boolean loopPlaying = true;
 
     private final Group root = new Group();
     private final Group controls = new Group();
@@ -62,6 +65,21 @@ public class Viewer extends Application {
      * Create a basic text field for input and a refresh button.
      */
     private void makeControls() {
+
+        Button bgmbutton = new Button("BGM on/off");
+        bgmbutton.setLayoutX(VIEWER_WIDTH / 2 + 70);
+        bgmbutton.setLayoutY(VIEWER_HEIGHT - 45);
+        bgmbutton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                if (loopPlaying)
+                    loop.stop();
+                else
+                    loop.play();
+                loopPlaying = !loopPlaying;
+            }
+        });
+
         Label label1 = new Label("Placement:");
         textField = new TextField();
         textField.setPrefWidth(300);
@@ -74,7 +92,7 @@ public class Viewer extends Application {
             }
         });
         HBox hb = new HBox();
-        hb.getChildren().addAll(label1, textField, button);
+        hb.getChildren().addAll(label1, textField, button,bgmbutton);
         hb.setSpacing(10);
         hb.setLayoutX(130);
         hb.setLayoutY(VIEWER_HEIGHT - 50);
@@ -83,10 +101,12 @@ public class Viewer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("experiment.fxml"));
         primaryStage.setTitle("Warring States Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
 
-        root.getChildren().add(controls);
+        //root.getChildren().add(controls);
+
         makeControls();
         setUpSoundLoop();
         loop.play();
