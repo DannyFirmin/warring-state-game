@@ -412,82 +412,163 @@ public class WarringStatesGame {
         }
 
 
-        for (i = 0; i < 6; i++) {
-            for (v = 0; v < 6; v++) {
-                if (board[i][j] == locationOfZhangyi) {
-                    zrow = i;
-                    zcol = v;
+        if (numPlayers >= 2 && numPlayers < 5) {
+            for (i = playerId; i < m; i = i + j) {
+                if (i == 0) {
+                    char y = newSequence.charAt(i);
+                    char y1 = locationOfZhangyi;
+                    String inbetweenKingdoms = getKingdomCardsInbetween(y, y1, locations, setup);
+
+
+                    int position = locations.indexOf(y);
+                    position = (position * 3) + 2; // position of current game player
+                    locationOfCurrentPlayer = setup.charAt(position);
+
+
+                    char z = setup.charAt(position - 2);
+                    char z1 = setup.charAt(position - 1);
+
+
+                    playerCards = playerCards + inbetweenKingdoms + z + z1;
+
+                } else if (i > 0) {
+                    char y = newSequence.charAt(i);
+                    char y1 = newSequence.charAt(i - 1);
+                    String inbetweenKingdoms = getKingdomCardsInbetween(y, y1, locations, setup);
+
+
+                    int position = locations.indexOf(y);
+                    position = (position * 3) + 2; // position of current game player
+                    locationOfCurrentPlayer = setup.charAt(position);
+
+
+                    char z = setup.charAt(position - 2);
+                    char z1 = setup.charAt(position - 1);
+
+
+                    playerCards = playerCards + inbetweenKingdoms + z + z1;
+                }
+
+
+            }
+            output = playerCards;
+            System.out.println(output);
+            output = removeDuplicates(output);
+            System.out.println(output);
+
+
+        }
+
+
+        return output;
+    }
+
+
+    public static String getKingdomCardsInbetween(char y, char y1, String locations, String setup) {
+
+        char[][] board = Board.board;
+        int secondLocationRow = 0;
+        int secondLocationCol = 0;
+        int firstLocationRow = 0;
+        int firstLocationCol = 0;
+
+        char firstLocation = y1;
+        char secondLocation = y;
+        String locationsInBetween = "";
+        String output = "";
+
+
+        for (int i = 0; i < 6; i++) {
+            for (int v = 0; v < 6; v++) {
+                if (board[i][v] == secondLocation) {
+                    secondLocationRow = i;
+                    secondLocationCol = v;
                 }
             }
         }
 
-        // location of player0 at the start of the game
-
-        char player0LocationAtStart = moveSequence.charAt(0);
-
-
-        for (i = 0; i < 6; i++) {
-            for (v = 0; v < 6; v++) {
-                if (board[i][v] == player0LocationAtStart) {
-                    player0LocationAtStartrow = i;
-                    player0LocationAtStartcol = v;
+        for (int i = 0; i < 6; i++) {
+            for (int v = 0; v < 6; v++) {
+                if (board[i][v] == firstLocation) {
+                    firstLocationRow = i;
+                    firstLocationCol = v;
                 }
             }
         }
 
-        // finding the locations between zhangyi and player0  // a new method can be created to find the location between
-        //two different sequences based on this.
 
-        if (zcol == player0LocationAtStartcol || zrow == player0LocationAtStartrow) {
-            if (zcol == player0LocationAtStartcol) {
-                if (zrow > player0LocationAtStartrow) {
-                    for (v = zrow; v <= player0LocationAtStartrow; v--) {
-                        locationsInBetween = locationsInBetween + board[zcol][v];
+        if (firstLocationCol == secondLocationCol || firstLocationRow == secondLocationRow) {
+            if (firstLocationCol == secondLocationCol) {
+                if (firstLocationRow > secondLocationRow) {
+                    for (int v = firstLocationRow; v <= secondLocationRow; v--) {
+                        if (board[firstLocationCol][v] != '#') {
+
+                            locationsInBetween = locationsInBetween + board[firstLocationCol][v];
+                            board[firstLocationCol][v] = '#';
 
 
+                        }
                     }
                 }
-                if (zrow < player0LocationAtStartrow) {
-                    for (v = zrow; v <= player0LocationAtStartrow; v++) {
-                        locationsInBetween = locationsInBetween + board[zcol][v];
+                if (firstLocationRow < secondLocationRow) {
+                    for (int v = firstLocationRow; v <= secondLocationRow; v++) {
+                        if (board[firstLocationCol][v] != '#') {
 
-                    }
-                }
-            }
-
-            if (zrow == player0LocationAtStartrow) {
-                if (zcol > player0LocationAtStartcol) {
-                    for (i = zcol; i <= player0LocationAtStartcol; i--) {
-                        locationsInBetween = locationsInBetween + board[i][zrow];
+                            locationsInBetween = locationsInBetween + board[firstLocationCol][v];
+                            board[firstLocationCol][v] = '#';
 
 
-                    }
-                }
-                if (zcol < player0LocationAtStartcol) {
-                    for (i = zcol; i <= player0LocationAtStartcol; i++) {
-                        locationsInBetween = locationsInBetween + board[i][zrow];
+                        }
+
                     }
                 }
             }
 
+            if (firstLocationRow == secondLocationRow) {
+                if (firstLocationCol > secondLocationCol) {
+                    for (int i = firstLocationCol; i <= secondLocationCol; i--) {
+                        if (board[i][firstLocationRow] != '#') {
+
+                            locationsInBetween = locationsInBetween + board[i][firstLocationRow];
+                            board[i][firstLocationRow] = '#';
+
+
+                        }
+
+
+                    }
+                }
+                if (firstLocationCol < secondLocationCol) {
+                    for (int i = firstLocationCol; i <= secondLocationCol; i++) {
+                        if (board[i][firstLocationRow] != '#') {
+
+                            locationsInBetween = locationsInBetween + board[i][firstLocationRow];
+                            board[i][firstLocationRow] = '#';
+
+
+                        }
+
+                    }
+                }
+            }
             System.out.println(locationsInBetween);
+
         }
 
 
         // finding kingdom cards of the locations
-
 
         //int numberOfLocations = locationsInBetween.length();
 
         String kingdomCards = "";
         // locationsInBetween = locationsInBetween.substring(1,locationsInBetween.length());
         //char[] locationArray = locationsInBetween.toCharArray();
-        for (i = 0; i < locationsInBetween.length(); i++) {
+        for (int i = 0; i < locationsInBetween.length(); i++) {
 
-            char y = locationsInBetween.charAt(i);
+            char u = locationsInBetween.charAt(i);
 
 
-            int position = locations.indexOf(y);
+            int position = locations.indexOf(u);
             position = (position * 3) + 2; // position of current game player
 
 
@@ -499,15 +580,14 @@ public class WarringStatesGame {
 
 
         }
-        System.out.println(kingdomCards);
 
 
         // checking if the kingdom cards are same in the locations inbetwen
 
         String KingdomCardNumbers = "";
 
-        if (kingdomCards.length() > 4) {
-            for (i = 2; i < kingdomCards.length() - 1; i = i + 2) {
+        if (kingdomCards.length() > 2) {
+            for (int i = 2; i < kingdomCards.length(); i = i + 2) {
                 if (kingdomCards.charAt(i) == kingdomCards.charAt(kingdomCards.length() - 2)) {
 
                     KingdomCardNumbers = KingdomCardNumbers + kingdomCards.charAt(i) + kingdomCards.charAt(i + 1);
@@ -515,52 +595,28 @@ public class WarringStatesGame {
 
                 }
             }
-            System.out.println(KingdomCardNumbers);
+            output = KingdomCardNumbers;
         }
 
-
-//
-
-
-        // this block is kept on hold
-
-        /*if (numPlayers >= 2 && numPlayers < 5) {
-            for (i = playerId - 1; i < m; i = i + j) {
-                char y1 = newSequence.charAt(i);
-                int position1 = locations.indexOf(y1);
-                position1 = (position1 * 3) + 2; // position of previous game player
-                locationOfPreviousPlayer = setup.charAt(position1);
-
-
-
-            }
-        }*/
-
-
-        if (numPlayers >= 2 && numPlayers < 5) {
-
-            for (i = playerId; i < m; i = i + j) {
-                char y = newSequence.charAt(i);
-
-
-                int position = locations.indexOf(y);
-                position = (position * 3) + 2; // position of current game player
-                locationOfCurrentPlayer = setup.charAt(position);
-
-
-                char z = setup.charAt(position - 2);
-                char z1 = setup.charAt(position - 1);
-
-
-                playerCards = playerCards + z + z1;
-
-
-            }
-            output = playerCards;
-
-        }
 
         return output;
+    }
+
+    public static String removeDuplicates(String output) {
+        String x = "";
+        int size = output.length();
+        String output1 = "" +output.charAt(0)+output.charAt(1);
+
+        for (int i = 0; i <size ; i= i+2) {
+            x = x + output.charAt(i) +output.charAt(i+1);
+            if(output.charAt(i) != x.charAt(0) && output.charAt(i+1) != x.charAt(1)){
+                output1 = output1 + output.charAt(i)+output.charAt(i+1);
+            }
+
+
+        }
+        return output1;
+
     }
 
 
