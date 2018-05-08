@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.AudioClip;
@@ -34,6 +35,7 @@ public class Viewer extends Application {
 
     /* Loop in public domain */
     private static final String LOOP_URI = Viewer.class.getResource(URI_BASE + "BGM.wav").toString();
+
     private AudioClip loop;
     private boolean loopPlaying = true;
 
@@ -101,11 +103,10 @@ public class Viewer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("experiment.fxml"));
+       // Parent root = FXMLLoader.load(getClass().getResource("experiment.fxml"));
         primaryStage.setTitle("Warring States Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
-
-        //root.getChildren().add(controls);
+        root.getChildren().add(controls);
 
         makeControls();
         setUpSoundLoop();
