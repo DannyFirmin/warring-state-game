@@ -2,8 +2,8 @@ import static comp1110.ass2.WarringStatesGame.isMoveLegal;
 
 public class Task6 {
     public static void main(String[] args) {
-        System.out.println(isMoveSequenceValid("g0Aa0Bf1Ca1Dc5Ee1Fa4Ge3He2Ia2Jc2Kd0Lf0Mb4Nd4Oa6Pc3Qe0Ra5Sc1Td1Uc4Vb5Wb0Xa7Yf2Zb10a31z92b33b64d35g16b27d28c09",
-        "W845HGAYMNZ1VDFEBTUOI0C69RLKQ"));
+        System.out.println(isMoveSequenceValid("e0Ba7Dc04f25c27z99a4Vg0Hb2Kd4Tf0Jb6Xa2Nc5P",
+        "45BDPJHK"));
     }
 
     static boolean isMoveSequenceValid(String setup, String moveSequence) {
@@ -17,9 +17,9 @@ public class Task6 {
                 l = moveSequence.charAt(i);//where to go now, take the location char
 
                 //find the index of zhangyi in current setup.
-                for (int j = 0; j < setup.length() - 3; j = j + 3) {
+                for (int j = 0; j < setup.length(); j = j + 3) {
                     if (setup.charAt(j) == 'z') {
-                        zi = j;//zhangyi's current index
+                        zi = j;//zhangyi's current index;
                         break;
                     }
                 }
@@ -37,10 +37,12 @@ public class Task6 {
                     setup = sb.toString();
                 } else {
                     result = false;
+                    System.out.println("40"+result);
                     break;
                 }
             } else {
                 result = false;
+                System.out.println("45"+result);
                 break;
             }
         }

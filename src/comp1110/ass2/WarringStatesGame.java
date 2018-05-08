@@ -320,7 +320,7 @@ public class WarringStatesGame {
                 l = moveSequence.charAt(i);//where to go now, take the location char
 
                 //find the index of zhangyi in current setup.
-                for (int j = 0; j < setup.length() - 3; j = j + 3) {
+                for (int j = 0; j < setup.length() ; j = j + 3) {
                     if (setup.charAt(j) == 'z') {
                         zi = j;//zhangyi's current index
                         break;
