@@ -1,6 +1,7 @@
 package comp1110.ass2;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -277,6 +278,14 @@ public class WarringStatesGame {
         return result;
     }
 
+    /**
+     * put king code to the board
+     *
+     * @param placement the current placement string
+     * @param board     board layout
+     * @return board layout with king code on it.
+     * ~~ means no king on that position
+     */
     static public String[][] placementToOccupation(String placement, char[][] board) {
         String[][] occupation = new String[6][6];
         for (int i = 0; i < 6; i++) {
@@ -315,12 +324,15 @@ public class WarringStatesGame {
         char l; //destination's board location char
         boolean result = true;
         for (int i = 0; i < moveSequence.length(); i++) {
+
+            if (setup.length()==3){return true;}
+
             //legal move
             if (isMoveLegal(setup, moveSequence.charAt(i))) {
                 l = moveSequence.charAt(i);//where to go now, take the location char
 
                 //find the index of zhangyi in current setup.
-                for (int j = 0; j < setup.length() ; j = j + 3) {
+                for (int j = 0; j < setup.length(); j = j + 3) {
                     if (setup.charAt(j) == 'z') {
                         zi = j;//zhangyi's current index
                         break;
@@ -334,11 +346,20 @@ public class WarringStatesGame {
                         break;
                     }
                 }
-                //replace previous king to z9
+
+                ArrayList<String> sameStateKing;
+                sameStateKing = findFurther(setup,zi,l);
+
                 setup = setup.replace(setup.substring(li - 2, li), "z9");
                 //delete previous z9x
                 StringBuilder sb = new StringBuilder(setup).delete(zi, zi + 3);
                 setup = sb.toString();
+                //TRY TO FIX TESTGOOD HERE
+//                if (sameStateKing.size()!=0){
+//                    for (int j = 0; j < sameStateKing.size(); j++) {
+//                        setup = setup.replaceAll(sameStateKing.get(j),"");
+//                    }
+//                }
             } else {
                 result = false;
                 break;
@@ -347,50 +368,32 @@ public class WarringStatesGame {
         return result;
     }
 
-    public static String findFurther(String placement, char locationChar) {
-        char b;
-        char c = '0'; //Zhangyi's 3rd card
+    public static void main(String[] args) {
+        ArrayList<String> sameStateKing2;
+        sameStateKing2 = findFurther("a2Aa1Bz9C",6,'A');
+        for (int i = 0; i < sameStateKing2.size(); i++) {
+            System.out.println(sameStateKing2.get(i));
+    }}
+    public static ArrayList<String> findFurther(String placement, int zi, char locationChar) {
         int zrow = 0;//Zhangyi's row on board
         int zcol = 0;//Zhangyi's column on board
         int lrow = 0;//destination's row on board
         int lcol = 0;//destination's column on board
         char kingdom = 'z';//kingdom card of destination
-        boolean hasCard = false;//whether destination has card
-        boolean noFurther = true;//whether further card of same kingdom
+        ArrayList<String> sameStateKing = new ArrayList<>();
 
         char[][] board = Board.board;
 
         String[][] occupation = placementToOccupation(placement, board);
 
-        //find Zhangyi
-        for (int i = 0; i < placement.length(); i = i + 3) {
-            if (placement.charAt(i) == 'z') {
-                b = placement.charAt(i + 1);
-                c = placement.charAt(i + 2);
-                break;
-            }
-        }
-
-        if (c == locationChar) {
-            return false;
-        }
-
         //find Zhangyi on board
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                if (board[i][j] == c) {
+                if (board[i][j] == zi + 2) {
                     zrow = i;
                     zcol = j;
                     break;
                 }
-            }
-        }
-
-        //whether there's card on location
-        for (int i = 0; i < placement.length(); i = i + 3) {
-            if (placement.charAt(i + 2) == locationChar) {
-                hasCard = true;
-                break;
             }
         }
 
@@ -418,15 +421,15 @@ public class WarringStatesGame {
             if (zcol > lcol) {
                 for (int i = lcol - 1; i >= 0; i--) {
                     if (occupation[zrow][i].charAt(0) == kingdom) {
-                        noFurther = false;
-                        break;
+                        String a = ""+ occupation[zrow][i].charAt(0) + occupation[zrow][i].charAt(1);
+                        sameStateKing.add(a);
                     }
                 }
             } else {
                 for (int i = lcol + 1; i < 6; i++) {
                     if (occupation[zrow][i].charAt(0) == kingdom) {
-                        noFurther = false;
-                        break;
+                        String a = ""+ occupation[zrow][i].charAt(0) + occupation[zrow][i].charAt(1);
+                        sameStateKing.add(a);
                     }
                 }
             }
@@ -435,33 +438,24 @@ public class WarringStatesGame {
             if (zrow > lrow) {
                 for (int i = lrow - 1; i >= 0; i--) {
                     if (occupation[i][zcol].charAt(0) == kingdom) {
-                        noFurther = false;
-                        break;
+                        String a = ""+ occupation[i][zcol].charAt(0) + occupation[i][zcol].charAt(1);
+                        sameStateKing.add(a);
                     }
                 }
             } else {
                 for (int i = lrow + 1; i < 6; i++) {
                     if (occupation[i][zcol].charAt(0) == kingdom) {
-                        noFurther = false;
-                        break;
+                        String a = ""+ occupation[i][zcol].charAt(0) + occupation[i][zcol].charAt(1);
+                        sameStateKing.add(a);
                     }
                 }
             }
         }
 
 
-        if ((locationChar <= '9' && locationChar >= '0') || (locationChar >= 'A' && locationChar <= 'Z')) {//in the range
-            if (hasCard) {
-                if (zrow == lrow || zcol == lcol) {//same row or column
-                    if (noFurther) {
-                        result = true;
-                    }
-                }
-            }
-        }
-
-        return result;
+        return sameStateKing;
     }
+
     /**
      * Get the list of supporters for the chosen player, given the provided
      * setup and move sequence.
@@ -720,12 +714,12 @@ public class WarringStatesGame {
     public static String removeDuplicates(String output) {
         String x = "";
         int size = output.length();
-        String output1 = "" +output.charAt(0)+output.charAt(1);
+        String output1 = "" + output.charAt(0) + output.charAt(1);
 
-        for (int i = 0; i <size ; i= i+2) {
-            x = x + output.charAt(i) +output.charAt(i+1);
-            if(output.charAt(i) != x.charAt(0) && output.charAt(i+1) != x.charAt(1)){
-                output1 = output1 + output.charAt(i)+output.charAt(i+1);
+        for (int i = 0; i < size; i = i + 2) {
+            x = x + output.charAt(i) + output.charAt(i + 1);
+            if (output.charAt(i) != x.charAt(0) && output.charAt(i + 1) != x.charAt(1)) {
+                output1 = output1 + output.charAt(i) + output.charAt(i + 1);
             }
 
 
