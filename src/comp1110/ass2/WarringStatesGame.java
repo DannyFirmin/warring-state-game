@@ -676,6 +676,7 @@ public class WarringStatesGame {
         2.occupation change;
         3.Zhangyi's location change;
         4.flags may change.*/
+        int temp=0;
         for (int i = 0; i < moveSequence.length(); i++) {//for each step in the moveSequence
             for (int j = 0; j < 6; j++) {
                 for (int k = 0; k < 6; k++) {//for each location on board
@@ -688,13 +689,18 @@ public class WarringStatesGame {
                                     if ((int) occupation[j][k].charAt(0) == (int) occupation[j][l].charAt(0) && !occupation[j][l].equals("~~")) {
                                         cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;//add 1 card to certain player
                                         occupation[j][l] = "~~";//delete data of related location on occupation
+                                        temp=i%numPlayers;
                                     }
                                 }
                                 int ID = 0;//initialize the playerID as 0
                                 for (int n = 0; n < numPlayers; n++) {//check every player
-                                    if (cards[n][kingdom - 97] >= m) {
+                                    if (cards[n][kingdom - 97] > m) {
                                         m = cards[n][kingdom - 97];//player n has the most cards till now
                                         ID = n;//player n should get the flag
+                                    }else if(cards[n][kingdom - 97] == m){
+                                        if(temp==i%numPlayers) {
+                                            ID = i % numPlayers;
+                                        }
                                     }
                                 }
                                 zcol = k;//change Zhangyi on board
@@ -706,13 +712,18 @@ public class WarringStatesGame {
                                     if ((int) occupation[j][k].charAt(0) == (int) occupation[j][l].charAt(0) && !occupation[j][l].equals("~~")) {
                                         cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;
                                         occupation[j][l] = "~~";
+                                        temp=i%numPlayers;
                                     }
                                 }
                                 int ID = 0;//initialize the playerID as 0
                                 for (int n = 0; n < numPlayers; n++) {//check every player
-                                    if (cards[n][kingdom - 97] >= m) {
+                                    if (cards[n][kingdom - 97] > m) {
                                         m = cards[n][kingdom - 97];//player n has the most cards till now
                                         ID = n;//player n should get the flag
+                                    }else if(cards[n][kingdom - 97] == m){
+                                        if(temp==i%numPlayers) {
+                                            ID = i % numPlayers;
+                                        }
                                     }
                                 }
                                 zcol = k;//change Zhangyi on board
@@ -727,14 +738,19 @@ public class WarringStatesGame {
                                         if ((int) occupation[j][k].charAt(0) == (int) occupation[l][k].charAt(0) && !occupation[l][k].equals("~~")) {
                                             cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;
                                             occupation[l][k] = "~~";
+                                            temp=i%numPlayers;
                                         }
                                     }
                                 }
                                 int ID = 0;//initialize the playerID as 0
                                 for (int n = 0; n < numPlayers; n++) {//check every player
-                                    if (cards[n][kingdom - 97] >= m) {
+                                    if (cards[n][kingdom - 97] > m) {
                                         m = cards[n][kingdom - 97];//player n has the most cards till now
                                         ID = n;//player n should get the flag
+                                    }else if(cards[n][kingdom - 97] == m){
+                                        if(temp==i%numPlayers) {
+                                            ID = i % numPlayers;
+                                        }
                                     }
                                 }
                                 zrow = j;//change Zhangyi on board
@@ -746,13 +762,18 @@ public class WarringStatesGame {
                                     if ((int) occupation[j][k].charAt(0) == (int) occupation[l][k].charAt(0) && !occupation[l][k].equals("~~")) {
                                         cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;
                                         occupation[l][k] = "~~";
+                                        temp=i%numPlayers;
                                     }
                                 }
                                 int ID = 0;//initialize the playerID as 0
                                 for (int n = 0; n < numPlayers; n++) {//check every player
-                                    if (cards[n][kingdom - 97] >= m) {
+                                    if (cards[n][kingdom - 97] > m) {
                                         m = cards[n][kingdom - 97];//player n has the most cards till now
                                         ID = n;//player n should get the flag
+                                    }else if(cards[n][kingdom - 97] == m){
+                                        if(temp==i%numPlayers) {
+                                            ID = i % numPlayers;
+                                        }
                                     }
                                 }
                                 zrow = j;//change Zhangyi on board
