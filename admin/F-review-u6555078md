@@ -14,3 +14,4 @@ Inperfect:
 There still one test failed as below.
 java.lang.AssertionError: Move sequence I6OCAFRMGYSUW8QE2Z13L945BDPJHK should be valid, but was rejected
 I cannot find where the problem is.
+
