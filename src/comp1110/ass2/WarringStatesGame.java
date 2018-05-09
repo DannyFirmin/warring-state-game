@@ -1,6 +1,7 @@
 package comp1110.ass2;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -277,6 +278,14 @@ public class WarringStatesGame {
         return result;
     }
 
+    /**
+     * put king code to the board
+     *
+     * @param placement the current placement string
+     * @param board     board layout
+     * @return board layout with king code on it.
+     * ~~ means no king on that position
+     */
     static public String[][] placementToOccupation(String placement, char[][] board) {
         String[][] occupation = new String[6][6];
         for (int i = 0; i < 6; i++) {
@@ -315,12 +324,15 @@ public class WarringStatesGame {
         char l; //destination's board location char
         boolean result = true;
         for (int i = 0; i < moveSequence.length(); i++) {
+
+            if (setup.length()==3){return true;}
+
             //legal move
             if (isMoveLegal(setup, moveSequence.charAt(i))) {
                 l = moveSequence.charAt(i);//where to go now, take the location char
 
                 //find the index of zhangyi in current setup.
-                for (int j = 0; j < setup.length() ; j = j + 3) {
+                for (int j = 0; j < setup.length(); j = j + 3) {
                     if (setup.charAt(j) == 'z') {
                         zi = j;//zhangyi's current index
                         break;
@@ -334,17 +346,114 @@ public class WarringStatesGame {
                         break;
                     }
                 }
-                //replace previous king to z9
+
+                ArrayList<String> sameStateKing;
+                sameStateKing = findFurther(setup,zi,l);
+
                 setup = setup.replace(setup.substring(li - 2, li), "z9");
                 //delete previous z9x
                 StringBuilder sb = new StringBuilder(setup).delete(zi, zi + 3);
                 setup = sb.toString();
+                //TRY TO FIX TESTGOOD HERE
+//                if (sameStateKing.size()!=0){
+//                    for (int j = 0; j < sameStateKing.size(); j++) {
+//                        setup = setup.replaceAll(sameStateKing.get(j),"");
+//                    }
+//                }
             } else {
                 result = false;
                 break;
             }
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        ArrayList<String> sameStateKing2;
+        sameStateKing2 = findFurther("a2Aa1Bz9C",6,'A');
+        for (int i = 0; i < sameStateKing2.size(); i++) {
+            System.out.println(sameStateKing2.get(i));
+    }}
+    public static ArrayList<String> findFurther(String placement, int zi, char locationChar) {
+        int zrow = 0;//Zhangyi's row on board
+        int zcol = 0;//Zhangyi's column on board
+        int lrow = 0;//destination's row on board
+        int lcol = 0;//destination's column on board
+        char kingdom = 'z';//kingdom card of destination
+        ArrayList<String> sameStateKing = new ArrayList<>();
+
+        char[][] board = Board.board;
+
+        String[][] occupation = placementToOccupation(placement, board);
+
+        //find Zhangyi on board
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == zi + 2) {
+                    zrow = i;
+                    zcol = j;
+                    break;
+                }
+            }
+        }
+
+        //find the kingdom card on the destination
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == locationChar) {
+                    kingdom = occupation[i][j].charAt(0);
+                }
+            }
+        }
+
+        //find destination on board
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == locationChar) {
+                    lrow = i;
+                    lcol = j;
+                }
+            }
+        }
+
+        //whether furthest kingdom
+        if (zrow == lrow) {
+            if (zcol > lcol) {
+                for (int i = lcol - 1; i >= 0; i--) {
+                    if (occupation[zrow][i].charAt(0) == kingdom) {
+                        String a = ""+ occupation[zrow][i].charAt(0) + occupation[zrow][i].charAt(1);
+                        sameStateKing.add(a);
+                    }
+                }
+            } else {
+                for (int i = lcol + 1; i < 6; i++) {
+                    if (occupation[zrow][i].charAt(0) == kingdom) {
+                        String a = ""+ occupation[zrow][i].charAt(0) + occupation[zrow][i].charAt(1);
+                        sameStateKing.add(a);
+                    }
+                }
+            }
+        }
+        if (zcol == lcol) {
+            if (zrow > lrow) {
+                for (int i = lrow - 1; i >= 0; i--) {
+                    if (occupation[i][zcol].charAt(0) == kingdom) {
+                        String a = ""+ occupation[i][zcol].charAt(0) + occupation[i][zcol].charAt(1);
+                        sameStateKing.add(a);
+                    }
+                }
+            } else {
+                for (int i = lrow + 1; i < 6; i++) {
+                    if (occupation[i][zcol].charAt(0) == kingdom) {
+                        String a = ""+ occupation[i][zcol].charAt(0) + occupation[i][zcol].charAt(1);
+                        sameStateKing.add(a);
+                    }
+                }
+            }
+        }
+
+
+        return sameStateKing;
     }
 
     /**
@@ -631,12 +740,12 @@ public class WarringStatesGame {
     public static String removeDuplicates(String output) {
         String x = "";
         int size = output.length();
-        String output1 = "" +output.charAt(0)+output.charAt(1);
+        String output1 = "" + output.charAt(0) + output.charAt(1);
 
-        for (int i = 0; i <size ; i= i+2) {
-            x = x + output.charAt(i) +output.charAt(i+1);
-            if(output.charAt(i) != x.charAt(0) && output.charAt(i+1) != x.charAt(1)){
-                output1 = output1 + output.charAt(i)+output.charAt(i+1);
+        for (int i = 0; i < size; i = i + 2) {
+            x = x + output.charAt(i) + output.charAt(i + 1);
+            if (output.charAt(i) != x.charAt(0) && output.charAt(i + 1) != x.charAt(1)) {
+                output1 = output1 + output.charAt(i) + output.charAt(i + 1);
             }
 
 
