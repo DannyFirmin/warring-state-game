@@ -363,12 +363,6 @@ public class WarringStatesGame {
         // FIXME Task 7: get the list of supporters for a given player after a sequence of moves
 
 
-        char[][] board = Board.board;
-        int zrow = 0; // zhangyi  row
-        int zcol = 0; // zhangyi column
-        int player0LocationAtStartrow = 0;  // player0 row before the game begins
-        int player0LocationAtStartcol = 0;  // player 0 column before the game begins
-
 
         String output = "";  // the final return value
         int k = setup.length();  // length of the setup string
@@ -379,18 +373,21 @@ public class WarringStatesGame {
 
         int m = newSequence.length();
 
-        String playerCards = "";
+
         int i;
         int v;
 
         int j = numPlayers;
         String locations = "";
 
-
-        char locationOfPreviousPlayer = 0;
-        char locationOfCurrentPlayer = 0;
         char locationOfZhangyi = 0;
-        String locationsInBetween = "";
+
+        String[] playerCharecterCards = new String[j];
+        for(i=0;i<j;i++){
+            playerCharecterCards[i] = "";
+
+        }
+        playerCharecterCards[0] = "";
 
 
         for (i = 2; i <= k; i = i + 3) {    // finding the location characters from the setup string
@@ -413,7 +410,7 @@ public class WarringStatesGame {
 
 
         if (numPlayers >= 2 && numPlayers < 5) {
-            for (i = playerId; i < m; i = i + j) {
+            for (i = 0; i < m; i = i + 1) {
                 if (i == 0) {
                     char y = newSequence.charAt(i);
                     char y1 = locationOfZhangyi;
@@ -422,14 +419,14 @@ public class WarringStatesGame {
 
                     int position = locations.indexOf(y);
                     position = (position * 3) + 2; // position of current game player
-                    locationOfCurrentPlayer = setup.charAt(position);
 
 
                     char z = setup.charAt(position - 2);
                     char z1 = setup.charAt(position - 1);
 
 
-                    playerCards = playerCards + inbetweenKingdoms + z + z1;
+                    playerCharecterCards[0] = playerCharecterCards[0] + inbetweenKingdoms + z + z1;
+                    System.out.println(playerCharecterCards[0]);
 
                 } else if (i > 0) {
                     char y = newSequence.charAt(i);
@@ -439,24 +436,52 @@ public class WarringStatesGame {
 
                     int position = locations.indexOf(y);
                     position = (position * 3) + 2; // position of current game player
-                    locationOfCurrentPlayer = setup.charAt(position);
+
 
 
                     char z = setup.charAt(position - 2);
                     char z1 = setup.charAt(position - 1);
+                    if (i%j ==0){
+                        playerCharecterCards[0] = playerCharecterCards[0] + inbetweenKingdoms + z + z1;
+                        System.out.println(playerCharecterCards[0]);
 
 
-                    playerCards = playerCards + inbetweenKingdoms + z + z1;
+
+                    }
+                    if (i%j ==1){
+                        playerCharecterCards[1] = playerCharecterCards[1] + inbetweenKingdoms + z + z1;
+
+                    }
+                    if (i%j ==2){
+                        playerCharecterCards[2] = playerCharecterCards[2] + inbetweenKingdoms + z + z1;
+
+                    }
+                    if (i%j ==3){
+                        playerCharecterCards[3] = playerCharecterCards[3] + inbetweenKingdoms + z + z1;
+
+                    }
+
+
+
+
                 }
 
 
             }
-            output = playerCards;
-            System.out.println(output);
-            output = removeDuplicates(output);
-            System.out.println(output);
+            System.out.println(playerCharecterCards);
+
+            output = playerCharecterCards[playerId];
+            //System.out.println(output);
+            //System.out.println(playerCharecterCards[0]);
+            //System.out.println(playerCharecterCards[1]);
+
+            //output = removeDuplicates(output);
+           //System.out.println(output);
 
 
+        }
+        for(i=0;i<j;i++){
+            System.out.println("the character cards of player " + i + playerCharecterCards[i]);
         }
 
 
@@ -495,7 +520,7 @@ public class WarringStatesGame {
                 }
             }
         }
-
+// finding  the locations of cards in between
 
         if (firstLocationCol == secondLocationCol || firstLocationRow == secondLocationRow) {
             if (firstLocationCol == secondLocationCol) {
@@ -551,18 +576,19 @@ public class WarringStatesGame {
                     }
                 }
             }
-            System.out.println(locationsInBetween);
+           // System.out.println(locationsInBetween);
+            board[firstLocationCol][firstLocationRow]  = '#';
+            board[secondLocationCol][secondLocationRow]  = '#';
+
 
         }
 
 
         // finding kingdom cards of the locations
 
-        //int numberOfLocations = locationsInBetween.length();
 
         String kingdomCards = "";
-        // locationsInBetween = locationsInBetween.substring(1,locationsInBetween.length());
-        //char[] locationArray = locationsInBetween.toCharArray();
+
         for (int i = 0; i < locationsInBetween.length(); i++) {
 
             char u = locationsInBetween.charAt(i);
