@@ -20,6 +20,7 @@ public class WarringStatesGame {
      *
      * @param cardPlacement A string describing a card placement
      * @return true if the card placement is well-formed
+     * @Author: Ben
      */
     static boolean isCardPlacementWellFormed(String cardPlacement) {
         // FIXME Task 2: determine whether a card placement is well-formed
@@ -82,8 +83,9 @@ public class WarringStatesGame {
      *
      * @param placement A string describing a placement of one or more cards
      * @return true if the placement is well-formed
+     * @Author: Ben
      */
-    static boolean isPlacementWellFormed(String placement) {
+    public static boolean isPlacementWellFormed(String placement) {
         // FIXME Task 3: determine whether a placement is well-formed
         boolean b = true;
         if (placement != null && placement.length() >= 3 && placement.length() <= 108 && placement.length() % 3 == 0) {
@@ -159,6 +161,7 @@ public class WarringStatesGame {
      * @param placement    the current placement string
      * @param locationChar a location for Zhang Yi to move to
      * @return true if Zhang Yi may move to that location
+     * @Author: Ben, Danny, Vishnu
      */
     public static boolean isMoveLegal(String placement, char locationChar) {
         // FIXME Task 5: determine whether a given move is legal
@@ -279,12 +282,11 @@ public class WarringStatesGame {
     }
 
     /**
-     * put king code to the board
+     * put king code to the board ~~ means no king on that position
      *
      * @param placement the current placement string
      * @param board     board layout
      * @return board layout with king code on it.
-     * ~~ means no king on that position
      */
     static public String[][] placementToOccupation(String placement, char[][] board) {
         String[][] occupation = new String[6][6];
@@ -316,6 +318,7 @@ public class WarringStatesGame {
      * @param setup        A placement string representing the board setup
      * @param moveSequence a string of location characters representing moves
      * @return True if the placement sequence is valid
+     * @Author: Danny
      */
     static boolean isMoveSequenceValid(String setup, String moveSequence) {
         // FIXME Task 6: determine whether a placement sequence is valid
@@ -467,6 +470,7 @@ public class WarringStatesGame {
      * @param numPlayers   the number of players in the game, must be in the range [2..4]
      * @param playerId     the player number for which to get the list of supporters, [0..(numPlayers-1)]
      * @return the list of supporters for the given player
+     * @Author: Vishnu
      */
     public static String getSupporters(String setup, String moveSequence, int numPlayers, int playerId) {
         // FIXME Task 7: get the list of supporters for a given player after a sequence of moves
