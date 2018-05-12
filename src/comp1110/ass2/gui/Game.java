@@ -1,5 +1,7 @@
 package comp1110.ass2.gui;
-
+/**
+ * @Author Danny
+ */
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
