@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!--Author: Danny-->
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -34,7 +36,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <GridPane layoutX="40.0" layoutY="58.0" prefHeight="623.0" prefWidth="673.0">
+      <GridPane fx:id="grid" layoutX="40.0" layoutY="58.0" prefHeight="557.0" prefWidth="674.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -52,534 +54,534 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <AnchorPane>
+            <AnchorPane fx:id="a0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="孝公" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="c4" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#75e58e" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="楚">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="负刍" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="b4" GridPane.rowIndex="2">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom7" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="king7" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
+                  <Text layoutX="18.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="君王后" underline="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <AnchorPane fx:id="a1" GridPane.columnIndex="1">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="商鞅" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="a6" GridPane.rowIndex="1">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="赵姬" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="c3" GridPane.rowIndex="3">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#75e58e" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="楚">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="屈原" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="a7" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="政王" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="b5" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom3" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="king3" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="建王" underline="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.rowIndex="2">
+            <AnchorPane fx:id="d3" GridPane.rowIndex="4">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8ef0fb" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="赵">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="李牧" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="d4" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8ef0fb" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="赵">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="廉颇" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="f0" GridPane.rowIndex="5">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18972" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="魏">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="19.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="魏文侯" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="a2" GridPane.columnIndex="2">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="19.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="惠文王" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="b0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="king" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.columnIndex="1">
+            <AnchorPane fx:id="b6" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom1" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="king1" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="孙膑" underline="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.rowIndex="1">
+            <AnchorPane fx:id="c5" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#75e58e" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="楚">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="20.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="春申君" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="e0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9d50d0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="韩">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="18.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="韩哀侯" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="f2" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18972" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="魏">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="19.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="安僖王" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="a3" GridPane.columnIndex="3">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="18.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="昭襄王" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="b1" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom2" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="king2" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
+                  <Text layoutX="18.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="钟无艳" underline="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.rowIndex="3">
+            <AnchorPane fx:id="c0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#75e58e" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="楚">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="吴起" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="d0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8ef0fb" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="赵">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="20.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="武灵王" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="e1" GridPane.columnIndex="3" GridPane.rowIndex="4">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9d50d0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="韩">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="19.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="桓惠王" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="g0" GridPane.columnIndex="3" GridPane.rowIndex="5">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d0d0d0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="燕">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="喜王" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="a4" GridPane.columnIndex="4">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="20.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="芈八子" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="b2" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom4" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="king4" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
+                  <Text layoutX="16.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="孟尝君" underline="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <AnchorPane fx:id="c1" GridPane.columnIndex="4" GridPane.rowIndex="2">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#75e58e" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="楚">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="18.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="考烈王" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="d1" GridPane.columnIndex="4" GridPane.rowIndex="3">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8ef0fb" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="赵">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="20.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="平原君" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="a5" GridPane.columnIndex="5">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="白起" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="b3" GridPane.columnIndex="5" GridPane.rowIndex="1">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom6" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="king6" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="襄王" underline="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <AnchorPane fx:id="c2" GridPane.columnIndex="5" GridPane.rowIndex="2">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom5" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#75e58e" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="楚">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="king5" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="幽王" underline="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.rowIndex="4">
+            <AnchorPane fx:id="d2" GridPane.columnIndex="5" GridPane.rowIndex="3">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom8" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8ef0fb" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="赵">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="king8" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
+                  <Text layoutX="19.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="孝成王" underline="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <AnchorPane fx:id="g1" GridPane.columnIndex="4" GridPane.rowIndex="5">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom9" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d0d0d0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="燕">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="king9" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
+                  <Text layoutX="19.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="太子丹" underline="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.rowIndex="5">
+            <AnchorPane fx:id="e3" GridPane.columnIndex="5" GridPane.rowIndex="4">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom10" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9d50d0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="韩">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="king10" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="韩非" underline="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.columnIndex="2">
+            <AnchorPane fx:id="e2" GridPane.columnIndex="4" GridPane.rowIndex="4">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom71" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9d50d0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="韩">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="king71" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="安王" underline="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <AnchorPane fx:id="f1" prefWidth="119.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom72" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18972" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="魏">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text fx:id="king72" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
+                  <Text layoutX="19.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="信陵君" underline="true">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <AnchorPane fx:id="z9" GridPane.columnIndex="5" GridPane.rowIndex="5">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom73" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king73" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="2" GridPane.rowIndex="3">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom74" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king74" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="2" GridPane.rowIndex="4">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom75" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king75" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="2" GridPane.rowIndex="5">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom76" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king76" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="3">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom77" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king77" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom78" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king78" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="3" GridPane.rowIndex="2">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom781" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king781" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="3" GridPane.rowIndex="3">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom782" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king782" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="3" GridPane.rowIndex="4">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom783" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king783" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="3" GridPane.rowIndex="5">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom784" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king784" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="4">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom785" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king785" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="4" GridPane.rowIndex="1">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom786" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king786" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="4" GridPane.rowIndex="2">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom7861" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king7861" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="4" GridPane.rowIndex="3">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom7862" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king7862" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="5">
-               <children>
-                  <Rectangle fx:id="A" arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kdA" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="kA" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="B" GridPane.columnIndex="5" GridPane.rowIndex="1">
-               <children>
-                  <Rectangle fx:id="B" arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kdB" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="kB" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="5" GridPane.rowIndex="2">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom7853" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king7853" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="5" GridPane.rowIndex="3">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom7854" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king7854" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="4" GridPane.rowIndex="5">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom78541" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king78541" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="5" GridPane.rowIndex="4">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom78542" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king78542" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="4" GridPane.rowIndex="4">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom78543" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king78543" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane prefWidth="119.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text fx:id="kingdom78544" layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="king78544" layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="宣王" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-            <AnchorPane GridPane.columnIndex="5" GridPane.rowIndex="5">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8a8383" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text fill="WHITE" layoutX="19.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="张仪">
                      <font>
                         <Font size="21.0" />
@@ -589,5 +591,8 @@
             </AnchorPane>
          </children>
       </GridPane>
+      <Button fx:id="go" layoutX="538.0" layoutY="640.0" mnemonicParsing="false" onAction="#makePlacement" text="GO" />
+      <TextField fx:id="placetext" layoutX="235.0" layoutY="640.0" prefHeight="27.0" prefWidth="295.0" />
+      <Text layoutX="155.0" layoutY="658.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Placement" />
    </children>
 </AnchorPane>

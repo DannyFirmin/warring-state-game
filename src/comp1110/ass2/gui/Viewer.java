@@ -61,6 +61,17 @@ public class Viewer extends Application {
      */
     void makePlacement(String placement) {
         // FIXME Task 4: implement the simple placement viewer
+/*
+Display images of cards in the window (anywhere)
+
+ Display images of cards so that their origin is in the correct place.
+
+ Display images so that their cards is in the correct place and their orientation is correct.
+
+ Break placement strings into card placements.
+
+ Fix the makePlacement() method of the Viewer class so that it works correctly.
+*/
     }
 
     /**
@@ -103,10 +114,10 @@ public class Viewer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-       // Parent root = FXMLLoader.load(getClass().getResource("experiment.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("experiment.fxml"));
         primaryStage.setTitle("Warring States Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
-        root.getChildren().add(controls);
+//        root.getChildren().add(controls);
 
         makeControls();
         setUpSoundLoop();
