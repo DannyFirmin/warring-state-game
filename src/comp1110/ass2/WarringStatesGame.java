@@ -2,9 +2,7 @@ package comp1110.ass2;
 
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class provides the text interface for the Warring States game
@@ -484,22 +482,18 @@ public class WarringStatesGame {
         int k = setup.length();  // length of the setup string
         int x = playerId + 1;
         int n = moveSequence.length();
-        int endTerms = n % x; // probably not required
-        String newSequence = moveSequence.substring(0, moveSequence.length() - endTerms); // making it fool proof
-
-        int m = newSequence.length();
-
-
         int j = numPlayers;
-        String locations = "";
+        String locations = ""; // all location chars [A-Z],[1-9]
 
-        char locationOfZhangyi = 0;
+        char locationOfZhangyi = 0; // location of zhangyi
+
+        String[] playerCharecterCards = new String[j]; // array to store the supporters
+        for(int i=0;i<j;i++){
+            playerCharecterCards[i] = "";
+
+        }
 
 
-        String player0cards = "";
-        String player1Cards = "";
-        String player2Cards = "";
-        String player3Cards = "";
 
 
         for (int i = 2; i <= k; i = i + 3) {    // finding the location characters from the setup string
@@ -513,61 +507,65 @@ public class WarringStatesGame {
 
         // FIND ZHANGYI LOCATION FROM SETUP string  before the game begins
 
-        for (int i = 0; i < m; i = i + 3) {
+        for (int i = 0; i < n; i = i + 3) {
             char zhangi = setup.charAt(i);
             if (zhangi == 'z') {
                 locationOfZhangyi = setup.charAt(i + 2);
             }
         }
 
+        // implementing all conditions from here
 
         if (numPlayers >= 2 && numPlayers < 5) {
-            if (playerId >= 0 && playerId < 4) {
-                for (int i = 0; i < m; i = i + 1) {
-                    if (i == 0) {
-                        char y = newSequence.charAt(i);
-                        char y1 = locationOfZhangyi;
-                        String inbetweenKingdoms = getKingdomCardsInbetween(y, y1, locations, setup);
+                for (int i = 0; i < n; i = i + 1) {
+                    if (i == 0) {                                   // when i= 0 where i is the index of movesequence;// we need to find supporters from zhangyo location to first location on movesequence
+                        char y = moveSequence.charAt(i);   //assigning destinition location
+                        char y1 = locationOfZhangyi;        //assigning start location
+                        String inbetweenKingdoms = getKingdomCardsInbetween(y, y1, locations, setup);  // calling the method to find locations in between y and y1 exclusive and get supporters
 
 
+                        // finding index of destination and getting the character number at the destination using setup string
                         int position = locations.indexOf(y);
-                        position = (position * 3) + 2; // position of current game player
+                        position = (position * 3) + 2;
 
 
-                        char z = setup.charAt(position - 2);
+                        char z = setup.charAt(position - 2); //
                         char z1 = setup.charAt(position - 1);
 
-
-                        player0cards = player0cards + inbetweenKingdoms + z + z1;
+                        playerCharecterCards[0] = playerCharecterCards[0] + inbetweenKingdoms + z + z1; // adding to player 0 string
 
                     } else if (i > 0) {
-                        char y = newSequence.charAt(i);
-                        char y1 = newSequence.charAt(i - 1);
+                        // similar to before block
+                        char y = moveSequence.charAt(i);
+                        char y1 = moveSequence.charAt(i - 1);
                         String inbetweenKingdoms = getKingdomCardsInbetween(y, y1, locations, setup);
 
 
                         int position = locations.indexOf(y);
-                        position = (position * 3) + 2; // position of current game player
+                        position = (position * 3) + 2;
 
 
                         char z = setup.charAt(position - 2);
                         char z1 = setup.charAt(position - 1);
+                        //categorizing the cards received for every sequence and placing in player strings
                         if (i % j == 0) {
-                            player0cards = player0cards + inbetweenKingdoms + z + z1;
+                            playerCharecterCards[0] = playerCharecterCards[0] + inbetweenKingdoms + z + z1;
 
                         }
 
 
                         if (i % j == 1) {
-                            player1Cards = player1Cards + inbetweenKingdoms + z + z1;
+                            playerCharecterCards[1] = playerCharecterCards[1] + inbetweenKingdoms + z + z1;
 
                         }
                         if (i % j == 2) {
-                            player2Cards = player2Cards + inbetweenKingdoms + z + z1;
+                            playerCharecterCards[2] = playerCharecterCards[2] + inbetweenKingdoms + z + z1;
 
                         }
                         if (i % j == 3) {
-                            player3Cards = player3Cards + inbetweenKingdoms + z + z1;
+                            playerCharecterCards[3] = playerCharecterCards[3] + inbetweenKingdoms + z + z1;
+
+
 
                         }
 
@@ -577,42 +575,22 @@ public class WarringStatesGame {
 
                 }
 
-                if (playerId == 0) {
-                    output = player0cards;
-                }
-                if (playerId == 1) {
-                    output = player1Cards;
-                }
-                if (playerId == 2) {
-                    output = player2Cards;
-                }
-                if (playerId == 3) {
-                    output = player3Cards;
-                }
-
-
-            }
-
 
         }
 
-        System.out.println("player 0 =" + player0cards);
-        System.out.println("player 0 =" + removeDuplicates(player0cards));
+
+        output = removeDuplicates(playerCharecterCards[playerId]);
+
+        System.out.println("player 0 = " + removeDuplicates(playerCharecterCards[0]));
+        System.out.println("player 1 = " + removeDuplicates(playerCharecterCards[1]));
+        System.out.println("player 2 =" + removeDuplicates(playerCharecterCards[2]));
+        System.out.println("player 3 =" + removeDuplicates(playerCharecterCards[3]));
 
 
 
-        System.out.println("player 1 =" + player1Cards);
-        System.out.println("player 1 =" + removeDuplicates(player1Cards));
+        System.out.println("output is " + output);
 
 
-
-        System.out.println("player 2 =" + player2Cards);
-        System.out.println("player 2 =" + removeDuplicates(player2Cards));
-
-
-
-        System.out.println("player 3 =" + player3Cards);
-        System.out.println("player 3 =" + removeDuplicates(player3Cards));
 
 
         return output;
@@ -632,7 +610,7 @@ public class WarringStatesGame {
         String locationsInBetween = "";
         String output = "";
 
-
+// finding row and column of location char on board
         for (int i = 0; i < 6; i++) {
             for (int v = 0; v < 6; v++) {
                 if (board[i][v] == secondLocation) {
@@ -659,7 +637,8 @@ public class WarringStatesGame {
                         if (board[i][firstLocationCol] != '#') {
 
                             locationsInBetween = locationsInBetween + board[i][firstLocationCol];
-                            board[i][firstLocationCol] = '#';
+                            board[i][firstLocationCol] = '#'; // after receiving the supporter ,setting the location to #
+
 
 
                         }
@@ -667,10 +646,10 @@ public class WarringStatesGame {
                 }
                 if (firstLocationRow < secondLocationRow) {
                     for (int i = firstLocationRow; i <= secondLocationRow; i++) {
-                        if (board[i][firstLocationCol] != '#') {
+                        if (board[i][firstLocationCol] != '#') { //  if the location char on board at that particular column is not # it gets locations
 
                             locationsInBetween = locationsInBetween + board[i][firstLocationCol];
-                            board[i][firstLocationCol] = '#';
+                            board[i][firstLocationCol] = '#'; // after receiving the supporter ,setting the location to #
 
 
                         }
@@ -685,7 +664,7 @@ public class WarringStatesGame {
                         if (board[firstLocationRow][v] != '#') {
 
                             locationsInBetween = locationsInBetween + board[firstLocationRow][v];
-                            board[firstLocationRow][v] = '#';
+                            board[firstLocationRow][v] = '#'; // similar to above block
 
 
                         }
@@ -698,7 +677,7 @@ public class WarringStatesGame {
                         if (board[firstLocationRow][v] != '#') {
 
                             locationsInBetween = locationsInBetween + board[firstLocationRow][v];
-                            board[firstLocationRow][v] = '#';
+                            board[firstLocationRow][v] = '#';//similar to above block
 
 
                         }
@@ -707,8 +686,9 @@ public class WarringStatesGame {
                 }
             }
             // System.out.println("locations inbetween =" +  locationsInBetween);
-            board[firstLocationRow][firstLocationCol] = '#';
-            board[secondLocationRow][secondLocationCol] = '#';
+            board[firstLocationRow][firstLocationCol] = '#'; // setting the first char location to #
+           // board[secondLocationRow][secondLocationCol] = '#'; // setting
+
 
 
         }
@@ -736,8 +716,9 @@ public class WarringStatesGame {
 
 
         }
-
         // System.out.println("kingdom cards = " + kingdomCards);
+
+
         // checking if the kingdom cards are same in the locations inbetwen
 
         String KingdomCardNumbers = "";
@@ -759,26 +740,19 @@ public class WarringStatesGame {
 
     public static String removeDuplicates(String x) {
 
-        String output1 = "";
-
-        int l = x.length();
-        for (int i = 0; i < l; i = i + 2) {
-            String y = x.substring(i, i + 2);
-            int a = x.lastIndexOf(y);
-            if (a != i) {
-                output1 = x.substring(0, a) + x.substring(a + 2, l);
-
-            }
-            if (a == i) {
-                output1 = x;
-
-
+        Set<String> set = new HashSet<>();
+        StringBuffer sf = new StringBuffer();
+        for(int i= 0;i<x.length();i=i+2){
+            String c = "" + x.charAt(i) + x.charAt(i+1);
+            if(!set.contains(c)){
+                set.add(c);
+                sf.append(c);
             }
 
         }
 
 
-        return output1;
+        return sf.toString();
 
     }
 
