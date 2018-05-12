@@ -488,12 +488,10 @@ public class WarringStatesGame {
         char locationOfZhangyi = 0; // location of zhangyi
 
         String[] playerCharecterCards = new String[j]; // array to store the supporters
-        for(int i=0;i<j;i++){
+        for (int i = 0; i < j; i++) {
             playerCharecterCards[i] = "";
 
         }
-
-
 
 
         for (int i = 2; i <= k; i = i + 3) {    // finding the location characters from the setup string
@@ -517,63 +515,62 @@ public class WarringStatesGame {
         // implementing all conditions from here
 
         if (numPlayers >= 2 && numPlayers < 5) {
-                for (int i = 0; i < n; i = i + 1) {
-                    if (i == 0) {                                   // when i= 0 where i is the index of movesequence;// we need to find supporters from zhangyo location to first location on movesequence
-                        char y = moveSequence.charAt(i);   //assigning destinition location
-                        char y1 = locationOfZhangyi;        //assigning start location
-                        String inbetweenKingdoms = getKingdomCardsInbetween(y, y1, locations, setup);  // calling the method to find locations in between y and y1 exclusive and get supporters
+            for (int i = 0; i < n; i = i + 1) {
+                if (i == 0) {                                   // when i= 0 where i is the index of movesequence;// we need to find supporters from zhangyo location to first location on movesequence
+                    char y = moveSequence.charAt(i);   //assigning destinition location
+                    char y1 = locationOfZhangyi;        //assigning start location
+                    String inbetweenKingdoms = getKingdomCardsInbetween(y, y1, locations, setup);  // calling the method to find locations in between y and y1 exclusive and get supporters
 
 
-                        // finding index of destination and getting the character number at the destination using setup string
-                        int position = locations.indexOf(y);
-                        position = (position * 3) + 2;
+                    // finding index of destination and getting the character number at the destination using setup string
+                    int position = locations.indexOf(y);
+                    position = (position * 3) + 2;
 
 
-                        char z = setup.charAt(position - 2); //
-                        char z1 = setup.charAt(position - 1);
+                    char z = setup.charAt(position - 2); //
+                    char z1 = setup.charAt(position - 1);
 
-                        playerCharecterCards[0] = playerCharecterCards[0] + inbetweenKingdoms + z + z1; // adding to player 0 string
+                    playerCharecterCards[0] = playerCharecterCards[0] + inbetweenKingdoms + z + z1; // adding to player 0 string
 
-                    } else if (i > 0) {
-                        // similar to before block
-                        char y = moveSequence.charAt(i);
-                        char y1 = moveSequence.charAt(i - 1);
-                        String inbetweenKingdoms = getKingdomCardsInbetween(y, y1, locations, setup);
-
-
-                        int position = locations.indexOf(y);
-                        position = (position * 3) + 2;
+                } else if (i > 0) {
+                    // similar to before block
+                    char y = moveSequence.charAt(i);
+                    char y1 = moveSequence.charAt(i - 1);
+                    String inbetweenKingdoms = getKingdomCardsInbetween(y, y1, locations, setup);
 
 
-                        char z = setup.charAt(position - 2);
-                        char z1 = setup.charAt(position - 1);
-                        //categorizing the cards received for every sequence and placing in player strings
-                        if (i % j == 0) {
-                            playerCharecterCards[0] = playerCharecterCards[0] + inbetweenKingdoms + z + z1;
-
-                        }
+                    int position = locations.indexOf(y);
+                    position = (position * 3) + 2;
 
 
-                        if (i % j == 1) {
-                            playerCharecterCards[1] = playerCharecterCards[1] + inbetweenKingdoms + z + z1;
+                    char z = setup.charAt(position - 2);
+                    char z1 = setup.charAt(position - 1);
+                    //categorizing the cards received for every sequence and placing in player strings
+                    if (i % j == 0) {
+                        playerCharecterCards[0] = playerCharecterCards[0] + inbetweenKingdoms + z + z1;
 
-                        }
-                        if (i % j == 2) {
-                            playerCharecterCards[2] = playerCharecterCards[2] + inbetweenKingdoms + z + z1;
-
-                        }
-                        if (i % j == 3) {
-                            playerCharecterCards[3] = playerCharecterCards[3] + inbetweenKingdoms + z + z1;
+                    }
 
 
+                    if (i % j == 1) {
+                        playerCharecterCards[1] = playerCharecterCards[1] + inbetweenKingdoms + z + z1;
 
-                        }
+                    }
+                    if (i % j == 2) {
+                        playerCharecterCards[2] = playerCharecterCards[2] + inbetweenKingdoms + z + z1;
+
+                    }
+                    if (i % j == 3) {
+                        playerCharecterCards[3] = playerCharecterCards[3] + inbetweenKingdoms + z + z1;
 
 
                     }
 
 
                 }
+
+
+            }
 
 
         }
@@ -587,10 +584,7 @@ public class WarringStatesGame {
         System.out.println("player 3 =" + removeDuplicates(playerCharecterCards[3]));
 
 
-
         System.out.println("output is " + output);
-
-
 
 
         return output;
@@ -640,7 +634,6 @@ public class WarringStatesGame {
                             board[i][firstLocationCol] = '#'; // after receiving the supporter ,setting the location to #
 
 
-
                         }
                     }
                 }
@@ -687,8 +680,7 @@ public class WarringStatesGame {
             }
             // System.out.println("locations inbetween =" +  locationsInBetween);
             board[firstLocationRow][firstLocationCol] = '#'; // setting the first char location to #
-           // board[secondLocationRow][secondLocationCol] = '#'; // setting
-
+            // board[secondLocationRow][secondLocationCol] = '#'; // setting
 
 
         }
@@ -742,9 +734,9 @@ public class WarringStatesGame {
 
         Set<String> set = new HashSet<>();
         StringBuffer sf = new StringBuffer();
-        for(int i= 0;i<x.length();i=i+2){
-            String c = "" + x.charAt(i) + x.charAt(i+1);
-            if(!set.contains(c)){
+        for (int i = 0; i < x.length(); i = i + 2) {
+            String c = "" + x.charAt(i) + x.charAt(i + 1);
+            if (!set.contains(c)) {
                 set.add(c);
                 sf.append(c);
             }
@@ -813,7 +805,7 @@ public class WarringStatesGame {
         2.occupation change;
         3.Zhangyi's location change;
         4.flags may change.*/
-        int temp=0;
+        int temp = 0;
         for (int i = 0; i < moveSequence.length(); i++) {//for each step in the moveSequence
             for (int j = 0; j < 6; j++) {
                 for (int k = 0; k < 6; k++) {//for each location on board
@@ -826,7 +818,7 @@ public class WarringStatesGame {
                                     if ((int) occupation[j][k].charAt(0) == (int) occupation[j][l].charAt(0) && !occupation[j][l].equals("~~")) {
                                         cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;//add 1 card to certain player
                                         occupation[j][l] = "~~";//delete data of related location on occupation
-                                        temp=i%numPlayers;
+                                        temp = i % numPlayers;
                                     }
                                 }
                                 int ID = 0;//initialize the playerID as 0
@@ -834,8 +826,8 @@ public class WarringStatesGame {
                                     if (cards[n][kingdom - 97] > m) {
                                         m = cards[n][kingdom - 97];//player n has the most cards till now
                                         ID = n;//player n should get the flag
-                                    }else if(cards[n][kingdom - 97] == m){
-                                        if(temp==i%numPlayers) {
+                                    } else if (cards[n][kingdom - 97] == m) {
+                                        if (temp == i % numPlayers) {
                                             ID = i % numPlayers;
                                         }
                                     }
@@ -849,7 +841,7 @@ public class WarringStatesGame {
                                     if ((int) occupation[j][k].charAt(0) == (int) occupation[j][l].charAt(0) && !occupation[j][l].equals("~~")) {
                                         cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;
                                         occupation[j][l] = "~~";
-                                        temp=i%numPlayers;
+                                        temp = i % numPlayers;
                                     }
                                 }
                                 int ID = 0;//initialize the playerID as 0
@@ -857,8 +849,8 @@ public class WarringStatesGame {
                                     if (cards[n][kingdom - 97] > m) {
                                         m = cards[n][kingdom - 97];//player n has the most cards till now
                                         ID = n;//player n should get the flag
-                                    }else if(cards[n][kingdom - 97] == m){
-                                        if(temp==i%numPlayers) {
+                                    } else if (cards[n][kingdom - 97] == m) {
+                                        if (temp == i % numPlayers) {
                                             ID = i % numPlayers;
                                         }
                                     }
@@ -875,7 +867,7 @@ public class WarringStatesGame {
                                         if ((int) occupation[j][k].charAt(0) == (int) occupation[l][k].charAt(0) && !occupation[l][k].equals("~~")) {
                                             cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;
                                             occupation[l][k] = "~~";
-                                            temp=i%numPlayers;
+                                            temp = i % numPlayers;
                                         }
                                     }
                                 }
@@ -884,8 +876,8 @@ public class WarringStatesGame {
                                     if (cards[n][kingdom - 97] > m) {
                                         m = cards[n][kingdom - 97];//player n has the most cards till now
                                         ID = n;//player n should get the flag
-                                    }else if(cards[n][kingdom - 97] == m){
-                                        if(temp==i%numPlayers) {
+                                    } else if (cards[n][kingdom - 97] == m) {
+                                        if (temp == i % numPlayers) {
                                             ID = i % numPlayers;
                                         }
                                     }
@@ -899,7 +891,7 @@ public class WarringStatesGame {
                                     if ((int) occupation[j][k].charAt(0) == (int) occupation[l][k].charAt(0) && !occupation[l][k].equals("~~")) {
                                         cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;
                                         occupation[l][k] = "~~";
-                                        temp=i%numPlayers;
+                                        temp = i % numPlayers;
                                     }
                                 }
                                 int ID = 0;//initialize the playerID as 0
@@ -907,8 +899,8 @@ public class WarringStatesGame {
                                     if (cards[n][kingdom - 97] > m) {
                                         m = cards[n][kingdom - 97];//player n has the most cards till now
                                         ID = n;//player n should get the flag
-                                    }else if(cards[n][kingdom - 97] == m){
-                                        if(temp==i%numPlayers) {
+                                    } else if (cards[n][kingdom - 97] == m) {
+                                        if (temp == i % numPlayers) {
                                             ID = i % numPlayers;
                                         }
                                     }
