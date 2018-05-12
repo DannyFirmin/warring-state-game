@@ -1,5 +1,13 @@
 # Characters of the Seven Kingdoms
 
+Qin: a0 .. a7
+Qi: b0 .. b6
+Chu: c0 .. c5
+Zhao: d0 .. d4
+Han: e0 .. e3
+Wei: f0 .. f2
+Yan: g0 .. g1
+
 ## Qin 秦
 - Duke Xiao 孝公
 - Shang Yang 商鞅

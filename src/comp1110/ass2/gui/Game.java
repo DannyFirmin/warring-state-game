@@ -29,7 +29,7 @@ public class Game extends Application {
     }
 
     // FIXME Task 9: Implement a basic playable Warring States game in JavaFX
-
+    // Task 9 Code is in Controller.java and wsg.fxml
     // FIXME Task 11: Allow players of your Warring States game to play against your simple agent
 
     // FIXME Task 12: Integrate a more advanced opponent into your game

@@ -1,0 +1,17 @@
+Reviewer: Chi Ben (u6555078)
+Component: Task 6 determine whether a placement sequence is valid
+Author: Danny Feng (u6611178)
+
+Review Comments:
+Overview:My teammate call the method isMoveLegal() form task 5, as the base of task 6,
+which makes the code simple and clear.Then in each step, it only need to change the setup
+by repalcing the card in the location with 'Zhangyi',and deleting the card 'Zhangyi'
+in the previous location,and repeat the process step by step till moveSequence is used up.
+If one step in the process is illegal, the moveSequence is illegal.Overall, it's very clear.
+
+
+Inperfect:
+There still one test failed as below.
+java.lang.AssertionError: Move sequence I6OCAFRMGYSUW8QE2Z13L945BDPJHK should be valid, but was rejected
+I cannot find where the problem is.
+
