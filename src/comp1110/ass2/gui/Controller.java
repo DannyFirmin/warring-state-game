@@ -11,22 +11,27 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static comp1110.ass2.WarringStatesGame.isPlacementWellFormed;
 import static comp1110.ass2.WarringStatesGame.placementToOccupation;
 
 public class Controller {
-
+    private boolean z9IsChosen = false;
     @FXML
     private TextField placetext;
 
     @FXML
     private GridPane grid;
-
+    @FXML
+    private Rectangle z9Rectangle;
     @FXML
     private AnchorPane z9;
     @FXML
@@ -125,6 +130,7 @@ public class Controller {
 
         alert.showAndWait();
     }
+
     /**
      * @Author: Danny Feng
      * @Description: Put the card in the right place according to the user placement input
@@ -204,4 +210,59 @@ public class Controller {
     }
 
 
+    @FXML
+    void handleDragOver(DragEvent event) {
+        event.acceptTransferModes(TransferMode.ANY);
+
+    }
+
+    @FXML
+    void handleDrop(DragEvent event) {
+        grid.getChildren().remove(a1);
+
+    }
+
+    @FXML
+    void handleDragDetection(MouseEvent event) {
+        Dragboard db = z9.startDragAndDrop(TransferMode.ANY);
+        event.consume();
+    }
+
+    ArrayList storePosition = new ArrayList<>();
+
+    @FXML
+    void handlePressZ9(MouseEvent event) {
+        if (!z9IsChosen) {
+            z9Rectangle.setStroke(Color.RED);
+            z9Rectangle.setStrokeWidth(3);
+            storePosition.add(grid.getRowIndex(z9));
+            z9IsChosen = true;
+        } else {
+            z9Rectangle.setStroke(Color.BLACK);
+            z9Rectangle.setStrokeWidth(1);
+            z9IsChosen = false;
+        }
+
+    }
+
+    @FXML
+    void handlePress(MouseEvent event) {
+        if (z9IsChosen) {
+            Node source = (Node) event.getSource();
+            grid.getChildren().remove(z9);
+            grid.getChildren().remove(source);
+            if (GridPane.getRowIndex(source) == null && GridPane.getColumnIndex(source) == null) {
+                grid.add(z9, 0, 0);
+            } else if (GridPane.getRowIndex(source) == null && GridPane.getColumnIndex(source) != null) {
+                grid.add(z9, GridPane.getColumnIndex(source), 0);
+            } else if (GridPane.getColumnIndex(source) == null && GridPane.getRowIndex(source) != null) {
+                grid.add(z9, 0, GridPane.getRowIndex(source));
+            } else if (GridPane.getColumnIndex(source) != null && GridPane.getRowIndex(source) != null) {
+                grid.add(z9, GridPane.getColumnIndex(source), GridPane.getRowIndex(source));
+            }
+            z9Rectangle.setStroke(Color.BLACK);
+            z9Rectangle.setStrokeWidth(1);
+            z9IsChosen = false;
+        }
+    }
 }
