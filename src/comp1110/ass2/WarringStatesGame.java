@@ -624,7 +624,8 @@ public class WarringStatesGame {
                         if (board[i][firstLocationCol] != '#') {
 
                             locationsInBetween = locationsInBetween + board[i][firstLocationCol];
-                            board[i][firstLocationCol] = '#'; // after receiving the supporter ,setting the location to #
+
+
 
 
                         }
@@ -635,7 +636,8 @@ public class WarringStatesGame {
                         if (board[i][firstLocationCol] != '#') { //  if the location char on board at that particular column is not # it gets locations
 
                             locationsInBetween = locationsInBetween + board[i][firstLocationCol];
-                            board[i][firstLocationCol] = '#'; // after receiving the supporter ,setting the location to #
+
+
 
 
                         }
@@ -650,7 +652,7 @@ public class WarringStatesGame {
                         if (board[firstLocationRow][v] != '#') {
 
                             locationsInBetween = locationsInBetween + board[firstLocationRow][v];
-                            board[firstLocationRow][v] = '#'; // similar to above block
+
 
 
                         }
@@ -663,7 +665,8 @@ public class WarringStatesGame {
                         if (board[firstLocationRow][v] != '#') {
 
                             locationsInBetween = locationsInBetween + board[firstLocationRow][v];
-                            board[firstLocationRow][v] = '#';//similar to above block
+
+
 
 
                         }
@@ -671,11 +674,11 @@ public class WarringStatesGame {
                     }
                 }
             }
-            // System.out.println("locations inbetween =" +  locationsInBetween);
-            board[firstLocationRow][firstLocationCol] = '#'; // setting the first char location to #
+
+             // setting the first char location to #
             // board[secondLocationRow][secondLocationCol] = '#'; // setting
 
-
+            System.out.println("locations inbetween =" +  locationsInBetween);
         }
 
 
@@ -701,7 +704,7 @@ public class WarringStatesGame {
 
 
         }
-        // System.out.println("kingdom cards = " + kingdomCards);
+         //System.out.println("kingdom cards = " + kingdomCards);
 
 
         // checking if the kingdom cards are same in the locations inbetwen
@@ -719,6 +722,7 @@ public class WarringStatesGame {
             }
             output = KingdomCardNumbers;
         }
+        System.out.println("kingdomcard numbers " + output);
 
         return output;
     }
