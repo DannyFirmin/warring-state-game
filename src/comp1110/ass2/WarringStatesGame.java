@@ -371,19 +371,6 @@ public class WarringStatesGame {
         return result;
     }
 
-    //        public static void main(String[] args) {
-//       String ass = findFurtherStr("a6Pc1Tb0Xz98g0Ab33b27b10c3Qa0Bd4Oe0Ra7Ya31e2Ig16e3Hc2Kf0Ma5Sc09c5Ed0Lb4Nf1Ce1Fc4Vf2Za4Ga1Dd1Ua2Jb64d35",9,'4');
-//        System.out.println(ass);
-//    }
-    public static String findFurtherStr(String placement, int zi, char locationChar) {
-        String str = "";
-        ArrayList<String> sameStateKing;
-        sameStateKing = findFurther(placement, zi, locationChar);
-        for (int i = 0; i < sameStateKing.size(); i++) {
-            str = str + sameStateKing.get(i);
-        }
-        return str;
-    }
 
     public static ArrayList<String> findFurther(String placement, int zi, char locationChar) {
         int zrow = 0;//Zhangyi's row on board
@@ -481,7 +468,9 @@ public class WarringStatesGame {
      * @param numPlayers   the number of players in the game, must be in the range [2..4]
      * @param playerId     the player number for which to get the list of supporters, [0..(numPlayers-1)]
      * @return the list of supporters for the given player
-     * @Author: Vishnu wrote it first and contribute the idea, Danny rewrote it to fix bug
+     * @Author: Vishnu and Danny (Vishnu first wrote this task but the testGood fails. Danny rewrote 50% of the code to fix the bug.
+     * Vishnu's method of finding if there is the same kingdom card when zhangyi move is not returning the correct result
+     * also he forgot to update the setup string when zhangyi move.)
      */
 
     public static String getSupporters(String setup, String moveSequence, int numPlayers, int playerId) {
@@ -613,46 +602,6 @@ public class WarringStatesGame {
         return sf.toString();
     }
 
-    public static void main(String[] args) {
-        String oldsetup = "a1Aa2Bb1Cz9D";
-        String newsetup = updateSetup(oldsetup,'A');
-        System.out.println(newsetup);
-    }
-    public static String updateSetup(String oldsetup,char moveSeqChar) {
-        int zi = 0; //zhangyi's index
-        int li = 0; //location's index
-        String newsetup = "";
-
-        //find the index of zhangyi in old setup.
-        for (int j = 0; j < oldsetup.length(); j = j + 3) {
-            if (oldsetup.charAt(j) == 'z') {
-                zi = j;//zhangyi's  index
-                break;
-            }
-        }
-
-        //find location char in setup string
-        for (int j = 2; j < oldsetup.length(); j = j + 3) {
-            if (oldsetup.charAt(j) == moveSeqChar) {
-                // moveSequence.charAt(i) go to setup to find where is this
-                li = j;//location's current index
-                break;
-            }
-        }
-        ArrayList<String> sameStateKing;
-        sameStateKing = findFurther(oldsetup, zi, moveSeqChar);
-        newsetup = oldsetup.replace(oldsetup.substring(li - 2, li), "z9");
-        //delete previous z9x
-        StringBuilder sb = new StringBuilder(newsetup).delete(zi, zi + 3);
-        newsetup = sb.toString();
-        if (sameStateKing.size() > 0) {
-            for (int j = 0; j < sameStateKing.size(); j++) {
-                newsetup = newsetup.replaceAll(sameStateKing.get(j), "~~");
-            }
-            sameStateKing.clear();
-        }
-        return newsetup;
-    }
     /**
      * Given a setup and move sequence, determine which player controls the flag of each kingdom
      * after all the moves in the sequence have been played.
@@ -661,6 +610,9 @@ public class WarringStatesGame {
      * @param moveSequence a string of location characters representing a sequence of moves
      * @param numPlayers   the number of players in the game, must be in the range [2..4]
      * @return an array containing the player ID who controls each kingdom, where
+     * @Author Ben and Danny
+     * (Ben wrote this firstly but all tests failed. Danny rewrote 99% of the code and now it is done.
+     * Thanks Cooper offering hints for dealing with the same amount of card of the same state)
      * - element 0 contains the player ID of the player who controls the flag of Qin
      * - element 1 contains the player ID of the player who controls the flag of Qi
      * - element 2 contains the player ID of the player who controls the flag of Chu
@@ -676,20 +628,27 @@ public class WarringStatesGame {
                 {0, 0, 0, 0, 0, 0, 0},//rows represent players,columns represent kingdoms
                 {0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0}};
+        String oldSetup = setup;
+        String newSetup = setup;
 
         int[] flags = {-1, -1, -1, -1, -1, -1, -1};
 
         for (int i = 0; i < moveSequence.length(); i++) {
-              String newSetup = updateSetup(setup, moveSequence.charAt(i));
-
             int currentPlayer = i % numPlayers;
             String[] playerSupporter = new String[numPlayers];
 
-            playerSupporter[currentPlayer] = getSupporters(newSetup, moveSequence.substring(0, i), numPlayers, currentPlayer);
+            playerSupporter[currentPlayer] = getSupporters(newSetup, moveSequence.charAt(i)+"", numPlayers, 0);
 
-            for (int j = 0; j < playerSupporter[i].length(); j = j + 2) {
+            if(i==0){ newSetup = updateSetup(oldSetup, moveSequence.charAt(0));}
+            if (i != 0) {
+                oldSetup = newSetup;
+                newSetup = updateSetup(oldSetup, moveSequence.charAt(i));
+            }
+
+            for (int j = 0; j < playerSupporter[currentPlayer].length(); j = j + 2) {
                 if (playerSupporter[currentPlayer].charAt(j) == 'a') {
                     cards[currentPlayer][0] = cards[currentPlayer][0] + 1;
+                    //flags[0] means the player who get the flag of Qin
                     if (flags[0] == -1 || flags[0] == currentPlayer)  // If this flag hasn't been owned by anyone
                         flags[0] = currentPlayer;
                     else if (cards[flags[0]][0] <= cards[currentPlayer][0])
@@ -742,209 +701,42 @@ public class WarringStatesGame {
         }
         return flags;
     }
-//
-//        String[] playerSupporter = new String[numPlayers];
-//        for (int i = 0; i < numPlayers; i++)
-//            playerSupporter[i] = getSupporters(setup, moveSequence, numPlayers, i);
-//        for (int i = 0; i < numPlayers; i++) {
-//            for (int j = 0; j < playerSupporter[i].length(); j = j + 2) {
-//                //how many a b c d e f g are in the string
-//                if (playerSupporter[i].charAt(j) == 'a') {
-//                    cards[i][0] = cards[i][0] + 1;
-//                    if (flags[0] == -1 || flags[0] == i)  // If this flag hasn't been owned by anyone
-//                        flags[0] = i;
-//                    else if (cards[flags[0]][0] <= cards[i][0])  // Time sequence problem
-//                        flags[0] = i;
-//                }
-//                if (playerSupporter[i].charAt(j) == 'b') {
-//                    cards[i][1] = cards[i][1] + 1;
-//                    if (flags[1] == -1 || flags[1] == i)
-//                        flags[1] = i;
-//                    else if (cards[flags[1]][1] <= cards[i][1])
-//                        flags[1] = i;
-//                }
-//                if (playerSupporter[i].charAt(j) == 'c') {
-//                    cards[i][2] = cards[i][2] + 1;
-//                    if (flags[2] == -1 || flags[2] == i)
-//                        flags[2] = i;
-//                    else if (cards[flags[2]][2] <= cards[i][2])
-//                        flags[2] = i;
-//                }
-//                if (playerSupporter[i].charAt(j) == 'd') {
-//                    cards[i][3] = cards[i][3] + 1;
-//                    if (flags[3] == -1 || flags[3] == i)
-//                        flags[3] = i;
-//                    else if (cards[flags[2]][2] <= cards[i][2])
-//                        flags[2] = i;
-//                }
-//                if (playerSupporter[i].charAt(j) == 'e') {
-//                    cards[i][4] = cards[i][4] + 1;
-//                    if (flags[4] == -1 || flags[4] == i)
-//                        flags[4] = i;
-//                    else if (cards[flags[2]][2] <= cards[i][2])
-//                        flags[2] = i;
-//                }
-//                if (playerSupporter[i].charAt(j) == 'f') {
-//                    cards[i][5] = cards[i][5] + 1;
-//                }
-//                if (playerSupporter[i].charAt(j) == 'g') {
-//                    cards[i][6] = cards[i][6] + 1;
-//                }
-//            }
-//        }
-//
-//
-//        return flags;
-//    }
 
+    public static String updateSetup(String oldsetup, char moveSeqChar) {
+        int zi = 0; //zhangyi's index
+        int li = 0; //location's index
+        String newsetup = "";
 
-//        int[] getFlags = {0, 0, 0, 0, 0, 0, 0};
-//        char c = '0'; //Zhangyi's 3rd card
-//        int zrow = 0;//Zhangyi's row on board
-//        int zcol = 0;//Zhangyi's column on board
-////        int lrow = 0;//destination's row on board
-////        int lcol = 0;//destination's column on board
-//        char[][] board = Board.board;//board in 2 dimensional array
-//        String[][] occupation = placementToOccupation(setup, board);//transform string of setup to 2 dimensional array on board
-//        int[][] cards = {{0, 0, 0, 0, 0, 0, 0},//initialize the cards in every players hands as all-0
-//                {0, 0, 0, 0, 0, 0, 0},//rows represent players,columns represent kingdoms
-//                {0, 0, 0, 0, 0, 0, 0},
-//                {0, 0, 0, 0, 0, 0, 0}};
-//
-//
-//        //find Zhangyi in setup
-//        for (int i = 0; i < setup.length(); i = i + 3) {
-//            if (setup.charAt(i) == 'z') {
-//                c = setup.charAt(i + 2);
-//                break;
-//            }
-//        }
-//        //find Zhangyi on board at first place
-//        for (int i = 0; i < 6; i++) {
-//            for (int j = 0; j < 6; j++) {
-//                if (board[i][j] == c) {
-//                    zrow = i;
-//                    zcol = j;
-//                    break;
-//                }
-//            }
-//        }
-//
-//        /*move each step,
-//        1.cards in hand change;
-//        2.occupation change;
-//        3.Zhangyi's location change;
-//        4.flags may change.*/
-//        int temp = 0;
-//        for (int i = 0; i < moveSequence.length(); i++) {//for each step in the moveSequence
-//            for (int j = 0; j < 6; j++) {
-//                for (int k = 0; k < 6; k++) {//for each location on board
-//                    if (moveSequence.charAt(i) == board[j][k]) {//for one character in moveSequence, find the location on board
-//                        int m = cards[0][occupation[j][k].charAt(0) - 97];//number of cards of kingdom on location that plaer 0 have
-//                        char kingdom = occupation[j][k].charAt(0);
-//                        if (zrow == j) {//Zhangyi and location in the same row
-//                            if (zcol > k) {//Zhangyi is on the right of location
-//                                for (int l = k; l <= zcol; l++) {
-//                                    if ((int) occupation[j][k].charAt(0) == (int) occupation[j][l].charAt(0) && !occupation[j][l].equals("~~")) {
-//                                        cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;//add 1 card to certain player
-//                                        occupation[j][l] = "~~";//delete data of related location on occupation
-//                                        temp = i % numPlayers;
-//                                    }
-//                                }
-//                                int ID = 0;//initialize the playerID as 0
-//                                for (int n = 0; n < numPlayers; n++) {//check every player
-//                                    if (cards[n][kingdom - 97] > m) {
-//                                        m = cards[n][kingdom - 97];//player n has the most cards till now
-//                                        ID = n;//player n should get the flag
-//                                    } else if (cards[n][kingdom - 97] == m) {
-//                                        if (temp == i % numPlayers) {
-//                                            ID = i % numPlayers;
-//                                        }
-//                                    }
-//                                }
-//                                zcol = k;//change Zhangyi on board
-//                                getFlags[kingdom - 97] = ID;//change flag
-//                            }
-//
-//                            if (zcol < k) {//Zhangyi is on the left of location
-//                                for (int l = zcol; l <= k; l++) {
-//                                    if ((int) occupation[j][k].charAt(0) == (int) occupation[j][l].charAt(0) && !occupation[j][l].equals("~~")) {
-//                                        cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;
-//                                        occupation[j][l] = "~~";
-//                                        temp = i % numPlayers;
-//                                    }
-//                                }
-//                                int ID = 0;//initialize the playerID as 0
-//                                for (int n = 0; n < numPlayers; n++) {//check every player
-//                                    if (cards[n][kingdom - 97] > m) {
-//                                        m = cards[n][kingdom - 97];//player n has the most cards till now
-//                                        ID = n;//player n should get the flag
-//                                    } else if (cards[n][kingdom - 97] == m) {
-//                                        if (temp == i % numPlayers) {
-//                                            ID = i % numPlayers;
-//                                        }
-//                                    }
-//                                }
-//                                zcol = k;//change Zhangyi on board
-//                                getFlags[kingdom - 97] = ID;//change flag
-//                            }
-//                        }
-//
-//                        if (zcol == k) {//Zhangyi and location in the same column
-//                            if (zrow > j) {//Zhangyi is on the lowerside of location
-//                                for (int l = j; l <= zrow; l++) {
-//                                    if (occupation[j][k].charAt(0) - 97 >= 0 && occupation[j][k].charAt(0) - 97 < numPlayers) {
-//                                        if ((int) occupation[j][k].charAt(0) == (int) occupation[l][k].charAt(0) && !occupation[l][k].equals("~~")) {
-//                                            cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;
-//                                            occupation[l][k] = "~~";
-//                                            temp = i % numPlayers;
-//                                        }
-//                                    }
-//                                }
-//                                int ID = 0;//initialize the playerID as 0
-//                                for (int n = 0; n < numPlayers; n++) {//check every player
-//                                    if (cards[n][kingdom - 97] > m) {
-//                                        m = cards[n][kingdom - 97];//player n has the most cards till now
-//                                        ID = n;//player n should get the flag
-//                                    } else if (cards[n][kingdom - 97] == m) {
-//                                        if (temp == i % numPlayers) {
-//                                            ID = i % numPlayers;
-//                                        }
-//                                    }
-//                                }
-//                                zrow = j;//change Zhangyi on board
-//                                getFlags[kingdom - 97] = ID;//change flag
-//                            }
-//
-//                            if (zrow < j) {//Zhangyi is on the upperside of location
-//                                for (int l = zrow; l <= j; l++) {
-//                                    if ((int) occupation[j][k].charAt(0) == (int) occupation[l][k].charAt(0) && !occupation[l][k].equals("~~")) {
-//                                        cards[i % numPlayers][occupation[j][k].charAt(0) - 97] += 1;
-//                                        occupation[l][k] = "~~";
-//                                        temp = i % numPlayers;
-//                                    }
-//                                }
-//                                int ID = 0;//initialize the playerID as 0
-//                                for (int n = 0; n < numPlayers; n++) {//check every player
-//                                    if (cards[n][kingdom - 97] > m) {
-//                                        m = cards[n][kingdom - 97];//player n has the most cards till now
-//                                        ID = n;//player n should get the flag
-//                                    } else if (cards[n][kingdom - 97] == m) {
-//                                        if (temp == i % numPlayers) {
-//                                            ID = i % numPlayers;
-//                                        }
-//                                    }
-//                                }
-//                                zrow = j;//change Zhangyi on board
-//                                getFlags[kingdom - 97] = ID;//change flag
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return getFlags;
-//    }
+        //find the index of zhangyi in old setup.
+        for (int j = 0; j < oldsetup.length(); j = j + 3) {
+            if (oldsetup.charAt(j) == 'z') {
+                zi = j;//zhangyi's  index
+                break;
+            }
+        }
+
+        //find location char in setup string
+        for (int j = 2; j < oldsetup.length(); j = j + 3) {
+            if (oldsetup.charAt(j) == moveSeqChar) {
+                // moveSequence.charAt(i) go to setup to find where is this
+                li = j;//location's current index
+                break;
+            }
+        }
+        ArrayList<String> sameStateKing;
+        sameStateKing = findFurther(oldsetup, zi, moveSeqChar);
+        newsetup = oldsetup.replace(oldsetup.substring(li - 2, li), "z9");
+        //delete previous z9x
+        StringBuilder sb = new StringBuilder(newsetup).delete(zi, zi + 3);
+        newsetup = sb.toString();
+        if (sameStateKing.size() > 0) {
+            for (int j = 0; j < sameStateKing.size(); j++) {
+                newsetup = newsetup.replaceAll(sameStateKing.get(j), "~~");
+            }
+            sameStateKing.clear();
+        }
+        return newsetup;
+    }
 
     /**
      * Generate a legal move, given the provided placement string.
