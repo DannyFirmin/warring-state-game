@@ -114,7 +114,7 @@ Display images of cards in the window (anywhere)
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("experiment.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("viewer.fxml"));
         primaryStage.setTitle("Warring States Viewer");
         Scene scene = new Scene(root, VIEWER_WIDTH, VIEWER_HEIGHT);
 //        root.getChildren().add(controls);

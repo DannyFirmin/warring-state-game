@@ -1,15 +1,24 @@
 package comp1110.ass2.gui;
 /**
  * @Author Danny
+ * The way to manage multiple screens is learned from
+ * https://www.youtube.com/watch?v=5GsdaZWDcdY
  */
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
 public class Game extends Application {
+    public static String screen1ID = "welcome";
+    public static String screen1File = "welcome.fxml";
+    public static String screen2ID = "playerNum";
+    public static String screen2File = "playernum.fxml";
+    public static String screen3ID = "game";
+    public static String screen3File = "game.fxml";
     private static final int BOARD_WIDTH = 933;
     private static final int BOARD_HEIGHT = 700;
 
@@ -31,15 +40,23 @@ public class Game extends Application {
     }
 
     // FIXME Task 9: Implement a basic playable Warring States game in JavaFX
-    // Task 9 Code is in Controller.java and wsg.fxml
+    // Task 9 Code is in GameController.java and game.fxml
     // FIXME Task 11: Allow players of your Warring States game to play against your simple agent
 
     // FIXME Task 12: Integrate a more advanced opponent into your game
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("wsg.fxml"));
-        primaryStage.setTitle("Warring States Game (Preview)");
+        ScreensController mainContainer = new ScreensController();
+        mainContainer.loadScreen(Game.screen1ID, Game.screen1File);
+        mainContainer.loadScreen(Game.screen2ID, Game.screen2File);
+        mainContainer.loadScreen(Game.screen3ID, Game.screen3File);
+        mainContainer.setScreen(Game.screen1ID);
+
+        Group root = new Group();
+        root.getChildren().addAll(mainContainer);
+
+        primaryStage.setTitle("Warring States Game (Early Access)");
         primaryStage.setScene(new Scene(root, BOARD_WIDTH, BOARD_HEIGHT));
         primaryStage.show();
         setUpSoundLoop();
