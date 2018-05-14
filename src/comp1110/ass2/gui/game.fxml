@@ -21,7 +21,7 @@
          <menus>
             <Menu mnemonicParsing="false" text="File">
                <items>
-                  <MenuItem mnemonicParsing="false" text="New Game" />
+                  <MenuItem mnemonicParsing="false" onAction="#toWelcome" text="New Game" />
                   <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#exitProgram" text="Quit" />
                </items>
             </Menu>
@@ -593,8 +593,9 @@
             </AnchorPane>
          </children>
       </GridPane>
-      <Button fx:id="go" layoutX="538.0" layoutY="640.0" mnemonicParsing="false" onAction="#makePlacement" text="GO" />
-      <TextField fx:id="placetext" layoutX="235.0" layoutY="640.0" prefHeight="27.0" prefWidth="295.0" />
-      <Text layoutX="155.0" layoutY="658.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Placement" />
+      <Button fx:id="go" layoutX="519.0" layoutY="640.0" mnemonicParsing="false" onAction="#makePlacement" text="GO" />
+      <TextField fx:id="placetext" layoutX="217.0" layoutY="640.0" prefHeight="27.0" prefWidth="295.0" />
+      <Text layoutX="144.0" layoutY="658.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Placement" />
+      <Button layoutX="572.0" layoutY="640.0" mnemonicParsing="false" onAction="#generateSetup" text="Generate" />
    </children>
 </AnchorPane>
