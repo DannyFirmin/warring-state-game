@@ -66,7 +66,8 @@ public class GameController implements Initializable, ControlledScreen {
             "e3Ad4Ba5Cd1Dc1Eb3Fc5Gd2Hg0Ie0Ja2Kb5Lf1Md3Na6Oz9Pb1Qc3Rf2Sc4Tb0Uc0Ve1Wd0Xg1Ye2Zb60a71a32a03b24a45b46f07c28a19",
             "g0Ac1Bb4Ca5Da2Ea6Ff0Gb1Ha3Id3Ja0Kz9Lc5Mb0Nf1Od2Pe1Qc2Re3Sb6Td0Ub5Va1Wb2Xc3Yb3Zc00e21e02a73d14f25a46g17c48d49"
     };
-    String placement="";
+    int moveSequenceCount = -1;
+    String placement = "";
     String moveSequence = "";
     private boolean z9IsChosen = false;
     @FXML
@@ -74,6 +75,10 @@ public class GameController implements Initializable, ControlledScreen {
 
     @FXML
     private GridPane grid;
+    @FXML
+    private GridPane p0board;
+    @FXML
+    private GridPane p1board;
     @FXML
     private Rectangle z9Rectangle;
     @FXML
@@ -149,6 +154,7 @@ public class GameController implements Initializable, ControlledScreen {
     @FXML
     private AnchorPane g1;
 
+
     @FXML
     void exitProgram(ActionEvent event) {
         Platform.exit();
@@ -188,16 +194,16 @@ public class GameController implements Initializable, ControlledScreen {
     @FXML
     void generateSetup(ActionEvent event) {
         placement(PLACEMENTS[(int) (Math.random() * 19)]);
-
     }
 
-    void placement(String setup) {
+    HashMap map = new HashMap();
+
+    public void placement(String setup) {
         placement = setup;
         if (isPlacementWellFormed(setup)) {
             grid.getChildren().clear();
             char[][] board = Board.board;
             String[][] occupation = placementToOccupation(setup, board);
-            HashMap map = new HashMap();
             map.put("z9", z9);
             map.put("a0", a0);
             map.put("a1", a1);
@@ -261,7 +267,7 @@ public class GameController implements Initializable, ControlledScreen {
                     "     * - no location contains more than one card");
             alert.showAndWait();
         }
-        System.out.println(placement);
+
     }
 
     @FXML
@@ -331,18 +337,34 @@ public class GameController implements Initializable, ControlledScreen {
                 col = GridPane.getColumnIndex(source);
             }
 
-            if (WarringStatesGame.isMoveLegal(placement,getLocation(row,col))){
-            grid.getChildren().remove(z9);
-            grid.getChildren().remove(source);
+            if (WarringStatesGame.isMoveLegal(placement, getLocation(row, col))) {
+                grid.getChildren().remove(z9);
+                grid.getChildren().remove(source);
+//                ArrayList<String> storeFurther;
+//                storeFurther = WarringStatesGame.findFurther(placement, getLocation(row, col));
+                moveSequence = moveSequence + getLocation(row, col);
+                moveSequenceCount = moveSequenceCount +1;
+                String supporters = WarringStatesGame.getSupporters(placement,moveSequence.charAt(moveSequenceCount)+"",PlayerNumController.numPlayers,0);
+                for (int i =0; i< supporters.length();i=i+2){
+                    grid.getChildren().remove((Node)map.get(supporters.substring(i, i+2)));
+                    p0board.add((Node)map.get(supporters.substring(i, i+2)),col, row);
+                }
+//                for (int i = 0; i < storeFurther.size(); i++) {
+//                    grid.getChildren().remove(storeFurther.get(i));
+//                    p0board.add((Node) map.get(storeFurther.get(i)), col + 1, row);
+//                }
+//                storeFurther.clear();
+//                p0board.add(source, col, row);
 
-            grid.add(z9, col, row);
-            moveSequence = moveSequence + getLocation(row, col);
+                grid.add(z9, col, row);
 
-            z9Rectangle.setStroke(Color.BLACK);
-            z9Rectangle.setStrokeWidth(1);
-            z9IsChosen = false;
-            placement = updateSetup(placement,getLocation(row,col));
-        }else {        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                z9Rectangle.setStroke(Color.BLACK);
+                z9Rectangle.setStrokeWidth(1);
+                z9IsChosen = false;
+                placement = updateSetup(placement, getLocation(row, col));
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Movement is invalid");
                 alert.setHeaderText(null);
                 alert.setContentText("To be valid, each movement must meet the following conditions\n" +
@@ -351,7 +373,8 @@ public class GameController implements Initializable, ControlledScreen {
                         "     * there are no other cards along the line from the same kingdom as the chosen card that are further away from Zhang Yi.");
                 alert.showAndWait();
                 z9Rectangle.setStroke(Color.BLACK);
-                z9Rectangle.setStrokeWidth(1);}
+                z9Rectangle.setStrokeWidth(1);
+            }
         }
     }
 }

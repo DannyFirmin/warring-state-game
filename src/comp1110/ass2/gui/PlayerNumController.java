@@ -22,8 +22,7 @@ public class PlayerNumController implements Initializable, ControlledScreen {
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;
     }
-
-public static int numPlayers = 2;
+    public static int numPlayers;
     @FXML
     private Button p2;
     @FXML
@@ -31,8 +30,21 @@ public static int numPlayers = 2;
     @FXML
     private Button p4;
     @FXML
-    void start(ActionEvent event) {
+    void startp2(ActionEvent event) {
         myController.setScreen(Game.screen3ID);
+        numPlayers = 2;
+
+    }
+    @FXML
+    void startp3(ActionEvent event) {
+        myController.setScreen(Game.screen3ID);
+        numPlayers = 3;
+    }
+    @FXML
+    void startp4(ActionEvent event) {
+        myController.setScreen(Game.screen3ID);
+        numPlayers = 4;
+
 
     }
 }

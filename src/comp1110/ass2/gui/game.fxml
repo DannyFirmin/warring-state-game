@@ -56,21 +56,6 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <AnchorPane fx:id="a0" onMousePressed="#handlePress">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="孝公" underline="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
             <AnchorPane fx:id="c4" onMousePressed="#handlePress" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#75e58e" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
@@ -591,11 +576,158 @@
                   </Text>
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="a0" onMousePressed="#handlePress">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="25.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="孝公" underline="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
          </children>
       </GridPane>
-      <Button fx:id="go" layoutX="519.0" layoutY="640.0" mnemonicParsing="false" onAction="#makePlacement" text="GO" />
-      <TextField fx:id="placetext" layoutX="217.0" layoutY="640.0" prefHeight="27.0" prefWidth="295.0" />
-      <Text layoutX="144.0" layoutY="658.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Placement" />
-      <Button layoutX="572.0" layoutY="640.0" mnemonicParsing="false" onAction="#generateSetup" text="Generate" />
+      <Button fx:id="go" layoutX="519.0" layoutY="662.0" mnemonicParsing="false" onAction="#makePlacement" text="GO" />
+      <TextField fx:id="placetext" layoutX="214.0" layoutY="662.0" prefHeight="27.0" prefWidth="295.0" />
+      <Text layoutX="142.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Placement" />
+      <Button layoutX="570.0" layoutY="662.0" mnemonicParsing="false" onAction="#generateSetup" text="Generate" />
+      <Text layoutX="777.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 0">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text layoutX="777.0" layoutY="626.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <GridPane fx:id="p0board" layoutX="703.0" layoutY="128.0" prefHeight="183.0" prefWidth="210.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <GridPane fx:id="p1board" layoutX="703.0" layoutY="411.0" prefHeight="175.0" prefWidth="201.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane fx:id="state" layoutX="221.0" layoutY="617.0" prefHeight="28.0" prefWidth="364.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <AnchorPane fx:id="qin" onMousePressed="#handlePress" prefHeight="2.0" prefWidth="3.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="27.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
+                  <Text layoutX="5.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="qi" onMousePressed="#handlePress" prefHeight="2.0" prefWidth="3.0" GridPane.columnIndex="1">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="27.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
+                  <Text layoutX="5.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="chu" onMousePressed="#handlePress" prefHeight="2.0" prefWidth="3.0" GridPane.columnIndex="2">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#75e58e" height="27.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
+                  <Text layoutX="5.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="楚">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="zhao" onMousePressed="#handlePress" prefHeight="2.0" prefWidth="3.0" GridPane.columnIndex="3">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8ef0fb" height="27.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
+                  <Text layoutX="5.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="赵">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="han" onMousePressed="#handlePress" prefHeight="2.0" prefWidth="3.0" GridPane.columnIndex="4">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9d50d0" height="27.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
+                  <Text layoutX="5.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="韩">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="wei" onMousePressed="#handlePress" prefHeight="2.0" prefWidth="3.0" GridPane.columnIndex="5">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18972" height="27.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
+                  <Text layoutX="5.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="魏">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="yan" onMousePressed="#handlePress" prefHeight="2.0" prefWidth="3.0" GridPane.columnIndex="6">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d0d0d0" height="27.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
+                  <Text layoutX="5.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="燕">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

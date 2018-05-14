@@ -350,7 +350,7 @@ public class WarringStatesGame {
                 }
 
                 ArrayList<String> sameStateKing;
-                sameStateKing = findFurther(setup, zi, l);
+                sameStateKing = findFurther(setup, l);
 
                 setup = setup.replace(setup.substring(li - 2, li), "z9");
                 //delete previous z9x
@@ -372,7 +372,8 @@ public class WarringStatesGame {
     }
 
 
-    public static ArrayList<String> findFurther(String placement, int zi, char locationChar) {
+    public static ArrayList<String> findFurther(String placement, char locationChar) {
+        int zi = 0; //zhangyi's index
         int zrow = 0;//Zhangyi's row on board
         int zcol = 0;//Zhangyi's column on board
         int lrow = 0;//destination's row on board
@@ -383,6 +384,14 @@ public class WarringStatesGame {
         char[][] board = Board.board;
 
         String[][] occupation = placementToOccupation(placement, board);
+
+        //find the index of zhangyi in current setup.
+        for (int j = 0; j < placement.length(); j = j + 3) {
+            if (placement.charAt(j) == 'z') {
+                zi = j;//zhangyi's current index
+                break;
+            }
+        }
 
         //find Zhangyi on board
         for (int i = 0; i < 6; i++) {
@@ -505,7 +514,7 @@ public class WarringStatesGame {
 
                 //find supporters from zhangyi's location to his destination location
                 ArrayList<String> sameStateKing;
-                sameStateKing = findFurther(setup, zi, moveSequence.charAt(0));
+                sameStateKing = findFurther(setup, moveSequence.charAt(0));
                 for (int j = 0; j < sameStateKing.size(); j++) {
                     inbetweenKingdoms = inbetweenKingdoms + sameStateKing.get(j);
                 }
@@ -543,7 +552,7 @@ public class WarringStatesGame {
                 }
 
                 ArrayList<String> sameStateKing;
-                sameStateKing = findFurther(setup, zi, moveSequence.charAt(i));
+                sameStateKing = findFurther(setup, moveSequence.charAt(i));
                 for (int j = 0; j < sameStateKing.size(); j++) {
                     inbetweenKingdoms = inbetweenKingdoms + sameStateKing.get(j);
                 }
@@ -724,7 +733,7 @@ public class WarringStatesGame {
             }
         }
         ArrayList<String> sameStateKing;
-        sameStateKing = findFurther(oldsetup, zi, moveSeqChar);
+        sameStateKing = findFurther(oldsetup, moveSeqChar);
         newsetup = oldsetup.replace(oldsetup.substring(li - 2, li), "z9");
         //delete previous z9x
         StringBuilder sb = new StringBuilder(newsetup).delete(zi, zi + 3);

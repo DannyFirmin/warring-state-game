@@ -16,7 +16,7 @@
                 <Image url="@assets/background.jpeg" />
             </image>
         </ImageView>
-        <Button fx:id="p2" layoutX="137.0" layoutY="278.0" mnemonicParsing="false" onAction="#start" prefHeight="67.0" prefWidth="157.0" text="2 Players">
+        <Button fx:id="p2" layoutX="137.0" layoutY="278.0" mnemonicParsing="false" onAction="#startp2" prefHeight="67.0" prefWidth="157.0" text="2 Players">
             <font>
                 <Font size="25.0" />
             </font>
@@ -34,12 +34,12 @@
                 </LinearGradient>
             </fill>
         </Text>
-      <Button fx:id="p3" layoutX="410.0" layoutY="280.0" mnemonicParsing="false" onAction="#start" prefHeight="67.0" prefWidth="157.0" text="3 Players">
+      <Button fx:id="p3" layoutX="410.0" layoutY="280.0" mnemonicParsing="false" onAction="#startp3" prefHeight="67.0" prefWidth="157.0" text="3 Players">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="p4" layoutX="672.0" layoutY="275.0" mnemonicParsing="false" onAction="#start" prefHeight="67.0" prefWidth="157.0" text="4 Players">
+      <Button fx:id="p4" layoutX="672.0" layoutY="275.0" mnemonicParsing="false" onAction="#startp4" prefHeight="67.0" prefWidth="157.0" text="4 Players">
          <font>
             <Font size="25.0" />
          </font>
