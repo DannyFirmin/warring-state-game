@@ -67,11 +67,13 @@ public class GameController implements Initializable, ControlledScreen {
             "e3Ad4Ba5Cd1Dc1Eb3Fc5Gd2Hg0Ie0Ja2Kb5Lf1Md3Na6Oz9Pb1Qc3Rf2Sc4Tb0Uc0Ve1Wd0Xg1Ye2Zb60a71a32a03b24a45b46f07c28a19",
             "g0Ac1Bb4Ca5Da2Ea6Ff0Gb1Ha3Id3Ja0Kz9Lc5Mb0Nf1Od2Pe1Qc2Re3Sb6Td0Ub5Va1Wb2Xc3Yb3Zc00e21e02a73d14f25a46g17c48d49"
     };
+    HashMap map = new HashMap();
+    static String setup;
     static int count;
     String placement = "";
     String moveSequence = "";
     static int turns;
-
+    int[] flags;
     private boolean isGameStart = false;
     private boolean z9IsChosen = false;
     @FXML
@@ -238,22 +240,57 @@ public class GameController implements Initializable, ControlledScreen {
 
     @FXML
     void toWelcome(ActionEvent event) {
+        //initialize
+        setup = "";
+        count = 0;
+        placement = "";
+        moveSequence = "";
+        turns = 0;
+        flags = null;
+        isGameStart = false;
+        cancelHighlight();
+        restoreState();
+
         placement(PLACEMENTS[(int) (Math.random() * 19)]);
         startmsg.setVisible(true);
         p0text.setVisible(false);
         p1text.setVisible(false);
         p2text.setVisible(false);
         p3text.setVisible(false);
-        isGameStart = false;
         myController.setScreen(Game.screen1ID);
+    }
+    void restoreState(){
+        ((GridPane) qin.getParent()).getChildren().remove(qin);
+        ((GridPane) qi.getParent()).getChildren().remove(qi);
+        ((GridPane) chu.getParent()).getChildren().remove(chu);
+        ((GridPane) zhao.getParent()).getChildren().remove(zhao);
+        ((GridPane) han.getParent()).getChildren().remove(han);
+        ((GridPane) wei.getParent()).getChildren().remove(wei);
+        ((GridPane) yan.getParent()).getChildren().remove(yan);
+
+        state.add(qin, 0, 0);
+        state.add(qi, 1, 0);
+        state.add(chu, 2, 0);
+        state.add(zhao, 3, 0);
+        state.add(han, 4, 0);
+        state.add(wei, 5, 0);
+        state.add(yan, 6, 0);
     }
 
     @FXML
     void newGame(ActionEvent event) {
+        setup = "";
+        count = 0;
+        placement = "";
+        moveSequence = "";
+        turns = 0;
+        flags = null;
         isGameStart = true;
+        cancelHighlight();
+
         placement(PLACEMENTS[(int) (Math.random() * 19)]);
         startmsg.setVisible(false);
-        switch(PlayerNumController.numPlayers){
+        switch (PlayerNumController.numPlayers) {
             case 2:
                 p0text.setVisible(true);
                 p1text.setVisible(true);
@@ -271,12 +308,12 @@ public class GameController implements Initializable, ControlledScreen {
                 break;
 
         }
+        restoreState();
     }
-
-    HashMap map = new HashMap();
 
     public void placement(String setup) {
         placement = setup;
+        this.setup = setup;
         if (isPlacementWellFormed(setup)) {
             grid.getChildren().clear();
             char[][] board = Board.board;
@@ -349,18 +386,24 @@ public class GameController implements Initializable, ControlledScreen {
 
     @FXML
     void makePlacement(ActionEvent event) {
-        String newPlacement = placetext.getText();
-        placement(newPlacement);
+        String setup = placetext.getText();
+        placement(setup);
         placetext.clear();
 
     }
 
 
-    ArrayList storePosition = new ArrayList<>();
+    //  ArrayList storePosition = new ArrayList<>();
+
+    void cancelHighlight() {
+        z9Rectangle.setStroke(Color.BLACK);
+        z9Rectangle.setStrokeWidth(1);
+        z9IsChosen = false;
+    }
 
     @FXML
     void handlePressZ9(MouseEvent event) {
-        if (!isGameStart){
+        if (!isGameStart) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Please start the game first!");
             alert.setHeaderText(null);
@@ -369,12 +412,10 @@ public class GameController implements Initializable, ControlledScreen {
         } else if (!z9IsChosen) {
             z9Rectangle.setStroke(Color.RED);
             z9Rectangle.setStrokeWidth(3);
-            storePosition.add(grid.getRowIndex(z9));
+            //   storePosition.add(grid.getRowIndex(z9));
             z9IsChosen = true;
         } else {
-            z9Rectangle.setStroke(Color.BLACK);
-            z9Rectangle.setStrokeWidth(1);
-            z9IsChosen = false;
+            cancelHighlight();
         }
 
     }
@@ -408,7 +449,7 @@ public class GameController implements Initializable, ControlledScreen {
 
                 moveSequence = moveSequence + getLocation(row, col);
 
- //               moveSequenceCount = moveSequenceCount +1;
+                //               moveSequenceCount = moveSequenceCount +1;
 // My previous code comment out here is calling the getSupprters method to give card to the player,
 // It is not efficiency, and it adds two card in the same gridpane which is not good.
 //                String supporters = WarringStatesGame.getSupporters(placement,moveSequence.charAt(moveSequenceCount)+"",PlayerNumController.numPlayers,0);
@@ -418,8 +459,9 @@ public class GameController implements Initializable, ControlledScreen {
 //                } T
 
                 turns = count % PlayerNumController.numPlayers;
-                count=count+1;
-                if (turns==0) {
+
+                //give card to player
+                if (turns == 0) {
                     ArrayList<String> storeFurther;
                     storeFurther = WarringStatesGame.findFurther(placement, getLocation(row, col));
                     for (int i = 0; i < storeFurther.size(); i++) {
@@ -429,8 +471,7 @@ public class GameController implements Initializable, ControlledScreen {
                     storeFurther.clear();
                     p0board.add(source, col, row);
                 }
-
-                if (turns==1) {
+                if (turns == 1) {
                     ArrayList<String> storeFurther;
                     storeFurther = WarringStatesGame.findFurther(placement, getLocation(row, col));
                     for (int i = 0; i < storeFurther.size(); i++) {
@@ -441,7 +482,7 @@ public class GameController implements Initializable, ControlledScreen {
                     p1board.add(source, col, row);
                 }
 
-                if (turns==2) {
+                if (turns == 2) {
                     ArrayList<String> storeFurther;
                     storeFurther = WarringStatesGame.findFurther(placement, getLocation(row, col));
                     for (int i = 0; i < storeFurther.size(); i++) {
@@ -452,7 +493,7 @@ public class GameController implements Initializable, ControlledScreen {
                     p2board.add(source, col, row);
                 }
 
-                if (turns==3) {
+                if (turns == 3) {
                     ArrayList<String> storeFurther;
                     storeFurther = WarringStatesGame.findFurther(placement, getLocation(row, col));
                     for (int i = 0; i < storeFurther.size(); i++) {
@@ -465,11 +506,174 @@ public class GameController implements Initializable, ControlledScreen {
 
                 grid.add(z9, col, row);
 
+                //give flag to player
+                System.out.println(placement);
+                System.out.println(moveSequence);
+                System.out.println(setup);
+                flags = WarringStatesGame.getFlags(setup, moveSequence, PlayerNumController.numPlayers);
+                for (int j = 0; j < flags.length; j++) {
+                    System.out.println("flag" + flags[j]);
+                }
+                //Qin
+                switch (flags[0]) {
+                    case -1:
+                        ((GridPane) qin.getParent()).getChildren().remove(qin);
+                        state.add(qin, 0, 0);
+                        break;
+                    case 0:
+                        ((GridPane) qin.getParent()).getChildren().remove(qin);
+                        p0board.add(qin, 0, 0);
+                        break;
+                    case 1:
+                        ((GridPane) qin.getParent()).getChildren().remove(qin);
+                        p1board.add(qin, 0, 0);
+                        break;
+                    case 2:
+                        ((GridPane) qin.getParent()).getChildren().remove(qin);
+                        p2board.add(qin, 0, 0);
+                        break;
+                    case 3:
+                        ((GridPane) qin.getParent()).getChildren().remove(qin);
+                        p3board.add(qin, 0, 0);
+                        break;
+                }
+                switch (flags[1]) {
+                    case -1:
+                        ((GridPane) qi.getParent()).getChildren().remove(qi);
+                        state.add(qi, 1, 0);
+                        break;
+                    case 0:
+                        ((GridPane) qi.getParent()).getChildren().remove(qi);
+                        p0board.add(qi, 1, 0);
+                        break;
+                    case 1:
+                        ((GridPane) qi.getParent()).getChildren().remove(qi);
+                        p1board.add(qi, 1, 0);
+                        break;
+                    case 2:
+                        ((GridPane) qi.getParent()).getChildren().remove(qi);
+                        p2board.add(qi, 1, 0);
+                        break;
+                    case 3:
+                        ((GridPane) qi.getParent()).getChildren().remove(qi);
+                        p3board.add(qi, 1, 0);
+                        break;
+                }
+                switch (flags[2]) {
+                    case -1:
+                        ((GridPane) chu.getParent()).getChildren().remove(chu);
+                        state.add(chu, 2, 0);
+                        break;
+                    case 0:
+                        ((GridPane) chu.getParent()).getChildren().remove(chu);
+                        p0board.add(chu, 2, 0);
+                        break;
+                    case 1:
+                        ((GridPane) chu.getParent()).getChildren().remove(chu);
+                        p1board.add(chu, 2, 0);
+                        break;
+                    case 2:
+                        ((GridPane) chu.getParent()).getChildren().remove(chu);
+                        p2board.add(chu, 2, 0);
+                        break;
+                    case 3:
+                        ((GridPane) chu.getParent()).getChildren().remove(chu);
+                        p3board.add(chu, 2, 0);
+                        break;
+                }
+                switch (flags[3]) {
+                    case -1:
+                        ((GridPane) zhao.getParent()).getChildren().remove(zhao);
+                        state.add(zhao, 3, 0);
+                        break;
+                    case 0:
+                        ((GridPane) zhao.getParent()).getChildren().remove(zhao);
+                        p0board.add(zhao, 3, 0);
+                        break;
+                    case 1:
+                        ((GridPane) zhao.getParent()).getChildren().remove(zhao);
+                        p1board.add(zhao, 3, 0);
+                        break;
+                    case 2:
+                        ((GridPane) zhao.getParent()).getChildren().remove(zhao);
+                        p2board.add(zhao, 3, 0);
+                        break;
+                    case 3:
+                        ((GridPane) zhao.getParent()).getChildren().remove(zhao);
+                        p3board.add(zhao, 3, 0);
+                        break;
+                }
+                switch (flags[4]) {
+                    case -1:
+                        ((GridPane) han.getParent()).getChildren().remove(han);
+                        state.add(han, 4, 0);
+                        break;
+                    case 0:
+                        ((GridPane) han.getParent()).getChildren().remove(han);
+                        p0board.add(han, 4, 0);
+                        break;
+                    case 1:
+                        ((GridPane) han.getParent()).getChildren().remove(han);
+                        p1board.add(han, 4, 0);
+                        break;
+                    case 2:
+                        ((GridPane) han.getParent()).getChildren().remove(han);
+                        p2board.add(han, 4, 0);
+                        break;
+                    case 3:
+                        ((GridPane) han.getParent()).getChildren().remove(han);
+                        p3board.add(han, 4, 0);
+                        break;
+                }
+                switch (flags[5]) {
+                    case -1:
+                        ((GridPane) wei.getParent()).getChildren().remove(wei);
+                        state.add(wei, 5, 0);
+                        break;
+                    case 0:
+                        ((GridPane) wei.getParent()).getChildren().remove(wei);
+                        p0board.add(wei, 5, 0);
+                        break;
+                    case 1:
+                        ((GridPane) wei.getParent()).getChildren().remove(wei);
+                        p1board.add(wei, 5, 0);
+                        break;
+                    case 2:
+                        ((GridPane) wei.getParent()).getChildren().remove(wei);
+                        p2board.add(wei, 5, 0);
+                        break;
+                    case 3:
+                        ((GridPane) wei.getParent()).getChildren().remove(wei);
+                        p3board.add(wei, 5, 0);
+                        break;
+                }
+                switch (flags[6]) {
+                    case -1:
+                        ((GridPane) yan.getParent()).getChildren().remove(yan);
+                        state.add(yan, 6, 0);
+                        break;
+                    case 0:
+                        ((GridPane) yan.getParent()).getChildren().remove(yan);
+                        p0board.add(yan, 6, 0);
+                        break;
+                    case 1:
+                        ((GridPane) yan.getParent()).getChildren().remove(yan);
+                        p1board.add(yan, 6, 0);
+                        break;
+                    case 2:
+                        ((GridPane) yan.getParent()).getChildren().remove(yan);
+                        p2board.add(yan, 6, 0);
+                        break;
+                    case 3:
+                        ((GridPane) yan.getParent()).getChildren().remove(yan);
+                        p3board.add(yan, 6, 0);
+                        break;
+                }
 
-                z9Rectangle.setStroke(Color.BLACK);
-                z9Rectangle.setStrokeWidth(1);
-                z9IsChosen = false;
+
+                cancelHighlight();
                 placement = updateSetup(placement, getLocation(row, col));
+                count = count + 1;
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Movement is invalid");
@@ -479,8 +683,7 @@ public class GameController implements Initializable, ControlledScreen {
                         "     * - the location is in the same row or column of the grid as Zhang Yi's current position; and drawing a line from Zhang Yi's current location through the card at the chosen location,\n" +
                         "     * there are no other cards along the line from the same kingdom as the chosen card that are further away from Zhang Yi.");
                 alert.showAndWait();
-                z9Rectangle.setStroke(Color.BLACK);
-                z9Rectangle.setStrokeWidth(1);
+                cancelHighlight();
             }
         }
     }
