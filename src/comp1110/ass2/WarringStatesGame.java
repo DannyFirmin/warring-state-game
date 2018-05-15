@@ -160,7 +160,7 @@ public class WarringStatesGame {
      * @param placement    the current placement string
      * @param locationChar a location for Zhang Yi to move to
      * @return true if Zhang Yi may move to that location
-     * @author: Ben, Danny
+     * @author: Ben,Danny
      */
     public static boolean isMoveLegal(String placement, char locationChar) {
         // FIXME Task 5: determine whether a given move is legal
@@ -315,7 +315,7 @@ public class WarringStatesGame {
      * @param setup        A placement string representing the board setup
      * @param moveSequence a string of location characters representing moves
      * @return True if the placement sequence is valid
-     * @author: Danny
+     * @author: Ben,Danny
      */
     static boolean isMoveSequenceValid(String setup, String moveSequence) {
         // FIXME Task 6: determine whether a placement sequence is valid
@@ -764,6 +764,19 @@ public class WarringStatesGame {
      */
     public static char generateMove(String placement) {
         // FIXME Task 10: generate a legal move
-        return '\0';
+        char location='\0';
+        char[][] board = Board.board;
+        for (int i=0;i<=36;i++) {
+            if (i >= 0 & i <= 9) {
+                if (isMoveLegal(placement, (char) (i + 48))) {
+                    location = (char) (i + 48);
+                }
+            } else {
+                if (isMoveLegal(placement, (char) (i + 65))) {
+                    location = (char) (i + 65);
+                }
+            }
+        }
+        return location;
     }
 }
