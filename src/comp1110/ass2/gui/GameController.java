@@ -691,14 +691,13 @@ public class GameController implements Initializable, ControlledScreen {
             endmsg.setVisible(true);
 
 
-
-            //check who is the winner
+            //check who is the winner -TODO
             int p0StateNum = 0;
             int p1StateNum = 0;
             int p2StateNum = 0;
             int p3StateNum = 0;
 
-            if(PlayerNumController.numPlayers==2) {
+            if (PlayerNumController.numPlayers == 2) {
                 String p0Card = getSupporters(setup, moveSequence, PlayerNumController.numPlayers, 0);
                 int p0CardNum = p0Card.length() / 2;
                 String p1Card = getSupporters(setup, moveSequence, PlayerNumController.numPlayers, 1);
@@ -711,19 +710,21 @@ public class GameController implements Initializable, ControlledScreen {
                         p1StateNum = p1StateNum + 1;
                     }
                 }
-                
-                if (p0StateNum>p1StateNum){
+
+                if (p0StateNum > p1StateNum) {
                     endmsg.setText("Game Over! Player 0 Win!!!");
-                } if (p0StateNum<p1StateNum){
+                }
+                if (p0StateNum < p1StateNum) {
                     endmsg.setText("Game Over! Player 1 Win!!!");
-                } if (p0StateNum==p1StateNum){
-                    if(p0CardNum>p1CardNum){
+                }
+                if (p0StateNum == p1StateNum) {
+                    if (p0CardNum > p1CardNum) {
                         endmsg.setText("Game Over! Player 0 Win!!!");
                     }
-                    if(p0CardNum<p1CardNum){
+                    if (p0CardNum < p1CardNum) {
                         endmsg.setText("Game Over! Player 1 Win!!!");
                     }
-                    if(p0CardNum==p1CardNum){
+                    if (p0CardNum == p1CardNum) {
                         endmsg.setText("Game Over! Draw!");
                     }
                 }

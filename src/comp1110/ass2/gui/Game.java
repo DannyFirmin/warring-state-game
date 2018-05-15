@@ -17,6 +17,10 @@ public class Game extends Application {
     public static String screen2File = "playernum.fxml";
     public static String screen3ID = "game";
     public static String screen3File = "game.fxml";
+    public static String screen4ID = "botnum";
+    public static String screen4File = "botnum.fxml";
+    public static String screen5ID = "gamebot";
+    public static String screen5File = "gamebot.fxml";
     private static final int BOARD_WIDTH = 933;
     private static final int BOARD_HEIGHT = 700;
 
@@ -49,6 +53,8 @@ public class Game extends Application {
         mainContainer.loadScreen(Game.screen1ID, Game.screen1File);
         mainContainer.loadScreen(Game.screen2ID, Game.screen2File);
         mainContainer.loadScreen(Game.screen3ID, Game.screen3File);
+        mainContainer.loadScreen(Game.screen4ID, Game.screen4File);
+        mainContainer.loadScreen(Game.screen5ID, Game.screen5File);
         mainContainer.setScreen(Game.screen1ID);
 
         Group root = new Group();

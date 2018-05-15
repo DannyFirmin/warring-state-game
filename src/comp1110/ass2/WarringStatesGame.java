@@ -160,7 +160,7 @@ public class WarringStatesGame {
      * @param placement    the current placement string
      * @param locationChar a location for Zhang Yi to move to
      * @return true if Zhang Yi may move to that location
-     * @author: Ben,Danny
+     * @author: Ben
      */
     public static boolean isMoveLegal(String placement, char locationChar) {
         // FIXME Task 5: determine whether a given move is legal
@@ -315,7 +315,7 @@ public class WarringStatesGame {
      * @param setup        A placement string representing the board setup
      * @param moveSequence a string of location characters representing moves
      * @return True if the placement sequence is valid
-     * @author: Ben,Danny
+     * @author: Danny
      */
     static boolean isMoveSequenceValid(String setup, String moveSequence) {
         // FIXME Task 6: determine whether a placement sequence is valid
@@ -477,7 +477,7 @@ public class WarringStatesGame {
      * @param numPlayers   the number of players in the game, must be in the range [2..4]
      * @param playerId     the player number for which to get the list of supporters, [0..(numPlayers-1)]
      * @return the list of supporters for the given player
-     * @author: Vishnu and Danny (Vishnu first wrote this task but the testGood fails. Danny rewrote 50% of the code to fix the bug.
+     * @author: Vishnu 60 % and Danny 40% (Vishnu first wrote this task but the testGood fails. Danny rewrote 50% of the code to fix the bug.
      * Vishnu's method of finding if there is the same kingdom card when zhangyi move is not returning the correct result
      * also he forgot to update the setup string when zhangyi move.)
      */
@@ -619,9 +619,7 @@ public class WarringStatesGame {
      * @param moveSequence a string of location characters representing a sequence of moves
      * @param numPlayers   the number of players in the game, must be in the range [2..4]
      * @return an array containing the player ID who controls each kingdom, where
-     * @author Ben and Danny
-     * (Ben wrote this firstly but all tests failed. Danny rewrote 99% of the code and now it is done.
-     * Thanks Cooper offering hints for dealing with the same amount of card of the same state)
+     * @author Danny
      * - element 0 contains the player ID of the player who controls the flag of Qin
      * - element 1 contains the player ID of the player who controls the flag of Qi
      * - element 2 contains the player ID of the player who controls the flag of Chu
@@ -646,9 +644,11 @@ public class WarringStatesGame {
             int currentPlayer = i % numPlayers;
             String[] playerSupporter = new String[numPlayers];
 
-            playerSupporter[currentPlayer] = getSupporters(newSetup, moveSequence.charAt(i)+"", numPlayers, 0);
+            playerSupporter[currentPlayer] = getSupporters(newSetup, moveSequence.charAt(i) + "", numPlayers, 0);
 
-            if(i==0){ newSetup = updateSetup(oldSetup, moveSequence.charAt(0));}
+            if (i == 0) {
+                newSetup = updateSetup(oldSetup, moveSequence.charAt(0));
+            }
             if (i != 0) {
                 oldSetup = newSetup;
                 newSetup = updateSetup(oldSetup, moveSequence.charAt(i));
@@ -761,12 +761,13 @@ public class WarringStatesGame {
      *
      * @param placement the current placement string
      * @return a location character representing Zhang Yi's destination for the move
+     * @author Ben
      */
     public static char generateMove(String placement) {
         // FIXME Task 10: generate a legal move
-        char location='\0';
+        char location = '\0';
         char[][] board = Board.board;
-        for (int i=0;i<=36;i++) {
+        for (int i = 0; i <= 36; i++) {
             if (i >= 0 & i <= 9) {
                 if (isMoveLegal(placement, (char) (i + 48))) {
                     location = (char) (i + 48);
@@ -855,6 +856,8 @@ public class WarringStatesGame {
 
         if (up || down || left || right) {
             return false;
-        }else {return true;}
+        } else {
+            return true;
+        }
     }
 }
