@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -66,12 +67,26 @@ public class GameController implements Initializable, ControlledScreen {
             "e3Ad4Ba5Cd1Dc1Eb3Fc5Gd2Hg0Ie0Ja2Kb5Lf1Md3Na6Oz9Pb1Qc3Rf2Sc4Tb0Uc0Ve1Wd0Xg1Ye2Zb60a71a32a03b24a45b46f07c28a19",
             "g0Ac1Bb4Ca5Da2Ea6Ff0Gb1Ha3Id3Ja0Kz9Lc5Mb0Nf1Od2Pe1Qc2Re3Sb6Td0Ub5Va1Wb2Xc3Yb3Zc00e21e02a73d14f25a46g17c48d49"
     };
-    int moveSequenceCount = -1;
+    static int count;
     String placement = "";
     String moveSequence = "";
+    static int turns;
+
+    private boolean isGameStart = false;
     private boolean z9IsChosen = false;
     @FXML
     private TextField placetext;
+
+    @FXML
+    private Text startmsg;
+    @FXML
+    private Text p1text;
+    @FXML
+    private Text p0text;
+    @FXML
+    private Text p2text;
+    @FXML
+    private Text p3text;
 
     @FXML
     private GridPane grid;
@@ -80,7 +95,42 @@ public class GameController implements Initializable, ControlledScreen {
     @FXML
     private GridPane p1board;
     @FXML
+    private GridPane p2board;
+    @FXML
+    private GridPane p3board;
+    @FXML
+    private GridPane state;
+    @FXML
+    private GridPane p1state;
+    @FXML
+    private GridPane p2state;
+    @FXML
+    private GridPane p3state;
+
+    @FXML
     private Rectangle z9Rectangle;
+
+    @FXML
+    private AnchorPane qin;
+
+    @FXML
+    private AnchorPane qi;
+
+    @FXML
+    private AnchorPane chu;
+
+    @FXML
+    private AnchorPane zhao;
+
+    @FXML
+    private AnchorPane han;
+
+    @FXML
+    private AnchorPane wei;
+
+    @FXML
+    private AnchorPane yan;
+
     @FXML
     private AnchorPane z9;
     @FXML
@@ -188,12 +238,39 @@ public class GameController implements Initializable, ControlledScreen {
 
     @FXML
     void toWelcome(ActionEvent event) {
+        placement(PLACEMENTS[(int) (Math.random() * 19)]);
+        startmsg.setVisible(true);
+        p0text.setVisible(false);
+        p1text.setVisible(false);
+        p2text.setVisible(false);
+        p3text.setVisible(false);
+        isGameStart = false;
         myController.setScreen(Game.screen1ID);
     }
 
     @FXML
-    void generateSetup(ActionEvent event) {
+    void newGame(ActionEvent event) {
+        isGameStart = true;
         placement(PLACEMENTS[(int) (Math.random() * 19)]);
+        startmsg.setVisible(false);
+        switch(PlayerNumController.numPlayers){
+            case 2:
+                p0text.setVisible(true);
+                p1text.setVisible(true);
+                break;
+            case 3:
+                p0text.setVisible(true);
+                p1text.setVisible(true);
+                p2text.setVisible(true);
+                break;
+            case 4:
+                p0text.setVisible(true);
+                p1text.setVisible(true);
+                p2text.setVisible(true);
+                p3text.setVisible(true);
+                break;
+
+        }
     }
 
     HashMap map = new HashMap();
@@ -279,29 +356,17 @@ public class GameController implements Initializable, ControlledScreen {
     }
 
 
-    @FXML
-    void handleDragOver(DragEvent event) {
-        event.acceptTransferModes(TransferMode.ANY);
-
-    }
-
-    @FXML
-    void handleDrop(DragEvent event) {
-        grid.getChildren().remove(a1);
-
-    }
-
-    @FXML
-    void handleDragDetection(MouseEvent event) {
-        Dragboard db = z9.startDragAndDrop(TransferMode.ANY);
-        event.consume();
-    }
-
     ArrayList storePosition = new ArrayList<>();
 
     @FXML
     void handlePressZ9(MouseEvent event) {
-        if (!z9IsChosen) {
+        if (!isGameStart){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Please start the game first!");
+            alert.setHeaderText(null);
+            alert.setContentText("Press the New Game button to make the board and start the game!");
+            alert.showAndWait();
+        } else if (!z9IsChosen) {
             z9Rectangle.setStroke(Color.RED);
             z9Rectangle.setStrokeWidth(3);
             storePosition.add(grid.getRowIndex(z9));
@@ -340,21 +405,63 @@ public class GameController implements Initializable, ControlledScreen {
             if (WarringStatesGame.isMoveLegal(placement, getLocation(row, col))) {
                 grid.getChildren().remove(z9);
                 grid.getChildren().remove(source);
-//                ArrayList<String> storeFurther;
-//                storeFurther = WarringStatesGame.findFurther(placement, getLocation(row, col));
+
                 moveSequence = moveSequence + getLocation(row, col);
-                moveSequenceCount = moveSequenceCount +1;
-                String supporters = WarringStatesGame.getSupporters(placement,moveSequence.charAt(moveSequenceCount)+"",PlayerNumController.numPlayers,0);
-                for (int i =0; i< supporters.length();i=i+2){
-                    grid.getChildren().remove((Node)map.get(supporters.substring(i, i+2)));
-                    p0board.add((Node)map.get(supporters.substring(i, i+2)),col, row);
+
+ //               moveSequenceCount = moveSequenceCount +1;
+// My previous code comment out here is calling the getSupprters method to give card to the player,
+// It is not efficiency, and it adds two card in the same gridpane which is not good.
+//                String supporters = WarringStatesGame.getSupporters(placement,moveSequence.charAt(moveSequenceCount)+"",PlayerNumController.numPlayers,0);
+//                for (int i =0; i< supporters.length();i=i+2){
+//                    grid.getChildren().remove((Node)map.get(supporters.substring(i, i+2)));
+//                    p0board.add((Node)map.get(supporters.substring(i, i+2)),col, row);
+//                } T
+
+                turns = count % PlayerNumController.numPlayers;
+                count=count+1;
+                if (turns==0) {
+                    ArrayList<String> storeFurther;
+                    storeFurther = WarringStatesGame.findFurther(placement, getLocation(row, col));
+                    for (int i = 0; i < storeFurther.size(); i++) {
+                        grid.getChildren().remove(storeFurther.get(i));
+                        p0board.add((Node) map.get(storeFurther.get(i)), col + 1, row);
+                    }
+                    storeFurther.clear();
+                    p0board.add(source, col, row);
                 }
-//                for (int i = 0; i < storeFurther.size(); i++) {
-//                    grid.getChildren().remove(storeFurther.get(i));
-//                    p0board.add((Node) map.get(storeFurther.get(i)), col + 1, row);
-//                }
-//                storeFurther.clear();
-//                p0board.add(source, col, row);
+
+                if (turns==1) {
+                    ArrayList<String> storeFurther;
+                    storeFurther = WarringStatesGame.findFurther(placement, getLocation(row, col));
+                    for (int i = 0; i < storeFurther.size(); i++) {
+                        grid.getChildren().remove(storeFurther.get(i));
+                        p1board.add((Node) map.get(storeFurther.get(i)), col + 1, row);
+                    }
+                    storeFurther.clear();
+                    p1board.add(source, col, row);
+                }
+
+                if (turns==2) {
+                    ArrayList<String> storeFurther;
+                    storeFurther = WarringStatesGame.findFurther(placement, getLocation(row, col));
+                    for (int i = 0; i < storeFurther.size(); i++) {
+                        grid.getChildren().remove(storeFurther.get(i));
+                        p2board.add((Node) map.get(storeFurther.get(i)), col + 1, row);
+                    }
+                    storeFurther.clear();
+                    p2board.add(source, col, row);
+                }
+
+                if (turns==3) {
+                    ArrayList<String> storeFurther;
+                    storeFurther = WarringStatesGame.findFurther(placement, getLocation(row, col));
+                    for (int i = 0; i < storeFurther.size(); i++) {
+                        grid.getChildren().remove(storeFurther.get(i));
+                        p3board.add((Node) map.get(storeFurther.get(i)), col + 1, row);
+                    }
+                    storeFurther.clear();
+                    p3board.add(source, col, row);
+                }
 
                 grid.add(z9, col, row);
 

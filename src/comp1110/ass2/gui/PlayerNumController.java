@@ -22,7 +22,7 @@ public class PlayerNumController implements Initializable, ControlledScreen {
     public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;
     }
-    public static int numPlayers;
+    public static int numPlayers =2;
     @FXML
     private Button p2;
     @FXML

@@ -5,9 +5,7 @@ package comp1110.ass2.gui;
  * https://www.youtube.com/watch?v=5GsdaZWDcdY
  */
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
