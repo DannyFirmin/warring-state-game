@@ -404,7 +404,7 @@
             </AnchorPane>
             <AnchorPane fx:id="b2" onMouseReleased="#handlePress" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
                      <font>
                         <Font size="24.0" />
@@ -839,6 +839,11 @@
       <Text fx:id="startmsg" fill="RED" layoutX="461.0" layoutY="360.0" rotate="90.0" stroke="#7d27ff" strokeType="OUTSIDE" strokeWidth="0.5" text="PLEASE PRESS NEW GAME TO START">
          <font>
             <Font size="28.0" />
+         </font>
+      </Text>
+      <Text fx:id="endmsg" fill="RED" layoutX="80.0" layoutY="243.0" stroke="#7d27ff" strokeType="OUTSIDE" strokeWidth="0.5" text="Game Ends!" visible="false">
+         <font>
+            <Font size="50.0" />
          </font>
       </Text>
    </children>

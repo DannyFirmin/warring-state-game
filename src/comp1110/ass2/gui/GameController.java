@@ -25,9 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import static comp1110.ass2.WarringStatesGame.isPlacementWellFormed;
-import static comp1110.ass2.WarringStatesGame.placementToOccupation;
-import static comp1110.ass2.WarringStatesGame.updateSetup;
+import static comp1110.ass2.WarringStatesGame.*;
 
 public class GameController implements Initializable, ControlledScreen {
 
@@ -81,6 +79,8 @@ public class GameController implements Initializable, ControlledScreen {
 
     @FXML
     private Text startmsg;
+    @FXML
+    private Text endmsg;
     @FXML
     private Text p1text;
     @FXML
@@ -216,7 +216,7 @@ public class GameController implements Initializable, ControlledScreen {
     @FXML
     void aboutProgram(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("About Warring States Game V0.2");
+        alert.setTitle("About Warring States Game V0.3");
         alert.setHeaderText(null);
         alert.setContentText("This game is developed by ANU COMP1110 wed16m.\n \nDevelopers : Danny Feng (u6611178), Vishnuvardhan Jasti(u6611697) and Chi Ben (u6555078)");
 
@@ -238,19 +238,43 @@ public class GameController implements Initializable, ControlledScreen {
      * @Description: Put the card in the right place according to the user placement input
      */
 
-    @FXML
-    void toWelcome(ActionEvent event) {
-        //initialize
+    void initializeGame() {
         setup = "";
         count = 0;
         placement = "";
         moveSequence = "";
         turns = 0;
         flags = null;
-        isGameStart = false;
         cancelHighlight();
         restoreState();
+        endmsg.setVisible(false);
+    }
 
+    void initializePlayer() {
+        switch (PlayerNumController.numPlayers) {
+            case 2:
+                p0text.setVisible(true);
+                p1text.setVisible(true);
+                break;
+            case 3:
+                p0text.setVisible(true);
+                p1text.setVisible(true);
+                p2text.setVisible(true);
+                break;
+            case 4:
+                p0text.setVisible(true);
+                p1text.setVisible(true);
+                p2text.setVisible(true);
+                p3text.setVisible(true);
+                break;
+        }
+    }
+
+    @FXML
+    void toWelcome(ActionEvent event) {
+        initializeGame();
+
+        isGameStart = false;
         placement(PLACEMENTS[(int) (Math.random() * 19)]);
         startmsg.setVisible(true);
         p0text.setVisible(false);
@@ -259,7 +283,8 @@ public class GameController implements Initializable, ControlledScreen {
         p3text.setVisible(false);
         myController.setScreen(Game.screen1ID);
     }
-    void restoreState(){
+
+    void restoreState() {
         ((GridPane) qin.getParent()).getChildren().remove(qin);
         ((GridPane) qi.getParent()).getChildren().remove(qi);
         ((GridPane) chu.getParent()).getChildren().remove(chu);
@@ -279,36 +304,11 @@ public class GameController implements Initializable, ControlledScreen {
 
     @FXML
     void newGame(ActionEvent event) {
-        setup = "";
-        count = 0;
-        placement = "";
-        moveSequence = "";
-        turns = 0;
-        flags = null;
+        initializeGame();
         isGameStart = true;
-        cancelHighlight();
-
         placement(PLACEMENTS[(int) (Math.random() * 19)]);
         startmsg.setVisible(false);
-        switch (PlayerNumController.numPlayers) {
-            case 2:
-                p0text.setVisible(true);
-                p1text.setVisible(true);
-                break;
-            case 3:
-                p0text.setVisible(true);
-                p1text.setVisible(true);
-                p2text.setVisible(true);
-                break;
-            case 4:
-                p0text.setVisible(true);
-                p1text.setVisible(true);
-                p2text.setVisible(true);
-                p3text.setVisible(true);
-                break;
-
-        }
-        restoreState();
+        initializePlayer();
     }
 
     public void placement(String setup) {
@@ -386,9 +386,12 @@ public class GameController implements Initializable, ControlledScreen {
 
     @FXML
     void makePlacement(ActionEvent event) {
+        initializeGame();
+        isGameStart = true;
+        startmsg.setVisible(false);
+        initializePlayer();
         String setup = placetext.getText();
         placement(setup);
-        placetext.clear();
 
     }
 
@@ -414,7 +417,7 @@ public class GameController implements Initializable, ControlledScreen {
             z9Rectangle.setStrokeWidth(3);
             //   storePosition.add(grid.getRowIndex(z9));
             z9IsChosen = true;
-        } else {
+        } else if (z9IsChosen) {
             cancelHighlight();
         }
 
@@ -507,13 +510,8 @@ public class GameController implements Initializable, ControlledScreen {
                 grid.add(z9, col, row);
 
                 //give flag to player
-                System.out.println(placement);
-                System.out.println(moveSequence);
-                System.out.println(setup);
                 flags = WarringStatesGame.getFlags(setup, moveSequence, PlayerNumController.numPlayers);
-                for (int j = 0; j < flags.length; j++) {
-                    System.out.println("flag" + flags[j]);
-                }
+
                 //Qin
                 switch (flags[0]) {
                     case -1:
@@ -685,6 +683,112 @@ public class GameController implements Initializable, ControlledScreen {
                 alert.showAndWait();
                 cancelHighlight();
             }
+        }
+
+        //check if the game ends
+        String placementForCheckEnd = placement.replaceAll("~~.", "");
+        if (checkEnd(placementForCheckEnd)) {
+            endmsg.setVisible(true);
+
+
+
+            //check who is the winner
+            int p0StateNum = 0;
+            int p1StateNum = 0;
+            int p2StateNum = 0;
+            int p3StateNum = 0;
+
+            if(PlayerNumController.numPlayers==2) {
+                String p0Card = getSupporters(setup, moveSequence, PlayerNumController.numPlayers, 0);
+                int p0CardNum = p0Card.length() / 2;
+                String p1Card = getSupporters(setup, moveSequence, PlayerNumController.numPlayers, 1);
+                int p1CardNum = p1Card.length() / 2;
+                for (int i = 0; i < 7; i++) {
+                    if (flags[i] == 0) {
+                        p0StateNum = p0StateNum + 1;
+                    }
+                    if (flags[i] == 1) {
+                        p1StateNum = p1StateNum + 1;
+                    }
+                }
+                
+                if (p0StateNum>p1StateNum){
+                    endmsg.setText("Game Over! Player 0 Win!!!");
+                } if (p0StateNum<p1StateNum){
+                    endmsg.setText("Game Over! Player 1 Win!!!");
+                } if (p0StateNum==p1StateNum){
+                    if(p0CardNum>p1CardNum){
+                        endmsg.setText("Game Over! Player 0 Win!!!");
+                    }
+                    if(p0CardNum<p1CardNum){
+                        endmsg.setText("Game Over! Player 1 Win!!!");
+                    }
+                    if(p0CardNum==p1CardNum){
+                        endmsg.setText("Game Over! Draw!");
+                    }
+                }
+            }
+////
+////            if(PlayerNumController.numPlayers==3) {
+////                String p0Card = getSupporters(placement, moveSequence, PlayerNumController.numPlayers, 0);
+////                int p0CardNum = p0Card.length() / 2;
+////                String p1Card = getSupporters(placement, moveSequence, PlayerNumController.numPlayers, 1);
+////                int p1CardNum = p1Card.length() / 2;
+////                String p2Card= getSupporters(placement,moveSequence,PlayerNumController.numPlayers,2);
+////                int p2CardNum=  p2Card.length()/2;
+////
+////
+////                for (int i = 0; i < 7; i++) {
+////                    if (flags[i] == 0) {
+////                        p0StateNum = p0StateNum + 1;
+////                    }
+////                    if (flags[i] == 1) {
+////                        p1StateNum = p1StateNum + 1;
+////                    }
+////                    if (flags[i] == 2) {
+////                        p2StateNum = p2StateNum + 1;
+////                    }
+////                }
+////
+////
+////                if (p0StateNum>p1StateNum){
+////                    endmsg.setText("Game Over! Player 0 Win!!!");
+////                } if (p0StateNum<p1StateNum){
+////                    endmsg.setText("Game Over! Player 1 Win!!!");
+////                } if (p0StateNum==p1StateNum){
+////                    if(p0CardNum>p1CardNum){
+////                        endmsg.setText("Game Over! Player 0 Win!!!");
+////                    }
+////                    if(p0CardNum<p1CardNum){
+////                        endmsg.setText("Game Over! Player 1 Win!!!");
+////                    }
+////                    if(p0CardNum==p1CardNum){
+////                        endmsg.setText("Game Over! Draw!");
+////                    }
+////                }
+////            }
+////
+////
+////
+////            String p2Card= getSupporters(placement,moveSequence,PlayerNumController.numPlayers,2);
+////            int p2CardNum=  p2Card.length()/2;
+////            String p3Card= getSupporters(placement,moveSequence,PlayerNumController.numPlayers,3);
+////            int p3CardNum=  p3Card.length()/2;
+////            for (int i = 0; i < 7; i++) {
+////                if (flags[i] == 0) {
+////                    p0StateNum = p0StateNum + 1;
+////                }
+////                if (flags[i] == 1) {
+////                    p1StateNum = p1StateNum + 1;
+////                }
+////                if (flags[i] == 2) {
+////                    p2StateNum = p2StateNum + 1;
+////                }
+////                if (flags[i] == 3) {
+////                    p3StateNum = p3StateNum + 1;
+////                }
+////            }
+////            if (p0StateNum)
         }
     }
 }

@@ -166,7 +166,7 @@ public class WarringStatesGame {
         // FIXME Task 5: determine whether a given move is legal
         boolean result = false;
         char b;
-        char c = '0'; //Zhangyi's 3rd card
+        char c = '0'; //Zhangyi's 3rd char
         int zrow = 0;//Zhangyi's row on board
         int zcol = 0;//Zhangyi's column on board
         int lrow = 0;//destination's row on board
@@ -765,5 +765,83 @@ public class WarringStatesGame {
     public static char generateMove(String placement) {
         // FIXME Task 10: generate a legal move
         return '\0';
+    }
+
+    /**
+     * check if zhangyi has no place to go
+     *
+     * @param placement the placement string
+     * @return true if zhangyi has no way to go
+     * @author Danny
+     */
+
+    public static boolean checkEnd(String placement) {
+        char c = '0'; //Zhangyi's 3rd char
+        int zrow = 0;//Zhangyi's row on board
+        int zcol = 0;//Zhangyi's column on board
+        boolean up = false;//true if there is any card above zhangyi
+        boolean down = false;
+        boolean left = false;
+        boolean right = false;
+        char[][] board = Board.board;
+        String[][] occupation = placementToOccupation(placement, board);
+
+        //find Zhangyi
+        for (int i = 0; i < placement.length(); i = i + 3) {
+            if (placement.charAt(i) == 'z') {
+                c = placement.charAt(i + 2);
+                break;
+            }
+        }
+        //find Zhangyi on board
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == c) {
+                    zrow = i;
+                    zcol = j;
+                    break;
+                }
+            }
+        }
+
+        //search up
+        if (zrow != 0) {
+            for (int i = zrow; i > 0; i--) {
+                if (occupation[i - 1][zcol].substring(0, 2) != "~~") {
+                    up = true;
+                }
+            }
+        }
+
+        //search down
+        if (zrow != 5) {
+            for (int i = zrow; i < 5; i++) {
+                if (occupation[i + 1][zcol].substring(0, 2) != "~~") {
+                    down = true;
+                }
+            }
+        }
+
+        //search left
+        if (zcol != 0) {
+            for (int i = zcol; i > 0; i--) {
+                if (occupation[zrow][i - 1].substring(0, 2) != "~~") {
+                    left = true;
+                }
+            }
+        }
+
+        //search right
+        if (zcol != 5) {
+            for (int i = zcol; i < 5; i++) {
+                if (occupation[zrow][i + 1].substring(0, 2) != "~~") {
+                    right = true;
+                }
+            }
+        }
+
+        if (up || down || left || right) {
+            return false;
+        }else {return true;}
     }
 }
