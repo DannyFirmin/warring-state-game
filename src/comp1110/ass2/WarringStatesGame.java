@@ -761,6 +761,7 @@ public class WarringStatesGame {
      *
      * @param placement the current placement string
      * @return a location character representing Zhang Yi's destination for the move
+     * @Author: Ben
      */
     public static char generateMove(String placement) {
         // FIXME Task 10: generate a legal move

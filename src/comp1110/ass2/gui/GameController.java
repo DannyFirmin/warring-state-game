@@ -711,7 +711,7 @@ public class GameController implements Initializable, ControlledScreen {
                         p1StateNum = p1StateNum + 1;
                     }
                 }
-                
+
                 if (p0StateNum>p1StateNum){
                     endmsg.setText("Game Over! Player 0 Win!!!");
                 } if (p0StateNum<p1StateNum){
