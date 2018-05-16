@@ -62,7 +62,7 @@ public class Game extends Application {
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
 
-        primaryStage.setTitle("Warring States Game (Early Access) V0.4");
+        primaryStage.setTitle("Warring States Game (Early Access) V0.5");
         primaryStage.setScene(new Scene(root, BOARD_WIDTH, BOARD_HEIGHT));
         primaryStage.show();
         setUpSoundLoop();
