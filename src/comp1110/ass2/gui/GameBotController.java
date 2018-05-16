@@ -384,55 +384,55 @@ public class GameBotController implements Initializable, ControlledScreen {
         }
     }
 
-    public void placementBot(String placement) {
-            grid.getChildren().clear();
-            char[][] board = Board.board;
-            String[][] occupation = placementToOccupation(placement, board);
-            map.put("z9", z9);
-            map.put("a0", a0);
-            map.put("a1", a1);
-            map.put("a2", a2);
-            map.put("a3", a3);
-            map.put("a4", a4);
-            map.put("a5", a5);
-            map.put("a6", a6);
-            map.put("a7", a7);
-            map.put("b0", b0);
-            map.put("b1", b1);
-            map.put("b2", b2);
-            map.put("b3", b3);
-            map.put("b4", b4);
-            map.put("b5", b5);
-            map.put("b6", b6);
-            map.put("c0", c0);
-            map.put("c1", c1);
-            map.put("c2", c2);
-            map.put("c3", c3);
-            map.put("c4", c4);
-            map.put("c5", c5);
-            map.put("d0", d0);
-            map.put("d1", d1);
-            map.put("d2", d2);
-            map.put("d3", d3);
-            map.put("d4", d4);
-            map.put("e0", e0);
-            map.put("e1", e1);
-            map.put("e2", e2);
-            map.put("e3", e3);
-            map.put("f0", f0);
-            map.put("f1", f1);
-            map.put("f2", f2);
-            map.put("g0", g0);
-            map.put("g1", g1);
+    public void rePlacementBot(String placement) {
+        grid.getChildren().clear();
+        char[][] board = Board.board;
+        String[][] occupation = placementToOccupation(placement, board);
+        map.put("z9", z9);
+        map.put("a0", a0);
+        map.put("a1", a1);
+        map.put("a2", a2);
+        map.put("a3", a3);
+        map.put("a4", a4);
+        map.put("a5", a5);
+        map.put("a6", a6);
+        map.put("a7", a7);
+        map.put("b0", b0);
+        map.put("b1", b1);
+        map.put("b2", b2);
+        map.put("b3", b3);
+        map.put("b4", b4);
+        map.put("b5", b5);
+        map.put("b6", b6);
+        map.put("c0", c0);
+        map.put("c1", c1);
+        map.put("c2", c2);
+        map.put("c3", c3);
+        map.put("c4", c4);
+        map.put("c5", c5);
+        map.put("d0", d0);
+        map.put("d1", d1);
+        map.put("d2", d2);
+        map.put("d3", d3);
+        map.put("d4", d4);
+        map.put("e0", e0);
+        map.put("e1", e1);
+        map.put("e2", e2);
+        map.put("e3", e3);
+        map.put("f0", f0);
+        map.put("f1", f1);
+        map.put("f2", f2);
+        map.put("g0", g0);
+        map.put("g1", g1);
 
-            for (int i = 0; i < 6; i++) {
-                for (int j = 0; j < 6; j++) {
-                    String A = "" + occupation[i][j].charAt(0) + occupation[i][j].charAt(1);
-                    if (!A.equals("~~")) {
-                        grid.add((Node) map.get(A), j, i);
-                    }
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                String A = "" + occupation[i][j].charAt(0) + occupation[i][j].charAt(1);
+                if (!A.equals("~~")) {
+                    grid.add((Node) map.get(A), j, i);
                 }
             }
+        }
     }
 
     @FXML
@@ -484,59 +484,63 @@ public class GameBotController implements Initializable, ControlledScreen {
     void handlePress(MouseEvent event) {
         turns = count % PlayerNumController.numPlayers;
 
-        if(turns==0){
-        if (z9IsChosen) {
-            Node source = (Node) event.getSource();
-            int row;
-            int col;
-            if (GridPane.getRowIndex(source) == null) {
-                row = 0;
-            } else {
-                row = GridPane.getRowIndex(source);
+        if (turns == 0) {
+            if (z9IsChosen) {
+                Node source = (Node) event.getSource();
+                int row;
+                int col;
+                if (GridPane.getRowIndex(source) == null) {
+                    row = 0;
+                } else {
+                    row = GridPane.getRowIndex(source);
+                }
+                if (GridPane.getColumnIndex(source) == null) {
+                    col = 0;
+                } else {
+                    col = GridPane.getColumnIndex(source);
+                }
+
+                if (WarringStatesGame.isMoveLegal(placement, getLocation(row, col))) {
+                    grid.getChildren().remove(z9);
+                    grid.getChildren().remove(source);
+
+                    moveSequence = moveSequence + getLocation(row, col);
+
+                    moveCard(source, row, col);
+
+                    grid.add(z9, col, row);
+
+                    flags = WarringStatesGame.getFlags(setup, moveSequence, PlayerNumController.numPlayers);
+                    moveFlag(flags);
+
+                    cancelHighlight();
+                    placement = updateSetup(placement, getLocation(row, col));
+                    count = count + 1;
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Movement is invalid");
+                    alert.setHeaderText(null);
+                    alert.setContentText("To be valid, each movement must meet the following conditions\n" +
+                            "     * - there is a card at the chosen location;\n" +
+                            "     * - the location is in the same row or column of the grid as Zhang Yi's current position; and drawing a line from Zhang Yi's current location through the card at the chosen location,\n" +
+                            "     * there are no other cards along the line from the same kingdom as the chosen card that are further away from Zhang Yi.");
+                    alert.showAndWait();
+                    cancelHighlight();
+                }
             }
-            if (GridPane.getColumnIndex(source) == null) {
-                col = 0;
-            } else {
-                col = GridPane.getColumnIndex(source);
-            }
-
-            if (WarringStatesGame.isMoveLegal(placement, getLocation(row, col))) {
-                grid.getChildren().remove(z9);
-                grid.getChildren().remove(source);
-
-                moveSequence = moveSequence + getLocation(row, col);
-
-                moveCard(source, row, col);
-
-                grid.add(z9, col, row);
-
-                flags = WarringStatesGame.getFlags(setup, moveSequence, PlayerNumController.numPlayers);
-                moveFlag(flags);
-
-                cancelHighlight();
-                placement = updateSetup(placement, getLocation(row, col));
-                count = count + 1;
-            } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Movement is invalid");
-                alert.setHeaderText(null);
-                alert.setContentText("To be valid, each movement must meet the following conditions\n" +
-                        "     * - there is a card at the chosen location;\n" +
-                        "     * - the location is in the same row or column of the grid as Zhang Yi's current position; and drawing a line from Zhang Yi's current location through the card at the chosen location,\n" +
-                        "     * there are no other cards along the line from the same kingdom as the chosen card that are further away from Zhang Yi.");
-                alert.showAndWait();
-                cancelHighlight();
-            }
-        }}
+        }
         turns = count % PlayerNumController.numPlayers;
 
-        if (turns==1) {
+        if (turns == 1) {
             char nextMove = generateMove(placement);
-            placement=updateSetup(placement,nextMove);
-            placementBot(placement);
+            placement = updateSetup(placement, nextMove);
+            rePlacementBot(placement);
             moveSequence = moveSequence + nextMove;
-            String botCard=getSupporters(placement,moveSequence,PlayerNumController.numPlayers,1);
-
+            String botCard = getSupporters(setup, moveSequence, PlayerNumController.numPlayers, 1);
+            for (int i = 0; i < botCard.length(); i = i + 2) {
+                p1board.getChildren().clear();
+                p1board.add((Node) map.get(botCard.substring(i, i + 2)), 0, 0);
+            }
             flags = WarringStatesGame.getFlags(setup, moveSequence, PlayerNumController.numPlayers);
             moveFlag(flags);
 
