@@ -74,6 +74,7 @@ public class GameBotController implements Initializable, ControlledScreen {
     int[] flags;
     private boolean isGameStart = false;
     private boolean z9IsChosen = false;
+    private boolean isEnd = false;
     @FXML
     private TextField placetext;
 
@@ -216,9 +217,9 @@ public class GameBotController implements Initializable, ControlledScreen {
     @FXML
     void aboutProgram(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("About Warring States Game V0.3");
+        alert.setTitle("About Warring States Game");
         alert.setHeaderText(null);
-        alert.setContentText("This game is developed by ANU COMP1110 wed16m.\n \nDevelopers : Danny Feng (u6611178), Vishnuvardhan Jasti(u6611697) and Chi Ben (u6555078)");
+        alert.setContentText("This game is developed by ANU COMP1110 wed16m.\n \nChief Developer : Danny Feng (u6611178)\nDevelopers: Chi Ben (u6555078) and Vishnuvardhan Jasti(u6611697)");
 
         alert.showAndWait();
     }
@@ -239,6 +240,7 @@ public class GameBotController implements Initializable, ControlledScreen {
      */
 
     void initializeGame() {
+        isEnd = false;
         setup = "";
         count = 0;
         placement = "";
@@ -251,7 +253,7 @@ public class GameBotController implements Initializable, ControlledScreen {
     }
 
     void initializePlayer() {
-        switch (PlayerNumController.numPlayers) {
+        switch (BotNumController.numPlayers) {
             case 2:
                 p0text.setVisible(true);
                 p1text.setVisible(true);
@@ -482,7 +484,7 @@ public class GameBotController implements Initializable, ControlledScreen {
 
     @FXML
     void handlePress(MouseEvent event) {
-        turns = count % PlayerNumController.numPlayers;
+        turns = count % BotNumController.numPlayers;
 
         if (turns == 0) {
             if (z9IsChosen) {
@@ -510,7 +512,7 @@ public class GameBotController implements Initializable, ControlledScreen {
 
                     grid.add(z9, col, row);
 
-                    flags = WarringStatesGame.getFlags(setup, moveSequence, PlayerNumController.numPlayers);
+                    flags = WarringStatesGame.getFlags(setup, moveSequence, BotNumController.numPlayers);
                     moveFlag(flags);
 
                     cancelHighlight();
@@ -529,27 +531,194 @@ public class GameBotController implements Initializable, ControlledScreen {
                 }
             }
         }
-        turns = count % PlayerNumController.numPlayers;
+        turns = count % BotNumController.numPlayers;
+        while(turns != 0) {
+        turns = count % BotNumController.numPlayers;
+        String placementForBot = placement.replaceAll("~~.", "");
+        char nextMove = generateMove(placementForBot);
+        if (nextMove == '!') {
+            isEnd = true;
+        } else {
+                int row = 0;
+                int col = 0;
+                String card = "";
+                if (nextMove == 'A') {
+                    row = 0;
+                    col = 5;
+                }
+                if (nextMove == 'B') {
+                    row = 1;
+                    col = 5;
+                }
+                if (nextMove == 'C') {
+                    row = 2;
+                    col = 5;
+                }
+                if (nextMove == 'D') {
+                    row = 3;
+                    col = 5;
+                }
+                if (nextMove == 'E') {
+                    row = 4;
+                    col = 5;
+                }
+                if (nextMove == 'F') {
+                    row = 5;
+                    col = 5;
+                }
+                if (nextMove == 'G') {
+                    row = 0;
+                    col = 4;
+                }
+                if (nextMove == 'H') {
+                    row = 1;
+                    col = 4;
+                }
+                if (nextMove == 'I') {
+                    row = 2;
+                    col = 4;
+                }
+                if (nextMove == 'J') {
+                    row = 3;
+                    col = 4;
+                }
+                if (nextMove == 'K') {
+                    row = 4;
+                    col = 4;
+                }
+                if (nextMove == 'L') {
+                    row = 5;
+                    col = 4;
+                }
+                if (nextMove == 'M') {
+                    row = 0;
+                    col = 3;
+                }
+                if (nextMove == 'N') {
+                    row = 1;
+                    col = 3;
+                }
+                if (nextMove == 'O') {
+                    row = 2;
+                    col = 3;
+                }
+                if (nextMove == 'P') {
+                    row = 3;
+                    col = 3;
+                }
+                if (nextMove == 'Q') {
+                    row = 4;
+                    col = 3;
+                }
+                if (nextMove == 'R') {
+                    row = 5;
+                    col = 3;
+                }
+                if (nextMove == 'S') {
+                    row = 0;
+                    col = 2;
+                }
+                if (nextMove == 'T') {
+                    row = 1;
+                    col = 2;
+                }
+                if (nextMove == 'U') {
+                    row = 2;
+                    col = 2;
+                }
+                if (nextMove == 'V') {
+                    row = 3;
+                    col = 2;
+                }
+                if (nextMove == 'W') {
+                    row = 4;
+                    col = 2;
+                }
+                if (nextMove == 'X') {
+                    row = 5;
+                    col = 2;
+                }
+                if (nextMove == 'Y') {
+                    row = 0;
+                    col = 1;
+                }
+                if (nextMove == 'Z') {
+                    row = 1;
+                    col = 1;
+                }
+                if (nextMove == '0') {
+                    row = 2;
+                    col = 1;
+                }
+                if (nextMove == '1') {
+                    row = 3;
+                    col = 1;
+                }
+                if (nextMove == '2') {
+                    row = 4;
+                    col = 1;
+                }
+                if (nextMove == '3') {
+                    row = 5;
+                    col = 1;
+                }
+                if (nextMove == '4') {
+                    row = 0;
+                    col = 0;
+                }
+                if (nextMove == '5') {
+                    row = 1;
+                    col = 0;
+                }
+                if (nextMove == '6') {
+                    row = 2;
+                    col = 0;
+                }
+                if (nextMove == '7') {
+                    row = 3;
+                    col = 0;
+                }
+                if (nextMove == '8') {
+                    row = 4;
+                    col = 0;
+                }
+                if (nextMove == '9') {
+                    row = 5;
+                    col = 5;
+                }
+                //find the index of destination in current setup.
+                for (int j = 2; j < placementForBot.length(); j = j + 3) {
+                    if (placementForBot.charAt(j) == nextMove) {
+                        card = placementForBot.substring(j - 2, j);//destination current index
+                        break;
+                    }
+                }
+                grid.getChildren().remove(z9);
+                grid.getChildren().remove((Node) map.get(card));
 
-        if (turns == 1) {
-            char nextMove = generateMove(placement);
-            placement = updateSetup(placement, nextMove);
-            rePlacementBot(placement);
-            moveSequence = moveSequence + nextMove;
-            String botCard = getSupporters(setup, moveSequence, PlayerNumController.numPlayers, 1);
-            for (int i = 0; i < botCard.length(); i = i + 2) {
-                p1board.getChildren().clear();
-                p1board.add((Node) map.get(botCard.substring(i, i + 2)), 0, 0);
+                moveSequence = moveSequence + nextMove;
+
+                moveCard((Node) map.get(card), row, col);
+
+
+                grid.add(z9, col, row);
+
+                flags = WarringStatesGame.getFlags(setup, moveSequence, BotNumController.numPlayers);
+                moveFlag(flags);
+                placement = updateSetup(placement, nextMove);
+
+
+                count = count + 1;
+
             }
-            flags = WarringStatesGame.getFlags(setup, moveSequence, PlayerNumController.numPlayers);
-            moveFlag(flags);
-
-            count = count + 1;
-
         }
         //check if the game ends
         String placementForCheckEnd = placement.replaceAll("~~.", "");
         if (checkEnd(placementForCheckEnd)) {
+            isEnd = true;
+        }
+        if (isEnd) {
+
             endmsg.setVisible(true);
 
 
@@ -563,17 +732,17 @@ public class GameBotController implements Initializable, ControlledScreen {
             int p2CardNum = 0;
             int p3CardNum = 0;
 
-            String p0Card = getSupporters(setup, moveSequence, PlayerNumController.numPlayers, 0);
+            String p0Card = getSupporters(setup, moveSequence, BotNumController.numPlayers, 0);
             p0CardNum = p0Card.length() / 2;
-            String p1Card = getSupporters(setup, moveSequence, PlayerNumController.numPlayers, 1);
+            String p1Card = getSupporters(setup, moveSequence, BotNumController.numPlayers, 1);
             p1CardNum = p1Card.length() / 2;
 
-            if (PlayerNumController.numPlayers == 3 || PlayerNumController.numPlayers == 4) {
-                String p2Card = getSupporters(setup, moveSequence, PlayerNumController.numPlayers, 2);
+            if (BotNumController.numPlayers == 3 || BotNumController.numPlayers == 4) {
+                String p2Card = getSupporters(setup, moveSequence, BotNumController.numPlayers, 2);
                 p2CardNum = p2Card.length() / 2;
             }
-            if (PlayerNumController.numPlayers == 4) {
-                String p3Card = getSupporters(setup, moveSequence, PlayerNumController.numPlayers, 3);
+            if (BotNumController.numPlayers == 4) {
+                String p3Card = getSupporters(setup, moveSequence, BotNumController.numPlayers, 3);
                 p3CardNum = p3Card.length() / 2;
             }
 
@@ -592,37 +761,37 @@ public class GameBotController implements Initializable, ControlledScreen {
                 }
             }
 
-            int[] stateNum = new int[PlayerNumController.numPlayers];
+            int[] stateNum = new int[BotNumController.numPlayers];
             stateNum[0] = p0StateNum;
             stateNum[1] = p1StateNum;
-            if (PlayerNumController.numPlayers == 3 || PlayerNumController.numPlayers == 4) {
+            if (BotNumController.numPlayers == 3 || BotNumController.numPlayers == 4) {
                 stateNum[2] = p2StateNum;
             }
-            if (PlayerNumController.numPlayers == 4) {
+            if (BotNumController.numPlayers == 4) {
                 stateNum[3] = p3StateNum;
             }
 
-            int[] cardNum = new int[PlayerNumController.numPlayers];
+            int[] cardNum = new int[BotNumController.numPlayers];
             cardNum[0] = p0CardNum;
             cardNum[1] = p1CardNum;
-            if (PlayerNumController.numPlayers == 3 || PlayerNumController.numPlayers == 4) {
+            if (BotNumController.numPlayers == 3 || BotNumController.numPlayers == 4) {
                 cardNum[2] = p2CardNum;
             }
-            if (PlayerNumController.numPlayers == 4) {
+            if (BotNumController.numPlayers == 4) {
                 cardNum[3] = p3CardNum;
             }
 
             if (win(stateNum, cardNum) == 0) {
-                endmsg.setText("Game Over! Player 0 Win!!!");
+                endmsg.setText("Game Over! You Win!!!");
             }
             if (win(stateNum, cardNum) == 1) {
-                endmsg.setText("Game Over! Player 1 Win!!!");
+                endmsg.setText("Game Over! Player 1(BOT) Win!!!");
             }
             if (win(stateNum, cardNum) == 2) {
-                endmsg.setText("Game Over! Player 2 Win!!!");
+                endmsg.setText("Game Over! Player 2(BOT) Win!!!");
             }
             if (win(stateNum, cardNum) == 3) {
-                endmsg.setText("Game Over! Player 3 Win!!!");
+                endmsg.setText("Game Over! Player 3(BOT) Win!!!");
             }
             if (win(stateNum, cardNum) == -1) {
                 endmsg.setText("Game Over! Draw");
@@ -676,6 +845,7 @@ public class GameBotController implements Initializable, ControlledScreen {
             p3board.add(source, col, row);
         }
     }
+
 
     void moveFlag(int[] flags) {
         //give flag to player

@@ -747,6 +747,9 @@ public class WarringStatesGame {
         return newsetup;
     }
 
+    public static void main(String[] args) {
+        System.out.println(generateMove("d0Vb01b22z94"));
+    }
     /**
      * Generate a legal move, given the provided placement string.
      * A move is valid if:
@@ -765,16 +768,17 @@ public class WarringStatesGame {
      */
     public static char generateMove(String placement) {
         // FIXME Task 10: generate a legal move
-        char location = '\0';
+        char location = '!';
         char[][] board = Board.board;
-        for (int i = 0; i <= 36; i++) {
+        for (int i = 0; i < 36; i++) {
             if (i >= 0 & i <= 9) {
                 if (isMoveLegal(placement, (char) (i + 48))) {
                     location = (char) (i + 48);
                 }
-            } else {
-                if (isMoveLegal(placement, (char) (i + 65))) {
-                    location = (char) (i + 65);
+            }
+            if (i >= 10 & i <36) {
+                if (isMoveLegal(placement, (char) (i + 65-10))) {
+                    location = (char) (i + 65-10);
                 }
             }
         }

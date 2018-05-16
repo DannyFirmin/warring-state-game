@@ -216,9 +216,9 @@ public class GameController implements Initializable, ControlledScreen {
     @FXML
     void aboutProgram(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("About Warring States Game V0.3");
+        alert.setTitle("About Warring States Game");
         alert.setHeaderText(null);
-        alert.setContentText("This game is developed by ANU COMP1110 wed16m.\n \nDevelopers : Danny Feng (u6611178), Vishnuvardhan Jasti(u6611697) and Chi Ben (u6555078)");
+        alert.setContentText("This game is developed by ANU COMP1110 wed16m.\n \nChief Developer : Danny Feng (u6611178)\nDevelopers: Chi Ben (u6555078) and Vishnuvardhan Jasti(u6611697)");
 
         alert.showAndWait();
     }
@@ -543,16 +543,16 @@ public class GameController implements Initializable, ControlledScreen {
             }
 
             if (win(stateNum, cardNum) == 0) {
-                endmsg.setText("Game Over! You Win!!!");
+                endmsg.setText("Game Over! Player 0 Win!!!");
             }
             if (win(stateNum, cardNum) == 1) {
-                endmsg.setText("Game Over! Player 1(BOT) Win!!!");
+                endmsg.setText("Game Over! Player 1 Win!!!");
             }
             if (win(stateNum, cardNum) == 2) {
-                endmsg.setText("Game Over! Player 2(BOT) Win!!!");
+                endmsg.setText("Game Over! Player 2 Win!!!");
             }
             if (win(stateNum, cardNum) == 3) {
-                endmsg.setText("Game Over! Player 3(BOT) Win!!!");
+                endmsg.setText("Game Over! Player 3 Win!!!");
             }
             if (win(stateNum, cardNum) == -1) {
                 endmsg.setText("Game Over! Draw");
