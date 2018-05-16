@@ -44,9 +44,9 @@
                 <Font size="25.0" />
             </font>
         </Button>
-        <Text fill="WHITE" layoutX="83.0" layoutY="236.0" stroke="#a4a33f" strokeType="OUTSIDE" text="How many bot(s) do you want to play with?">
+        <Text fill="WHITE" layoutX="67.0" layoutY="240.0" stroke="#a4a33f" strokeType="OUTSIDE" text="How many bot(s) do you want to play with?">
             <font>
-                <Font size="44.0" />
+                <Font size="36.0" />
             </font>
         </Text>
     </children>

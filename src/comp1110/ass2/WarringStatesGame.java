@@ -747,9 +747,6 @@ public class WarringStatesGame {
         return newsetup;
     }
 
-    public static void main(String[] args) {
-        System.out.println(generateMove("d0Vb01b22z94"));
-    }
     /**
      * Generate a legal move, given the provided placement string.
      * A move is valid if:
