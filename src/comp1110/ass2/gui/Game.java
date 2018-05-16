@@ -4,11 +4,15 @@ package comp1110.ass2.gui;
  * The way to manage multiple screens is learned from
  * https://www.youtube.com/watch?v=5GsdaZWDcdY
  */
+import comp1110.ass2.Board;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
+
+import static comp1110.ass2.WarringStatesGame.getSupporters;
+import static comp1110.ass2.WarringStatesGame.isMoveLegal;
 
 public class Game extends Application {
     public static String screen1ID = "welcome";
@@ -66,6 +70,85 @@ public class Game extends Application {
 
     // FIXME Task 12: Integrate a more advanced opponent into your game
     //improve the performance of generator
+    public static char betterMove(char zhangyi;String placement) {
+
+        char location='\0';
+        char[][] board = Board.board;
+        for (int i=0;i<=36;i++) {
+            if (i >= 0 & i <= 9) {
+                if (isMoveLegal(placement, (char) (i + 48))) {
+                    location = (char) (i + 48);
+                }
+            } else {
+                if (isMoveLegal(placement, (char) (i + 65))) {
+                    location = (char) (i + 65);
+                }
+            }
+            char kingdom=placement.charAt(placement.indexOf(location)-2);
+            if (zhangyi%6 == location%6) {
+                if (zcol > lcol) {
+                    for (int i = lcol - 1; i >= 0; i--) {
+                        if (occupation[zrow][i].charAt(0) == kingdom) {
+                            noFurther = false;
+                            break;
+                        }
+                    }
+                } else {
+                    for (int i = lcol + 1; i < 6; i++) {
+                        if (occupation[zrow][i].charAt(0) == kingdom) {
+                            noFurther = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (zcol == lcol) {
+                if (zrow > lrow) {
+                    for (int i = lrow - 1; i >= 0; i--) {
+                        if (occupation[i][zcol].charAt(0) == kingdom) {
+                            noFurther = false;
+                            break;
+                        }
+                    }
+                } else {
+                    for (int i = lrow + 1; i < 6; i++) {
+                        if (occupation[i][zcol].charAt(0) == kingdom) {
+                            noFurther = false;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+        boolean result = false;
+        char b;
+        char c = '0'; //Zhangyi's 3rd char
+        int zrow = 0;//Zhangyi's row on board
+        int zcol = 0;//Zhangyi's column on board
+        int lrow = 0;//destination's row on board
+        int lcol = 0;//destination's column on board
+        char kingdom = 'z';//kingdom card of destination
+
+        //find Zhangyi on board
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == c) {
+                    zrow = i;
+                    zcol = j;
+                    break;
+                }
+            }
+        }
+
+
+
+        return location;
+    }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
