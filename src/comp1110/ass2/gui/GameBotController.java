@@ -304,6 +304,7 @@ public class GameBotController implements Initializable, ControlledScreen {
 
     @FXML
     void newGame(ActionEvent event) {
+
         initializeGame();
         isGameStart = true;
         placement(PLACEMENTS[(int) (Math.random() * 19)]);
@@ -381,7 +382,57 @@ public class GameBotController implements Initializable, ControlledScreen {
                     "     * - no location contains more than one card");
             alert.showAndWait();
         }
+    }
 
+    public void placementBot(String placement) {
+            grid.getChildren().clear();
+            char[][] board = Board.board;
+            String[][] occupation = placementToOccupation(placement, board);
+            map.put("z9", z9);
+            map.put("a0", a0);
+            map.put("a1", a1);
+            map.put("a2", a2);
+            map.put("a3", a3);
+            map.put("a4", a4);
+            map.put("a5", a5);
+            map.put("a6", a6);
+            map.put("a7", a7);
+            map.put("b0", b0);
+            map.put("b1", b1);
+            map.put("b2", b2);
+            map.put("b3", b3);
+            map.put("b4", b4);
+            map.put("b5", b5);
+            map.put("b6", b6);
+            map.put("c0", c0);
+            map.put("c1", c1);
+            map.put("c2", c2);
+            map.put("c3", c3);
+            map.put("c4", c4);
+            map.put("c5", c5);
+            map.put("d0", d0);
+            map.put("d1", d1);
+            map.put("d2", d2);
+            map.put("d3", d3);
+            map.put("d4", d4);
+            map.put("e0", e0);
+            map.put("e1", e1);
+            map.put("e2", e2);
+            map.put("e3", e3);
+            map.put("f0", f0);
+            map.put("f1", f1);
+            map.put("f2", f2);
+            map.put("g0", g0);
+            map.put("g1", g1);
+
+            for (int i = 0; i < 6; i++) {
+                for (int j = 0; j < 6; j++) {
+                    String A = "" + occupation[i][j].charAt(0) + occupation[i][j].charAt(1);
+                    if (!A.equals("~~")) {
+                        grid.add((Node) map.get(A), j, i);
+                    }
+                }
+            }
     }
 
     @FXML
@@ -431,6 +482,9 @@ public class GameBotController implements Initializable, ControlledScreen {
 
     @FXML
     void handlePress(MouseEvent event) {
+        turns = count % PlayerNumController.numPlayers;
+
+        if(turns==0){
         if (z9IsChosen) {
             Node source = (Node) event.getSource();
             int row;
@@ -451,8 +505,6 @@ public class GameBotController implements Initializable, ControlledScreen {
                 grid.getChildren().remove(source);
 
                 moveSequence = moveSequence + getLocation(row, col);
-
-                turns = count % PlayerNumController.numPlayers;
 
                 moveCard(source, row, col);
 
@@ -475,8 +527,22 @@ public class GameBotController implements Initializable, ControlledScreen {
                 alert.showAndWait();
                 cancelHighlight();
             }
-        }
+        }}
+        turns = count % PlayerNumController.numPlayers;
 
+        if (turns==1) {
+            char nextMove = generateMove(placement);
+            placement=updateSetup(placement,nextMove);
+            placementBot(placement);
+            moveSequence = moveSequence + nextMove;
+            String botCard=getSupporters(placement,moveSequence,PlayerNumController.numPlayers,1);
+
+            flags = WarringStatesGame.getFlags(setup, moveSequence, PlayerNumController.numPlayers);
+            moveFlag(flags);
+
+            count = count + 1;
+
+        }
         //check if the game ends
         String placementForCheckEnd = placement.replaceAll("~~.", "");
         if (checkEnd(placementForCheckEnd)) {
