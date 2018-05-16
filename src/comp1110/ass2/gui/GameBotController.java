@@ -484,10 +484,10 @@ public class GameBotController implements Initializable, ControlledScreen {
 
     @FXML
     void handlePress(MouseEvent event) {
-        if(z9IsChosen){
-        turns = count % BotNumController.numPlayers;
+        if (z9IsChosen) {
+            turns = count % BotNumController.numPlayers;
 
-        if (turns == 0) {
+            if (turns == 0) {
                 Node source = (Node) event.getSource();
                 int row;
                 int col;
@@ -518,6 +518,8 @@ public class GameBotController implements Initializable, ControlledScreen {
                     cancelHighlight();
                     placement = updateSetup(placement, getLocation(row, col));
                     count = count + 1;
+                    turns = count % BotNumController.numPlayers;
+
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Movement is invalid");
@@ -530,187 +532,188 @@ public class GameBotController implements Initializable, ControlledScreen {
                     cancelHighlight();
                 }
 
-        }
-        turns = count % BotNumController.numPlayers;
-        while(turns != 0) {
-        turns = count % BotNumController.numPlayers;
-        String placementForBot = placement.replaceAll("~~.", "");
-        char nextMove = generateMove(placementForBot);
-        if (nextMove == '!') {
-            isEnd = true;
-        } else {
-                int row = 0;
-                int col = 0;
-                String card = "";
-                if (nextMove == 'A') {
-                    row = 0;
-                    col = 5;
-                }
-                if (nextMove == 'B') {
-                    row = 1;
-                    col = 5;
-                }
-                if (nextMove == 'C') {
-                    row = 2;
-                    col = 5;
-                }
-                if (nextMove == 'D') {
-                    row = 3;
-                    col = 5;
-                }
-                if (nextMove == 'E') {
-                    row = 4;
-                    col = 5;
-                }
-                if (nextMove == 'F') {
-                    row = 5;
-                    col = 5;
-                }
-                if (nextMove == 'G') {
-                    row = 0;
-                    col = 4;
-                }
-                if (nextMove == 'H') {
-                    row = 1;
-                    col = 4;
-                }
-                if (nextMove == 'I') {
-                    row = 2;
-                    col = 4;
-                }
-                if (nextMove == 'J') {
-                    row = 3;
-                    col = 4;
-                }
-                if (nextMove == 'K') {
-                    row = 4;
-                    col = 4;
-                }
-                if (nextMove == 'L') {
-                    row = 5;
-                    col = 4;
-                }
-                if (nextMove == 'M') {
-                    row = 0;
-                    col = 3;
-                }
-                if (nextMove == 'N') {
-                    row = 1;
-                    col = 3;
-                }
-                if (nextMove == 'O') {
-                    row = 2;
-                    col = 3;
-                }
-                if (nextMove == 'P') {
-                    row = 3;
-                    col = 3;
-                }
-                if (nextMove == 'Q') {
-                    row = 4;
-                    col = 3;
-                }
-                if (nextMove == 'R') {
-                    row = 5;
-                    col = 3;
-                }
-                if (nextMove == 'S') {
-                    row = 0;
-                    col = 2;
-                }
-                if (nextMove == 'T') {
-                    row = 1;
-                    col = 2;
-                }
-                if (nextMove == 'U') {
-                    row = 2;
-                    col = 2;
-                }
-                if (nextMove == 'V') {
-                    row = 3;
-                    col = 2;
-                }
-                if (nextMove == 'W') {
-                    row = 4;
-                    col = 2;
-                }
-                if (nextMove == 'X') {
-                    row = 5;
-                    col = 2;
-                }
-                if (nextMove == 'Y') {
-                    row = 0;
-                    col = 1;
-                }
-                if (nextMove == 'Z') {
-                    row = 1;
-                    col = 1;
-                }
-                if (nextMove == '0') {
-                    row = 2;
-                    col = 1;
-                }
-                if (nextMove == '1') {
-                    row = 3;
-                    col = 1;
-                }
-                if (nextMove == '2') {
-                    row = 4;
-                    col = 1;
-                }
-                if (nextMove == '3') {
-                    row = 5;
-                    col = 1;
-                }
-                if (nextMove == '4') {
-                    row = 0;
-                    col = 0;
-                }
-                if (nextMove == '5') {
-                    row = 1;
-                    col = 0;
-                }
-                if (nextMove == '6') {
-                    row = 2;
-                    col = 0;
-                }
-                if (nextMove == '7') {
-                    row = 3;
-                    col = 0;
-                }
-                if (nextMove == '8') {
-                    row = 4;
-                    col = 0;
-                }
-                if (nextMove == '9') {
-                    row = 5;
-                    col = 5;
-                }
-                //find the index of destination in current setup.
-                for (int j = 2; j < placementForBot.length(); j = j + 3) {
-                    if (placementForBot.charAt(j) == nextMove) {
-                        card = placementForBot.substring(j - 2, j);//destination current index
-                        break;
-                    }
-                }
-                grid.getChildren().remove(z9);
-                grid.getChildren().remove((Node) map.get(card));
-
-                moveSequence = moveSequence + nextMove;
-
-                moveCard((Node) map.get(card), row, col);
-
-
-                grid.add(z9, col, row);
-
-                flags = WarringStatesGame.getFlags(setup, moveSequence, BotNumController.numPlayers);
-                moveFlag(flags);
-                placement = updateSetup(placement, nextMove);
-
-                cancelHighlight();
-                count = count + 1;
             }
-        }}
+            while (turns != 0) {
+                String placementForBot = placement.replaceAll("~~.", "");
+                char nextMove = generateMove(placementForBot);
+                if (nextMove == '!') {
+                    isEnd = true;
+                } else {
+                    int row = 0;
+                    int col = 0;
+                    String card = "";
+                    if (nextMove == 'A') {
+                        row = 0;
+                        col = 5;
+                    }
+                    if (nextMove == 'B') {
+                        row = 1;
+                        col = 5;
+                    }
+                    if (nextMove == 'C') {
+                        row = 2;
+                        col = 5;
+                    }
+                    if (nextMove == 'D') {
+                        row = 3;
+                        col = 5;
+                    }
+                    if (nextMove == 'E') {
+                        row = 4;
+                        col = 5;
+                    }
+                    if (nextMove == 'F') {
+                        row = 5;
+                        col = 5;
+                    }
+                    if (nextMove == 'G') {
+                        row = 0;
+                        col = 4;
+                    }
+                    if (nextMove == 'H') {
+                        row = 1;
+                        col = 4;
+                    }
+                    if (nextMove == 'I') {
+                        row = 2;
+                        col = 4;
+                    }
+                    if (nextMove == 'J') {
+                        row = 3;
+                        col = 4;
+                    }
+                    if (nextMove == 'K') {
+                        row = 4;
+                        col = 4;
+                    }
+                    if (nextMove == 'L') {
+                        row = 5;
+                        col = 4;
+                    }
+                    if (nextMove == 'M') {
+                        row = 0;
+                        col = 3;
+                    }
+                    if (nextMove == 'N') {
+                        row = 1;
+                        col = 3;
+                    }
+                    if (nextMove == 'O') {
+                        row = 2;
+                        col = 3;
+                    }
+                    if (nextMove == 'P') {
+                        row = 3;
+                        col = 3;
+                    }
+                    if (nextMove == 'Q') {
+                        row = 4;
+                        col = 3;
+                    }
+                    if (nextMove == 'R') {
+                        row = 5;
+                        col = 3;
+                    }
+                    if (nextMove == 'S') {
+                        row = 0;
+                        col = 2;
+                    }
+                    if (nextMove == 'T') {
+                        row = 1;
+                        col = 2;
+                    }
+                    if (nextMove == 'U') {
+                        row = 2;
+                        col = 2;
+                    }
+                    if (nextMove == 'V') {
+                        row = 3;
+                        col = 2;
+                    }
+                    if (nextMove == 'W') {
+                        row = 4;
+                        col = 2;
+                    }
+                    if (nextMove == 'X') {
+                        row = 5;
+                        col = 2;
+                    }
+                    if (nextMove == 'Y') {
+                        row = 0;
+                        col = 1;
+                    }
+                    if (nextMove == 'Z') {
+                        row = 1;
+                        col = 1;
+                    }
+                    if (nextMove == '0') {
+                        row = 2;
+                        col = 1;
+                    }
+                    if (nextMove == '1') {
+                        row = 3;
+                        col = 1;
+                    }
+                    if (nextMove == '2') {
+                        row = 4;
+                        col = 1;
+                    }
+                    if (nextMove == '3') {
+                        row = 5;
+                        col = 1;
+                    }
+                    if (nextMove == '4') {
+                        row = 0;
+                        col = 0;
+                    }
+                    if (nextMove == '5') {
+                        row = 1;
+                        col = 0;
+                    }
+                    if (nextMove == '6') {
+                        row = 2;
+                        col = 0;
+                    }
+                    if (nextMove == '7') {
+                        row = 3;
+                        col = 0;
+                    }
+                    if (nextMove == '8') {
+                        row = 4;
+                        col = 0;
+                    }
+                    if (nextMove == '9') {
+                        row = 5;
+                        col = 5;
+                    }
+                    //find the index of destination in current setup.
+                    for (int j = 2; j < placementForBot.length(); j = j + 3) {
+                        if (placementForBot.charAt(j) == nextMove) {
+                            card = placementForBot.substring(j - 2, j);//destination current index
+                            break;
+                        }
+                    }
+                    grid.getChildren().remove(z9);
+                    grid.getChildren().remove((Node) map.get(card));
+
+                    moveSequence = moveSequence + nextMove;
+
+                    moveCard((Node) map.get(card), row, col);
+
+
+                    grid.add(z9, col, row);
+
+                    flags = WarringStatesGame.getFlags(setup, moveSequence, BotNumController.numPlayers);
+                    moveFlag(flags);
+                    placement = updateSetup(placement, nextMove);
+
+                    cancelHighlight();
+                    count = count + 1;
+                    turns = count % BotNumController.numPlayers;
+
+                }
+            }
+        }
         //check if the game ends
         String placementForCheckEnd = placement.replaceAll("~~.", "");
         if (checkEnd(placementForCheckEnd)) {
