@@ -484,10 +484,10 @@ public class GameBotController implements Initializable, ControlledScreen {
 
     @FXML
     void handlePress(MouseEvent event) {
+        if(z9IsChosen){
         turns = count % BotNumController.numPlayers;
 
         if (turns == 0) {
-            if (z9IsChosen) {
                 Node source = (Node) event.getSource();
                 int row;
                 int col;
@@ -529,7 +529,7 @@ public class GameBotController implements Initializable, ControlledScreen {
                     alert.showAndWait();
                     cancelHighlight();
                 }
-            }
+
         }
         turns = count % BotNumController.numPlayers;
         while(turns != 0) {
@@ -707,11 +707,10 @@ public class GameBotController implements Initializable, ControlledScreen {
                 moveFlag(flags);
                 placement = updateSetup(placement, nextMove);
 
-
+                cancelHighlight();
                 count = count + 1;
-
             }
-        }
+        }}
         //check if the game ends
         String placementForCheckEnd = placement.replaceAll("~~.", "");
         if (checkEnd(placementForCheckEnd)) {
