@@ -860,4 +860,26 @@ public class WarringStatesGame {
             return true;
         }
     }
+
+    // method ：who wins
+    // stateNum[] is total number of flags of each player,cardNum[] is total number of cards of each player
+    // value of win is the No of the player who wins, if win is -1, draw
+    public static int win(int[] stateNum, int[] cardNum) {
+        int win = 0;
+        int flagmost = 0;
+        for (int i = 0; i < stateNum.length; i++) {
+            if (stateNum[i] > flagmost) {
+                flagmost = stateNum[i];
+                win = i;
+            } else if (stateNum[i] == flagmost) {
+                if (cardNum[i] > cardNum[win]) {
+                    win = i;
+                } else if (cardNum[i] == cardNum[win]) {
+                    win = -1;
+                    break;
+                }
+            }
+        }
+        return win;
+    }
 }

@@ -42,32 +42,10 @@ public class Game extends Application {
     }
 
     // FIXME Task 9: Implement a basic playable Warring States game in JavaFX
-    // Task 9 Code is in GameController.java and game.fxml
-
-    // method ：who wins
-    // flagNum[] is total number of flags of each player,cardNum[] is total number of cards of each player
-    // value of win is the No of the player who wins, if win is -1, draw
-    public int Win(int[] flagNum, int[] cardNum){
-        int win = 0;
-        int flagmost = 0;
-        for (int i = 0; i <= flagNum.length; i++) {
-            if (flagNum[i] > flagmost) {
-                flagmost = flagNum[i];
-                win = i;
-            } else if (flagNum[i] == flagmost) {
-                if (cardNum[i] > cardNum[win]) {
-                    win = i;
-                }else if(cardNum[i] == cardNum[win]){
-                    win= -1;
-                    break;
-                }
-            }
-        }
-        return win;
-    }
+    // Task 9 Code for implement the game is separated in GameController.java, WarringStatesGame.java and game.fxml
 
     // FIXME Task 11: Allow players of your Warring States game to play against your simple agent
-
+    // Task 11 Code is in GameBotController.java
     // FIXME Task 12: Integrate a more advanced opponent into your game
     //improve the performance of generator
 
