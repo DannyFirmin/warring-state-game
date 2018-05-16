@@ -16,12 +16,12 @@
                 <Image url="@assets/background.jpeg" />
             </image>
         </ImageView>
-        <Button fx:id="p2" layoutX="137.0" layoutY="278.0" mnemonicParsing="false" onAction="#startp2" prefHeight="67.0" prefWidth="157.0" text="2 Players">
+        <Button fx:id="p2" layoutX="137.0" layoutY="278.0" mnemonicParsing="false" onAction="#startp2" text="2 Players">
             <font>
                 <Font size="25.0" />
             </font>
         </Button>
-        <Text layoutX="454.0" layoutY="633.0" stroke="BLACK" strokeType="OUTSIDE" text="Warring States Game">
+        <Text layoutX="454.0" layoutY="633.0" stroke="BLACK" strokeType="OUTSIDE" text="Warring States Game" AnchorPane.bottomAnchor="-642.28125" AnchorPane.rightAnchor="-895.525390625">
             <font>
                 <Font name="System Bold" size="44.0" />
             </font>
@@ -34,12 +34,12 @@
                 </LinearGradient>
             </fill>
         </Text>
-      <Button fx:id="p3" layoutX="410.0" layoutY="280.0" mnemonicParsing="false" onAction="#startp3" prefHeight="67.0" prefWidth="157.0" text="3 Players">
+      <Button fx:id="p3" layoutX="410.0" layoutY="280.0" mnemonicParsing="false" onAction="#startp3" text="3 Players">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="p4" layoutX="672.0" layoutY="275.0" mnemonicParsing="false" onAction="#startp4" prefHeight="67.0" prefWidth="157.0" text="4 Players">
+      <Button fx:id="p4" layoutX="672.0" layoutY="275.0" mnemonicParsing="false" onAction="#startp4" text="4 Players">
          <font>
             <Font size="25.0" />
          </font>
