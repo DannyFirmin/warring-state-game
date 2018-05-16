@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--Author: Danny-->
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -15,48 +13,48 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="933.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="comp1110.ass2.gui.GameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="933.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="comp1110.ass2.gui.ViewerController">
    <children>
       <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
                   <MenuItem mnemonicParsing="false" text="New Game" />
-              <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#exitProgram" text="Quit" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem fx:id="regret" mnemonicParsing="false" onAction="#regret" text="Regret" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
+                  <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#exitProgram" text="Quit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+               <items>
+                  <MenuItem fx:id="regret" mnemonicParsing="false" onAction="#regret" text="Regret" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
                   <MenuItem mnemonicParsing="false" text="Game Help" />
-              <MenuItem fx:id="about" mnemonicParsing="false" onAction="#aboutProgram" text="About" />
-            </items>
-          </Menu>
-        </menus>
+                  <MenuItem fx:id="about" mnemonicParsing="false" onAction="#aboutProgram" text="About" />
+               </items>
+            </Menu>
+         </menus>
       </MenuBar>
       <GridPane fx:id="grid" layoutX="40.0" layoutY="58.0" prefHeight="557.0" prefWidth="674.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <AnchorPane fx:id="a0" onMousePressed="#handlePress">
+            <AnchorPane fx:id="a0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
@@ -71,7 +69,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="c4" onMousePressed="#handlePress" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <AnchorPane fx:id="c4" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#75e58e" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="楚">
@@ -86,7 +84,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="b4" onMousePressed="#handlePress" GridPane.rowIndex="2">
+            <AnchorPane fx:id="b4" GridPane.rowIndex="2">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
@@ -101,7 +99,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="a1" onMousePressed="#handlePress" GridPane.columnIndex="1">
+            <AnchorPane fx:id="a1" GridPane.columnIndex="1">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
@@ -116,7 +114,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="a6" onMousePressed="#handlePress" GridPane.rowIndex="1">
+            <AnchorPane fx:id="a6" GridPane.rowIndex="1">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
@@ -131,7 +129,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="c3" onMousePressed="#handlePress" GridPane.rowIndex="3">
+            <AnchorPane fx:id="c3" GridPane.rowIndex="3">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#75e58e" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="楚">
@@ -146,7 +144,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="a7" onMousePressed="#handlePress" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <AnchorPane fx:id="a7" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
@@ -161,7 +159,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="b5" onMousePressed="#handlePress" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <AnchorPane fx:id="b5" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
@@ -176,7 +174,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="d3" onMousePressed="#handlePress" GridPane.rowIndex="4">
+            <AnchorPane fx:id="d3" GridPane.rowIndex="4">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8ef0fb" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="赵">
@@ -191,7 +189,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="d4" onMousePressed="#handlePress" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <AnchorPane fx:id="d4" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8ef0fb" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="赵">
@@ -206,7 +204,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="f0" onMousePressed="#handlePress" GridPane.rowIndex="5">
+            <AnchorPane fx:id="f0" GridPane.rowIndex="5">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18972" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="魏">
@@ -221,7 +219,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="a2" onMousePressed="#handlePress" GridPane.columnIndex="2">
+            <AnchorPane fx:id="a2" GridPane.columnIndex="2">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
@@ -236,7 +234,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="b0" onMousePressed="#handlePress" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <AnchorPane fx:id="b0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
@@ -251,7 +249,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="b6" onMousePressed="#handlePress" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <AnchorPane fx:id="b6" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
@@ -266,7 +264,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="c5" onMousePressed="#handlePress" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <AnchorPane fx:id="c5" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#75e58e" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="楚">
@@ -281,7 +279,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="e0" onMousePressed="#handlePress" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <AnchorPane fx:id="e0" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9d50d0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="韩">
@@ -296,7 +294,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="f2" onMousePressed="#handlePress" GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <AnchorPane fx:id="f2" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18972" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="魏">
@@ -311,7 +309,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="a3" onMousePressed="#handlePress" GridPane.columnIndex="3">
+            <AnchorPane fx:id="a3" GridPane.columnIndex="3">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
@@ -326,7 +324,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="b1" onMousePressed="#handlePress" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <AnchorPane fx:id="b1" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
@@ -341,7 +339,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="c0" onMousePressed="#handlePress" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <AnchorPane fx:id="c0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#75e58e" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="楚">
@@ -356,7 +354,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="d0" onMousePressed="#handlePress" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <AnchorPane fx:id="d0" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8ef0fb" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="赵">
@@ -371,7 +369,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="e1" onMousePressed="#handlePress" GridPane.columnIndex="3" GridPane.rowIndex="4">
+            <AnchorPane fx:id="e1" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9d50d0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="韩">
@@ -386,7 +384,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="g0" onMousePressed="#handlePress" GridPane.columnIndex="3" GridPane.rowIndex="5">
+            <AnchorPane fx:id="g0" GridPane.columnIndex="3" GridPane.rowIndex="5">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d0d0d0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="燕">
@@ -401,7 +399,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="a4" onMouseReleased="#handlePress" GridPane.columnIndex="4">
+            <AnchorPane fx:id="a4" GridPane.columnIndex="4">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
@@ -416,7 +414,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="b2" onMouseReleased="#handlePress" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <AnchorPane fx:id="b2" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
@@ -431,7 +429,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="c1" onMouseReleased="#handlePress" GridPane.columnIndex="4" GridPane.rowIndex="2">
+            <AnchorPane fx:id="c1" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#75e58e" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="楚">
@@ -446,7 +444,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="d1" onMousePressed="#handlePress" GridPane.columnIndex="4" GridPane.rowIndex="3">
+            <AnchorPane fx:id="d1" GridPane.columnIndex="4" GridPane.rowIndex="3">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8ef0fb" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="赵">
@@ -461,7 +459,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="a5" onMousePressed="#handlePress" GridPane.columnIndex="5">
+            <AnchorPane fx:id="a5" GridPane.columnIndex="5">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f598b2" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="秦">
@@ -476,7 +474,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="b3" onMousePressed="#handlePress" GridPane.columnIndex="5" GridPane.rowIndex="1">
+            <AnchorPane fx:id="b3" GridPane.columnIndex="5" GridPane.rowIndex="1">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8cb76" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="齐">
@@ -491,7 +489,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="c2" onMousePressed="#handlePress" GridPane.columnIndex="5" GridPane.rowIndex="2">
+            <AnchorPane fx:id="c2" GridPane.columnIndex="5" GridPane.rowIndex="2">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#75e58e" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="楚">
@@ -506,7 +504,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="d2" onMousePressed="#handlePress" GridPane.columnIndex="5" GridPane.rowIndex="3">
+            <AnchorPane fx:id="d2" GridPane.columnIndex="5" GridPane.rowIndex="3">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8ef0fb" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="赵">
@@ -521,7 +519,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="g1" onMousePressed="#handlePress" GridPane.columnIndex="4" GridPane.rowIndex="5">
+            <AnchorPane fx:id="g1" GridPane.columnIndex="4" GridPane.rowIndex="5">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d0d0d0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="燕">
@@ -536,7 +534,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="e3" onMousePressed="#handlePress" GridPane.columnIndex="5" GridPane.rowIndex="4">
+            <AnchorPane fx:id="e3" GridPane.columnIndex="5" GridPane.rowIndex="4">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9d50d0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="韩">
@@ -551,7 +549,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="e2" onMousePressed="#handlePress" GridPane.columnIndex="4" GridPane.rowIndex="4">
+            <AnchorPane fx:id="e2" GridPane.columnIndex="4" GridPane.rowIndex="4">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9d50d0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="韩">
@@ -566,7 +564,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="f1" onMousePressed="#handlePress" prefWidth="119.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <AnchorPane fx:id="f1" prefWidth="119.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f18972" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text layoutX="28.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="魏">
@@ -581,9 +579,9 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="z9" onMousePressed="#handlePressZ9" GridPane.columnIndex="5" GridPane.rowIndex="5">
+            <AnchorPane fx:id="z9" GridPane.columnIndex="5" GridPane.rowIndex="5">
                <children>
-                  <Rectangle fx:id="z9Rectangle" arcHeight="5.0" arcWidth="5.0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
                   <Text fill="WHITE" layoutX="19.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="张仪">
                      <font>
                         <Font size="21.0" />
