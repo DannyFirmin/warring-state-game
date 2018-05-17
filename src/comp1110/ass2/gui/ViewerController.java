@@ -1,24 +1,27 @@
 
 package comp1110.ass2.gui;
 /**
+ * The codes here is for Task 4
+ * All codes in this file is done by Danny
+ *
  * @Author: Danny
  * @Description: JavaFX Event handler
  */
 
-        import comp1110.ass2.Board;
-        import javafx.application.Platform;
-        import javafx.event.ActionEvent;
-        import javafx.fxml.FXML;
-        import javafx.scene.Node;
-        import javafx.scene.control.Alert;
-        import javafx.scene.control.TextField;
-        import javafx.scene.layout.AnchorPane;
-        import javafx.scene.layout.GridPane;
+import comp1110.ass2.Board;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 
-        import java.util.HashMap;
+import java.util.HashMap;
 
-        import static comp1110.ass2.WarringStatesGame.isPlacementWellFormed;
-        import static comp1110.ass2.WarringStatesGame.placementToOccupation;
+import static comp1110.ass2.WarringStatesGame.isPlacementWellFormed;
+import static comp1110.ass2.WarringStatesGame.placementToOccupation;
 
 public class ViewerController {
 
@@ -126,8 +129,9 @@ public class ViewerController {
 
         alert.showAndWait();
     }
+
     /**
-     * @Author: Danny Feng
+     * @Author: Danny
      * @Description: Put the card in the right place according to the user placement input
      */
     @FXML

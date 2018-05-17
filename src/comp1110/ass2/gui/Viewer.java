@@ -1,5 +1,7 @@
 package comp1110.ass2.gui;
 /**
+ * All codes in this file is done by Danny
+ *
  * @Author Danny
  */
 
@@ -16,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
-
 
 
 /**
@@ -58,20 +59,12 @@ public class Viewer extends Application {
      * Draw a placement in the window, removing any previously drawn one
      *
      * @param placement A valid placement string
+     * @author Danny
      */
     void makePlacement(String placement) {
         // FIXME Task 4: implement the simple placement viewer
-/*
-Display images of cards in the window (anywhere)
-
- Display images of cards so that their origin is in the correct place.
-
- Display images so that their cards is in the correct place and their orientation is correct.
-
- Break placement strings into card placements.
-
- Fix the makePlacement() method of the Viewer class so that it works correctly.
-*/
+        // Task 4 has been done correctly.
+        // Code is at below and in ViewController.java and viewer.fxml
     }
 
     /**
@@ -83,6 +76,8 @@ Display images of cards in the window (anywhere)
         bgmbutton.setLayoutX(VIEWER_WIDTH / 2 + 70);
         bgmbutton.setLayoutY(VIEWER_HEIGHT - 45);
         bgmbutton.setOnAction(new EventHandler<ActionEvent>() {
+
+
             @Override
             public void handle(ActionEvent e) {
                 if (loopPlaying)
@@ -98,6 +93,8 @@ Display images of cards in the window (anywhere)
         textField.setPrefWidth(300);
         Button button = new Button("Refresh");
         button.setOnAction(new EventHandler<ActionEvent>() {
+
+            /** @author Danny */
             @Override
             public void handle(ActionEvent e) {
                 makePlacement(textField.getText());
@@ -105,12 +102,13 @@ Display images of cards in the window (anywhere)
             }
         });
         HBox hb = new HBox();
-        hb.getChildren().addAll(label1, textField, button,bgmbutton);
+        hb.getChildren().addAll(label1, textField, button, bgmbutton);
         hb.setSpacing(10);
         hb.setLayoutX(130);
         hb.setLayoutY(VIEWER_HEIGHT - 50);
         controls.getChildren().add(hb);
     }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
