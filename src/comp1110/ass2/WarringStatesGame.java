@@ -134,6 +134,14 @@ public class WarringStatesGame {
         return newcode;
     }
 
+    /**
+     * Change the board encode all to numbers from 0-35
+     *
+     * @param encode
+     * @return origin values
+     * @author Vishnu
+     */
+
     public static char decode(int encode) {
         if (encode >= 0 && encode <= 25) {
             encode = encode + 65;
@@ -508,7 +516,7 @@ public class WarringStatesGame {
      * @param numPlayers   the number of players in the game, must be in the range [2..4]
      * @param playerId     the player number for which to get the list of supporters, [0..(numPlayers-1)]
      * @return the list of supporters for the given player
-     * @author: Vishnu and Danny (Vishnu first wrote this task but the testGood fails. Danny rewrote 50% of the code to fix the bug.
+     * @author: Vishnu and Danny (Vishnu first wrote this task but the testGood fails. Danny rewrote  the code to fix the bug.
      * Vishnu's method of finding if there is the same kingdom card when zhangyi move is not returning the correct result
      * also he forgot to update the setup string when zhangyi move.)
      */
