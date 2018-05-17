@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import static comp1110.ass2.gui.Game.newPlacement;
+import static comp1110.ass2.gui.Game.takeCards;
+
 /**
  * This class provides the text interface for the Warring States game
  */
@@ -285,6 +288,7 @@ public class WarringStatesGame {
      * @param placement the current placement string
      * @param board     board layout
      * @return board layout with king code on it.
+     * @authur:Ben
      */
     static public String[][] placementToOccupation(String placement, char[][] board) {
         String[][] occupation = new String[6][6];
@@ -303,6 +307,28 @@ public class WarringStatesGame {
             }
         }
         return occupation;
+    }
+
+    /**
+     * transfer occupation to placement
+     *
+     * @param occupation the current occupation string array
+     * @param board with king code
+     * @return placement.
+     * @authur:Ben
+     */
+    static public String occupationToPlacement(String[][] occupation,char[][] board) {
+        String placement="";
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if(occupation[i][j]=="~~"){
+                    continue;
+                }else{
+                    placement=placement+String.valueOf(board[i][j])+occupation[i][j];
+                }
+            }
+        }
+        return placement;
     }
 
     /**

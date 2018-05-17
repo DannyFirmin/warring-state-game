@@ -11,8 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
-import static comp1110.ass2.WarringStatesGame.getSupporters;
-import static comp1110.ass2.WarringStatesGame.isMoveLegal;
+import static comp1110.ass2.WarringStatesGame.*;
 
 public class Game extends Application {
     public static String screen1ID = "welcome";
@@ -52,69 +51,40 @@ public class Game extends Application {
     // Task 11 Code is in GameBotController.java
     // FIXME Task 12: Integrate a more advanced opponent into your game
     //improve the performance of generator
-    public static char betterMove(char zhangyi;String placement) {
+    /**
+     * to give the number of cards will be taken on a certain destination
+     *
+     * @param location one move to
+     * @param placement current placement string
+     * @return number of taken cards after one move.
+     * @authur:Ben
+     */
+    public static int takeCards(char location, String placement) {
 
-        char location='\0';
         char[][] board = Board.board;
-        for (int i=0;i<=36;i++) {
-            if (i >= 0 & i <= 9) {
-                if (isMoveLegal(placement, (char) (i + 48))) {
-                    location = (char) (i + 48);
-                }
-            } else {
-                if (isMoveLegal(placement, (char) (i + 65))) {
-                    location = (char) (i + 65);
-                }
-            }
-            char kingdom=placement.charAt(placement.indexOf(location)-2);
-            if (zhangyi%6 == location%6) {
-                if (zcol > lcol) {
-                    for (int i = lcol - 1; i >= 0; i--) {
-                        if (occupation[zrow][i].charAt(0) == kingdom) {
-                            noFurther = false;
-                            break;
-                        }
-                    }
-                } else {
-                    for (int i = lcol + 1; i < 6; i++) {
-                        if (occupation[zrow][i].charAt(0) == kingdom) {
-                            noFurther = false;
-                            break;
-                        }
-                    }
-                }
-            }
-            if (zcol == lcol) {
-                if (zrow > lrow) {
-                    for (int i = lrow - 1; i >= 0; i--) {
-                        if (occupation[i][zcol].charAt(0) == kingdom) {
-                            noFurther = false;
-                            break;
-                        }
-                    }
-                } else {
-                    for (int i = lrow + 1; i < 6; i++) {
-                        if (occupation[i][zcol].charAt(0) == kingdom) {
-                            noFurther = false;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-
-
-
-        boolean result = false;
+        char kingdom='0' ;
         char b;
         char c = '0'; //Zhangyi's 3rd char
         int zrow = 0;//Zhangyi's row on board
         int zcol = 0;//Zhangyi's column on board
         int lrow = 0;//destination's row on board
         int lcol = 0;//destination's column on board
-        char kingdom = 'z';//kingdom card of destination
+        String[][] occupation = placementToOccupation(placement, board);
+        int count = 0;
+        for(int i=2;i<placement.length();i=i+3){
+            if (location==placement.charAt(i)){
+                kingdom=placement.charAt(i-2);
+                break;
+            }
+        }
 
+        //find Zhangyi
+        for (int i = 0; i < placement.length(); i = i + 3) {
+            if (placement.charAt(i) == 'z') {
+                c = placement.charAt(i + 2);
+                break;
+            }
+        }
         //find Zhangyi on board
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
@@ -125,11 +95,297 @@ public class Game extends Application {
                 }
             }
         }
+        //find the kingdom card on location
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == location) {
+                    kingdom = occupation[i][j].charAt(0);
+                }
+            }
+        }
+
+        //find location on board
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == location) {
+                    lrow = i;
+                    lcol = j;
+                }
+            }
+        }
+
+        if (zrow == lrow) {
+            if (zcol > lcol) {
+                for (int i = lcol - 1; i >= 0; i--) {
+                    if (occupation[zrow][i].charAt(0) == kingdom) {
+                        count++;
+                    }
+                }
+            } else {
+                for (int i = lcol + 1; i < 6; i++) {
+                    if (occupation[zrow][i].charAt(0) == kingdom) {
+                        count++;
+                    }
+                }
+            }
+        }
+        if (zcol == lcol) {
+            if (zrow > lrow) {
+                for (int i = lrow - 1; i >= 0; i--) {
+                    if (occupation[i][zcol].charAt(0) == kingdom) {
+                        count++;
+                    }
+                }
+            } else {
+                for (int i = lrow + 1; i < 6; i++) {
+                    if (occupation[i][zcol].charAt(0) == kingdom) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+
+    /**
+     * return a new placement after one move
+     *
+     * @param location one move to
+     * @param placement current placement string
+     * @return a new string of placement after one move.
+     * @authur:Ben
+     */
+    public static String newPlacement(char location, String placement) {
+        char[][] board = Board.board;
+        char kingdom='0' ;
+        char b;
+        char c = '0'; //Zhangyi's 3rd char
+        int zrow = 0;//Zhangyi's row on board
+        int zcol = 0;//Zhangyi's column on board
+        int lrow = 0;//destination's row on board
+        int lcol = 0;//destination's column on board
+        String[][] occupation = placementToOccupation(placement, board);
+        String placementafter="";
+        // replace the destination on occupation to "z9", delete the information of taken cards
+        occupation[lrow][lcol] = "z9";
+        if (zrow == lrow) {
+            if (zcol > lcol) {
+                for (int i = lcol - 1; i >= 0; i--) {
+                    if (occupation[zrow][i].charAt(0) == kingdom) {
+                        occupation[zrow][i] = "~~";
+                        board[zrow][i]='~';
+                        break;
+                    }
+                }
+            } else {
+                for (int i = lcol + 1; i < 6; i++) {
+                    if (occupation[zrow][i].charAt(0) == kingdom) {
+                        occupation[zrow][i] = "~~";
+                        board[zrow][i]='~';
+                        break;
+                    }
+                }
+            }
+        }
+        if (zcol == lcol) {
+            if (zrow > lrow) {
+                for (int i = lrow - 1; i >= 0; i--) {
+                    if (occupation[i][zcol].charAt(0) == kingdom) {
+                        occupation[i][zcol] = "~~";
+                        board[i][zcol]='~';
+                        break;
+                    }
+                }
+            } else {
+                for (int i = lrow + 1; i < 6; i++) {
+                    if (occupation[i][zcol].charAt(0) == kingdom) {
+                        occupation[i][zcol] = "~~";
+                        board[i][zcol]='~';
+                        break;
+                    }
+                }
+            }
+        }
+        //transfer the occupation back to placement after Zhangyi moves
+        placementafter=occupationToPlacement(occupation,board);
+        return placementafter;
+    }
+
+    /**
+     * return a location which takes most cards in all legal moves
+     * @param placement current placement string
+     * @return a location char
+     * @authur:Ben
+     */
+    public static char generateMaxMove(String placement) {
+        char location = '\0';
+        char[][] board = Board.board;
+        int count=-1;
+        char loc='\0';
+        for (int i = 0; i < 36; i++) {
+            if (i >= 0 & i <= 9) {
+                if (isMoveLegal(placement, (char) (i + 48))) {
+                    location = (char) (i + 48);
+                    if(takeCards(location, placement)>count) {
+                        count = takeCards(location, placement);
+                        loc = location;
+                    }
+                }
+            }
+            if (i >= 10 & i <36) {
+                if (isMoveLegal(placement, (char) (i + 65-10))) {
+                    location = (char) (i + 65-10);
+                    if(takeCards(location, placement)>count){
+                        count=takeCards(location,placement);
+                        loc=location;
+                    }
+                }
+            }
+        }
+        return loc;
+    }
 
 
 
+
+    /**
+     * return a location which minimum the upper number of cards of the next move in all legal moves
+     * @param placement current placement string
+     * @return a location char
+     * @authur:Ben
+     */
+    public static char generateNextMinMove(String placement) {
+        char location = '\0';
+        char[][] board = Board.board;
+        String placementafter="";
+        int cardnum=0;
+        String cardsnum="";
+        for (int i = 0; i < 36; i++) {
+            if (i >= 0 & i <= 9) {
+                if (isMoveLegal(placement, (char) (i + 48))) {
+                    location = (char) (i + 48);
+                    placementafter = newPlacement(location, placement);
+                    if (takeCards(location, placementafter) > cardnum) {
+                        cardnum = takeCards(location, placement);
+                        cardsnum = cardsnum + location + cardnum;
+                        cardnum=0;
+                    }
+                }
+            }
+            if (i >= 10 & i < 36) {
+                if (isMoveLegal(placement, (char) (i + 65 -10 ))) {
+                    location = (char) (i + 65 -10);
+                    placementafter = newPlacement(location, placement);
+                    if (takeCards(location, placementafter) > cardnum) {
+                        cardnum = takeCards(location, placement);
+                        cardsnum = cardsnum + location + cardnum;
+                        cardnum=0;
+                    }
+                }
+            }
+        }
+        int least=6;
+        if(cardsnum.length()>1) {
+            for (int i = 1; i < cardsnum.length(); i = i + 2) {
+                if (cardsnum.charAt(i) - 48 < least) {
+                    least = cardsnum.charAt(i) - 48;
+                    location = cardsnum.charAt(i - 1);
+                }
+            }
+        }
         return location;
     }
+
+
+//    public static char generateMove(String placement) {
+//        char location = '\0';
+//        char[][] board = Board.board;
+//        int count = -1;
+//        int countnext = -1;
+//        int countmost = 6;
+//        char loc = '\0';
+//        String loclist = "";
+//        String locnext = "";
+//        String locnextlist = "";
+//        String placementafter = "";
+//        for (int i = 0; i < 36; i++) {
+//            if (i >= 0 & i <= 9) {
+//                if (isMoveLegal(placement, (char) (i + 48))) {
+//                    location = (char) (i + 48);
+//                    if (takeCards(location, placement) > count) {
+//                        count = takeCards(location, placement);
+//                        loc = location;
+//                        loclist = String.valueOf(loc);
+//                        for (int m = 0; m < loclist.length(); m++) {
+//                            placementafter = newPlacement(loclist.charAt(m), placement);
+//                            if (takeCards(loclist.charAt(m), placementafter) > count) {
+//                                countnext = takeCards(location, placementafter);
+//                                locnext = String.valueOf(location) + String.valueOf(countnext);
+//                            }
+//                        }
+//                    } else if (takeCards(location, placement) == count) {
+//                        loclist = locnextlist + loc;
+//                        for (int m = 0; m < loclist.length(); m++) {
+//                            placementafter = newPlacement(loclist.charAt(m), placement);
+//                            if (takeCards(loclist.charAt(m), placementafter) > count) {
+//                                countnext = takeCards(location, placementafter);
+//                                locnext = String.valueOf(location) + String.valueOf(countnext);
+//                            }
+//                        }
+//                    }
+//                    locnextlist = locnextlist + locnext;
+//                    if (locnextlist.length() > 2) {
+//                        for (int k = 1; k < locnextlist.length(); k = k + 2) {
+//                            if (locnextlist.charAt(k) - 48 < countmost) {
+//                                countmost = locnextlist.charAt(k) - 48;
+//                                loc = locnextlist.charAt(k - 1);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+//            if (i >= 10 & i < 36) {
+//                if (isMoveLegal(placement, (char) (i + 55))) {
+//                    location = (char) (i + 55);
+//                    if (takeCards(location, placement) > count) {
+//                        count = takeCards(location, placement);
+//                        loc = location;
+//                        loclist = String.valueOf(loc);
+//                        for (int m = 0; m < loclist.length(); m++) {
+//                            placementafter = newPlacement(loclist.charAt(m), placement);
+//                            if (takeCards(loclist.charAt(m), placementafter) > count) {
+//                                countnext = takeCards(location, placementafter);
+//                                locnext = String.valueOf(location) + String.valueOf(countnext);
+//                            }
+//                        }
+//                    } else if (takeCards(location, placement) == count) {
+//                        loclist = locnextlist + loc;
+//                        for (int m = 0; m < loclist.length(); m++) {
+//                            placementafter = newPlacement(loclist.charAt(m), placement);
+//                            if (takeCards(loclist.charAt(m), placementafter) > count) {
+//                                countnext = takeCards(location, placementafter);
+//                                locnext = String.valueOf(location) + String.valueOf(countnext);
+//                            }
+//                        }
+//                    }
+//                    locnextlist = locnextlist + locnext;
+//                    if (locnextlist.length() > 2) {
+//                        for (int k = 1; k < locnextlist.length(); k = k + 2) {
+//                            if (locnextlist.charAt(k) - 55 < countmost) {
+//                                countmost = locnextlist.charAt(k) - 55;
+//                                loc = locnextlist.charAt(k - 1);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return loc;
+//    }
+
+
 
 
     @Override
