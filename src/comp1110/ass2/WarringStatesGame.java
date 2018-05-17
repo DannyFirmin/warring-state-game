@@ -791,7 +791,7 @@ public class WarringStatesGame {
      */
     public static char generateMove(String placement) {
         // FIXME Task 10: generate a legal move
-        char location = '!';
+        char location = '\0';
         char[][] board = Board.board;
         for (int i = 0; i < 36; i++) {
             if (i >= 0 & i <= 9) {
