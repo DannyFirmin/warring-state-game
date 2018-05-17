@@ -3,7 +3,6 @@ package comp1110.ass2;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-
 /**
  * This class provides the text interface for the Warring States game
  */

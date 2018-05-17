@@ -6,4 +6,3 @@ The whole assinment contribution
 * u6611697 Owned Task 7, helped fixing bugs and did documents includes rules book, presentation slider.
 
 Signed: Danny Feng (u6611178), Vishnuvardhan Jasti(u6611697), Chi Ben (u6555078)
-
