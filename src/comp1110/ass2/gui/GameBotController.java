@@ -1,5 +1,8 @@
 package comp1110.ass2.gui;
 /**
+ * The codes here is for Task 11
+ * All codes in this file is done by Danny
+ *
  * @Author: Danny
  * @Description: JavaFX Event handler for BOT
  */
@@ -484,6 +487,7 @@ public class GameBotController implements Initializable, ControlledScreen {
 
     @FXML
     void handlePress(MouseEvent event) {
+        if (isGameStart){
         if (z9IsChosen) {
             turns = count % BotNumController.numPlayers;
 
@@ -536,7 +540,7 @@ public class GameBotController implements Initializable, ControlledScreen {
             while (turns != 0) {
                 String placementForBot = placement.replaceAll("~~.", "");
                 char nextMove = generateMove(placementForBot);
-                if (nextMove == '!') {
+                if (nextMove == '\0') {
                     isEnd = true;
                 } else {
                     int row = 0;
@@ -799,7 +803,7 @@ public class GameBotController implements Initializable, ControlledScreen {
                 endmsg.setText("Game Over! Draw");
             }
 
-        }
+        }}
     }
 
     void moveCard(Node source, int row, int col) {

@@ -1,5 +1,7 @@
 package comp1110.ass2.gui;
 /**
+ * All codes in this file is done by Danny
+ *
  * @Author: Danny
  * @Description: JavaFX Event handler for human player
  */
@@ -431,6 +433,7 @@ public class GameController implements Initializable, ControlledScreen {
 
     @FXML
     void handlePress(MouseEvent event) {
+        if (isGameStart){
         if (z9IsChosen) {
             Node source = (Node) event.getSource();
             int row;
@@ -558,7 +561,7 @@ public class GameController implements Initializable, ControlledScreen {
                 endmsg.setText("Game Over! Draw");
             }
 
-        }
+        }}
     }
 
     void moveCard(Node source, int row, int col) {

@@ -1,21 +1,13 @@
 package comp1110.ass2;
 
-import comp1110.ass2.gui.Game;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
-import static comp1110.ass2.gui.Game.newPlacement;
-import static comp1110.ass2.gui.Game.takeCards;
 
 /**
  * This class provides the text interface for the Warring States game
  */
 public class WarringStatesGame {
-
     /**
      * Determine whether a card placement is well-formed according to the following:
      * - it consists of exactly three characters
@@ -130,6 +122,7 @@ public class WarringStatesGame {
      *
      * @param origin the origin board encode
      * @return newcode the new number encode
+     * @author Danny
      */
     public static int reEncode(char origin) {
         int newcode = 0;
@@ -315,18 +308,18 @@ public class WarringStatesGame {
      * transfer occupation to placement
      *
      * @param occupation the current occupation string array
-     * @param board with king code
+     * @param board      with king code
      * @return placement.
      * @authur:Ben
      */
-    static public String occupationToPlacement(String[][] occupation,char[][] board) {
-        String placement="";
+    static public String occupationToPlacement(String[][] occupation, char[][] board) {
+        String placement = "";
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                if(occupation[i][j]=="~~"){
+                if (occupation[i][j] == "~~") {
                     continue;
-                }else{
-                    placement=placement+String.valueOf(board[i][j])+occupation[i][j];
+                } else {
+                    placement = placement + String.valueOf(board[i][j]) + occupation[i][j];
                 }
             }
         }
@@ -399,6 +392,16 @@ public class WarringStatesGame {
         return result;
     }
 
+    /**
+     * This method is called by a lot of task heavily
+     * given a old setup string and the char that zhangyi is going to move
+     * return the new setup with zhangyi moved and the previous card removed
+     *
+     * @param placement    the placement string
+     * @param locationChar the location that zhangyi is going to move
+     * @return all the card that is in the same state as the card that zhangyi is going to taks
+     * @author Danny
+     */
 
     public static ArrayList<String> findFurther(String placement, char locationChar) {
         int zi = 0; //zhangyi's index
@@ -625,7 +628,11 @@ public class WarringStatesGame {
         return output;
     }
 
-
+    /**
+     * This method is for Task 7
+     *
+     * @aurhor Vishnu
+     */
     public static String removeDuplicates(String x) {
         Set<String> set = new HashSet<>();
         StringBuffer sf = new StringBuffer();
@@ -739,6 +746,15 @@ public class WarringStatesGame {
         return flags;
     }
 
+    /**
+     * This method is called by many other tasks to update the setup string
+     * given a old setup string and the char that zhangyi is going to move
+     * return the new setup with zhangyi moved and the previous card removed
+     *
+     * @param oldsetup the placement string
+     * @return the new setup with zhangyi moved
+     * @author Danny
+     */
     public static String updateSetup(String oldsetup, char moveSeqChar) {
         int zi = 0; //zhangyi's index
         int li = 0; //location's index
@@ -791,71 +807,27 @@ public class WarringStatesGame {
      * @return a location character representing Zhang Yi's destination for the move
      * @author Ben
      */
-//    public static char generateMove(String placement) {
-//        // FIXME Task 10: generate a legal move
-//        char location = '\0';
-//        char[][] board = Board.board;
-//        for (int i = 0; i < 36; i++) {
-//            if (i >= 0 & i <= 9) {
-//                if (isMoveLegal(placement, (char) (i + 48))) {
-//                    location = (char) (i + 48);
-//                }
-//            }
-//            if (i >= 10 & i <36) {
-//                if (isMoveLegal(placement, (char) (i + 65-10))) {
-//                    location = (char) (i + 65-10);
-//                }
-//            }
-//        }
-//        return location;
-//    }
-
     public static char generateMove(String placement) {
         // FIXME Task 10: generate a legal move
         char location = '\0';
-        String loc="";
         char[][] board = Board.board;
         for (int i = 0; i < 36; i++) {
             if (i >= 0 & i <= 9) {
                 if (isMoveLegal(placement, (char) (i + 48))) {
-                    for(int j=0;j<Game.generateMaxMoves(placement).length();j++) {
-                        if (Game.generateMaxMoves(placement).charAt(j) ==(char) (i + 48)) {
-                            location = (char) (i + 48);
-                            loc=loc+location;
-                            }
-                        }
-                    }
-                    for(int k=0;k<loc.length();k++){
-                        if (loc.charAt(k) ==(char) (i + 48)) {
-                            location=loc.charAt(k);
-                            break;
-                        }
+                    location = (char) (i + 48);
                 }
             }
-            if (i >= 10 & i <36) {
-                if (isMoveLegal(placement, (char) (i + 65-10))) {
-                    for(int j=0;j<Game.generateMaxMoves(placement).length();j++) {
-                        if (Game.generateMaxMoves(placement).charAt(j) ==(char) (i + 55)) {
-                            location = (char) (i + 55);
-                            loc=loc+location;
-                        }
-                    }
-                }
-                for(int k=0;k<loc.length();k++){
-                    if (loc.charAt(k) ==(char) (i + 55)) {
-                        location=loc.charAt(k);
-                        break;
-                    }
+            if (i >= 10 & i < 36) {
+                if (isMoveLegal(placement, (char) (i + 65 - 10))) {
+                    location = (char) (i + 65 - 10);
                 }
             }
         }
         return location;
     }
 
-
-
-
     /**
+     * This method is for task 9 that check if the game should be end
      * check if zhangyi has no place to go
      *
      * @param placement the placement string
@@ -935,7 +907,6 @@ public class WarringStatesGame {
         }
     }
 
-    // method ：who wins
     // stateNum[] is total number of flags of each player,cardNum[] is total number of cards of each player
     // value of win is the No of the player who wins, if win is -1, draw
     public static int win(int[] stateNum, int[] cardNum) {
@@ -955,5 +926,334 @@ public class WarringStatesGame {
             }
         }
         return win;
+    }
+
+/** All the code below is for task 12*/
+    /**
+     * This method is for task 12
+     * to give the number of cards will be taken on a certain destination
+     *
+     * @param location  one move to
+     * @param placement current placement string
+     * @return number of taken cards after one move.
+     * @authur:Ben
+     */
+    public static int takeCards(char location, String placement) {
+
+        char[][] board = Board.board;
+        char kingdom = '0';
+        char b;
+        char c = '0'; //Zhangyi's 3rd char
+        int zrow = 0;//Zhangyi's row on board
+        int zcol = 0;//Zhangyi's column on board
+        int lrow = 0;//destination's row on board
+        int lcol = 0;//destination's column on board
+        String[][] occupation = placementToOccupation(placement, board);
+        int count = 0;
+        for (int i = 2; i < placement.length(); i = i + 3) {
+            if (location == placement.charAt(i)) {
+                kingdom = placement.charAt(i - 2);
+                break;
+            }
+        }
+
+        //find Zhangyi
+        for (int i = 0; i < placement.length(); i = i + 3) {
+            if (placement.charAt(i) == 'z') {
+                c = placement.charAt(i + 2);
+                break;
+            }
+        }
+        //find Zhangyi on board
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == c) {
+                    zrow = i;
+                    zcol = j;
+                    break;
+                }
+            }
+        }
+        //find the kingdom card on location
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == location) {
+                    kingdom = occupation[i][j].charAt(0);
+                }
+            }
+        }
+
+        //find location on board
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (board[i][j] == location) {
+                    lrow = i;
+                    lcol = j;
+                }
+            }
+        }
+
+        if (zrow == lrow) {
+            if (zcol > lcol) {
+                for (int i = lcol - 1; i >= 0; i--) {
+                    if (occupation[zrow][i].charAt(0) == kingdom) {
+                        count++;
+                    }
+                }
+            } else {
+                for (int i = lcol + 1; i < 6; i++) {
+                    if (occupation[zrow][i].charAt(0) == kingdom) {
+                        count++;
+                    }
+                }
+            }
+        }
+        if (zcol == lcol) {
+            if (zrow > lrow) {
+                for (int i = lrow - 1; i >= 0; i--) {
+                    if (occupation[i][zcol].charAt(0) == kingdom) {
+                        count++;
+                    }
+                }
+            } else {
+                for (int i = lrow + 1; i < 6; i++) {
+                    if (occupation[i][zcol].charAt(0) == kingdom) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+
+    /**
+     * This method is for task 12
+     * return a new placement after one move
+     *
+     * @param location  one move to
+     * @param placement current placement string
+     * @return a new string of placement after one move.
+     * @authur:Ben
+     */
+    public static String newPlacement(char location, String placement) {
+        char[][] board = Board.board;
+        char kingdom = '0';
+        char b;
+        char c = '0'; //Zhangyi's 3rd char
+        int zrow = 0;//Zhangyi's row on board
+        int zcol = 0;//Zhangyi's column on board
+        int lrow = 0;//destination's row on board
+        int lcol = 0;//destination's column on board
+        String[][] occupation = placementToOccupation(placement, board);
+        String placementafter = "";
+        // replace the destination on occupation to "z9", delete the information of taken cards
+        occupation[lrow][lcol] = "z9";
+        if (zrow == lrow) {
+            if (zcol > lcol) {
+                for (int i = lcol - 1; i >= 0; i--) {
+                    if (occupation[zrow][i].charAt(0) == kingdom) {
+                        occupation[zrow][i] = "~~";
+                        board[zrow][i] = '~';
+                        break;
+                    }
+                }
+            } else {
+                for (int i = lcol + 1; i < 6; i++) {
+                    if (occupation[zrow][i].charAt(0) == kingdom) {
+                        occupation[zrow][i] = "~~";
+                        board[zrow][i] = '~';
+                        break;
+                    }
+                }
+            }
+        }
+        if (zcol == lcol) {
+            if (zrow > lrow) {
+                for (int i = lrow - 1; i >= 0; i--) {
+                    if (occupation[i][zcol].charAt(0) == kingdom) {
+                        occupation[i][zcol] = "~~";
+                        board[i][zcol] = '~';
+                        break;
+                    }
+                }
+            } else {
+                for (int i = lrow + 1; i < 6; i++) {
+                    if (occupation[i][zcol].charAt(0) == kingdom) {
+                        occupation[i][zcol] = "~~";
+                        board[i][zcol] = '~';
+                        break;
+                    }
+                }
+            }
+        }
+        //transfer the occupation back to placement after Zhangyi moves
+        placementafter = occupationToPlacement(occupation, board);
+        return placementafter;
+    }
+
+    /**
+     * This method is for task 12
+     * return a location which takes most cards in all legal moves
+     *
+     * @param placement current placement string
+     * @return a location char
+     * @authur:Ben
+     */
+    public static char generateMaxMove(String placement) {
+        char location = '\0';
+        char[][] board = Board.board;
+        int count = -1;
+        char loc = '\0';
+        for (int i = 0; i < 36; i++) {
+            if (i >= 0 & i <= 9) {
+                if (isMoveLegal(placement, (char) (i + 48))) {
+                    location = (char) (i + 48);
+                    if (takeCards(location, placement) > count) {
+                        count = takeCards(location, placement);
+                        loc = location;
+                    }
+                }
+            }
+            if (i >= 10 & i < 36) {
+                if (isMoveLegal(placement, (char) (i + 65 - 10))) {
+                    location = (char) (i + 65 - 10);
+                    if (takeCards(location, placement) > count) {
+                        count = takeCards(location, placement);
+                        loc = location;
+                    }
+                }
+            }
+        }
+        return loc;
+    }
+
+    public static String generateMaxMoves(String placement) {
+        char location = '\0';
+        char[][] board = Board.board;
+        int count = -1;
+        String loc = "";
+        for (int i = 0; i < 36; i++) {
+            if (i >= 0 & i <= 9) {
+                if (isMoveLegal(placement, (char) (i + 48))) {
+                    location = (char) (i + 48);
+                    if (takeCards(location, placement) > count) {
+                        count = takeCards(location, placement);
+                        loc = location + "";
+                    } else if (takeCards(location, placement) == count) {
+                        loc = loc + location;
+                    }
+                }
+            }
+            if (i >= 10 & i < 36) {
+                if (isMoveLegal(placement, (char) (i + 65 - 10))) {
+                    location = (char) (i + 65 - 10);
+                    if (takeCards(location, placement) > count) {
+                        count = takeCards(location, placement);
+                        loc = location + "";
+                    } else if (takeCards(location, placement) == count) {
+                        loc = loc + location;
+                    }
+                }
+            }
+        }
+        return loc;
+    }
+
+
+    /**
+     * This method is for task 12
+     * return a location which minimum the upper number of cards of the next move in all legal moves
+     *
+     * @param placement current placement string
+     * @return a location char
+     * @authur:Ben
+     */
+    public static char generateNextMinMove(String placement) {
+        char location = '\0';
+        char[][] board = Board.board;
+        String placementafter = "";
+        int cardnum = 0;
+        String cardsnum = "";
+        for (int i = 0; i < 36; i++) {
+            if (i >= 0 & i <= 9) {
+                if (isMoveLegal(placement, (char) (i + 48))) {
+                    location = (char) (i + 48);
+                    placementafter = newPlacement(location, placement);
+                    if (takeCards(location, placementafter) > cardnum) {
+                        cardnum = takeCards(location, placement);
+                        cardsnum = cardsnum + location + cardnum;
+                        cardnum = 0;
+                    }
+                }
+            }
+            if (i >= 10 & i < 36) {
+                if (isMoveLegal(placement, (char) (i + 65 - 10))) {
+                    location = (char) (i + 65 - 10);
+                    placementafter = newPlacement(location, placement);
+                    if (takeCards(location, placementafter) > cardnum) {
+                        cardnum = takeCards(location, placement);
+                        cardsnum = cardsnum + location + cardnum;
+                        cardnum = 0;
+                    }
+                }
+            }
+        }
+        int least = 6;
+        if (cardsnum.length() > 1) {
+            for (int i = 1; i < cardsnum.length(); i = i + 2) {
+                if (cardsnum.charAt(i) - 48 < least) {
+                    least = cardsnum.charAt(i) - 48;
+                    location = cardsnum.charAt(i - 1);
+                }
+            }
+        }
+        return location;
+    }
+
+    public static String generateNextMinMoves(String placement) {
+        char location = '\0';
+        String loc = "";
+        char[][] board = Board.board;
+        String placementafter = "";
+        int cardnum = 0;
+        String cardsnum = "";
+        for (int i = 0; i < 36; i++) {
+            if (i >= 0 & i <= 9) {
+                if (isMoveLegal(placement, (char) (i + 48))) {
+                    location = (char) (i + 48);
+                    placementafter = newPlacement(location, placement);
+                    if (takeCards(location, placementafter) > cardnum) {
+                        cardnum = takeCards(location, placement);
+                        cardsnum = cardsnum + location + cardnum;
+                        cardnum = 0;
+                    }
+                }
+            }
+            if (i >= 10 & i < 36) {
+                if (isMoveLegal(placement, (char) (i + 65 - 10))) {
+                    location = (char) (i + 65 - 10);
+                    placementafter = newPlacement(location, placement);
+                    if (takeCards(location, placementafter) > cardnum) {
+                        cardnum = takeCards(location, placement);
+                        cardsnum = cardsnum + location + cardnum;
+                        cardnum = 0;
+                    }
+                }
+            }
+        }
+        int least = 6;
+        if (cardsnum.length() > 1) {
+            for (int i = 1; i < cardsnum.length(); i = i + 2) {
+                if (cardsnum.charAt(i) - 48 < least) {
+                    least = cardsnum.charAt(i) - 48;
+                    location = cardsnum.charAt(i - 1);
+                    loc = location + "";
+                } else if (cardsnum.charAt(i) - 48 == least) {
+                    loc = loc + location;
+                }
+            }
+        }
+        return loc;
     }
 }
