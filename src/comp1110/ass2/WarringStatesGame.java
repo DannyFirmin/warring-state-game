@@ -1,5 +1,7 @@
 package comp1110.ass2;
 
+import comp1110.ass2.gui.Game;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -789,24 +791,69 @@ public class WarringStatesGame {
      * @return a location character representing Zhang Yi's destination for the move
      * @author Ben
      */
+//    public static char generateMove(String placement) {
+//        // FIXME Task 10: generate a legal move
+//        char location = '\0';
+//        char[][] board = Board.board;
+//        for (int i = 0; i < 36; i++) {
+//            if (i >= 0 & i <= 9) {
+//                if (isMoveLegal(placement, (char) (i + 48))) {
+//                    location = (char) (i + 48);
+//                }
+//            }
+//            if (i >= 10 & i <36) {
+//                if (isMoveLegal(placement, (char) (i + 65-10))) {
+//                    location = (char) (i + 65-10);
+//                }
+//            }
+//        }
+//        return location;
+//    }
+
     public static char generateMove(String placement) {
         // FIXME Task 10: generate a legal move
-        char location = '!';
+        char location = '\0';
+        String loc="";
         char[][] board = Board.board;
         for (int i = 0; i < 36; i++) {
             if (i >= 0 & i <= 9) {
                 if (isMoveLegal(placement, (char) (i + 48))) {
-                    location = (char) (i + 48);
+                    for(int j=0;j<Game.generateMaxMoves(placement).length();j++) {
+                        if (Game.generateMaxMoves(placement).charAt(j) ==(char) (i + 48)) {
+                            location = (char) (i + 48);
+                            loc=loc+location;
+                            }
+                        }
+                    }
+                    for(int k=0;k<loc.length();k++){
+                        if (loc.charAt(k) ==(char) (i + 48)) {
+                            location=loc.charAt(k);
+                            break;
+                        }
                 }
             }
             if (i >= 10 & i <36) {
                 if (isMoveLegal(placement, (char) (i + 65-10))) {
-                    location = (char) (i + 65-10);
+                    for(int j=0;j<Game.generateMaxMoves(placement).length();j++) {
+                        if (Game.generateMaxMoves(placement).charAt(j) ==(char) (i + 55)) {
+                            location = (char) (i + 55);
+                            loc=loc+location;
+                        }
+                    }
+                }
+                for(int k=0;k<loc.length();k++){
+                    if (loc.charAt(k) ==(char) (i + 55)) {
+                        location=loc.charAt(k);
+                        break;
+                    }
                 }
             }
         }
         return location;
     }
+
+
+
 
     /**
      * check if zhangyi has no place to go

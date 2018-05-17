@@ -246,7 +246,37 @@ public class Game extends Application {
         return loc;
     }
 
-
+    public static String generateMaxMoves(String placement) {
+        char location = '\0';
+        char[][] board = Board.board;
+        int count=-1;
+        String loc="";
+        for (int i = 0; i < 36; i++) {
+            if (i >= 0 & i <= 9) {
+                if (isMoveLegal(placement, (char) (i + 48))) {
+                    location = (char) (i + 48);
+                    if(takeCards(location, placement)>count) {
+                        count = takeCards(location, placement);
+                        loc = location+"";
+                    }else if(takeCards(location, placement)==count){
+                        loc = loc+location;
+                    }
+                }
+            }
+            if (i >= 10 & i <36) {
+                if (isMoveLegal(placement, (char) (i + 65-10))) {
+                    location = (char) (i + 65-10);
+                    if(takeCards(location, placement)>count){
+                        count=takeCards(location,placement);
+                        loc = location+"";
+                    }else if(takeCards(location, placement)==count){
+                        loc = loc+location;
+                    }
+                }
+            }
+        }
+        return loc;
+    }
 
 
     /**
@@ -297,93 +327,52 @@ public class Game extends Application {
         return location;
     }
 
+    public static String generateNextMinMoves(String placement) {
+        char location = '\0';
+        String loc="";
+        char[][] board = Board.board;
+        String placementafter="";
+        int cardnum=0;
+        String cardsnum="";
+        for (int i = 0; i < 36; i++) {
+            if (i >= 0 & i <= 9) {
+                if (isMoveLegal(placement, (char) (i + 48))) {
+                    location = (char) (i + 48);
+                    placementafter = newPlacement(location, placement);
+                    if (takeCards(location, placementafter) > cardnum) {
+                        cardnum = takeCards(location, placement);
+                        cardsnum = cardsnum + location + cardnum;
+                        cardnum=0;
+                    }
+                }
+            }
+            if (i >= 10 & i < 36) {
+                if (isMoveLegal(placement, (char) (i + 65 -10 ))) {
+                    location = (char) (i + 65 -10);
+                    placementafter = newPlacement(location, placement);
+                    if (takeCards(location, placementafter) > cardnum) {
+                        cardnum = takeCards(location, placement);
+                        cardsnum = cardsnum + location + cardnum;
+                        cardnum=0;
+                    }
+                }
+            }
+        }
+        int least=6;
+        if(cardsnum.length()>1) {
+            for (int i = 1; i < cardsnum.length(); i = i + 2) {
+                if (cardsnum.charAt(i) - 48 < least) {
+                    least = cardsnum.charAt(i) - 48;
+                    location = cardsnum.charAt(i - 1);
+                    loc=location+"";
+                }else if(cardsnum.charAt(i) - 48 == least){
+                    loc=loc+location;
+                }
+            }
+        }
+        return loc;
+    }
 
-//    public static char generateMove(String placement) {
-//        char location = '\0';
-//        char[][] board = Board.board;
-//        int count = -1;
-//        int countnext = -1;
-//        int countmost = 6;
-//        char loc = '\0';
-//        String loclist = "";
-//        String locnext = "";
-//        String locnextlist = "";
-//        String placementafter = "";
-//        for (int i = 0; i < 36; i++) {
-//            if (i >= 0 & i <= 9) {
-//                if (isMoveLegal(placement, (char) (i + 48))) {
-//                    location = (char) (i + 48);
-//                    if (takeCards(location, placement) > count) {
-//                        count = takeCards(location, placement);
-//                        loc = location;
-//                        loclist = String.valueOf(loc);
-//                        for (int m = 0; m < loclist.length(); m++) {
-//                            placementafter = newPlacement(loclist.charAt(m), placement);
-//                            if (takeCards(loclist.charAt(m), placementafter) > count) {
-//                                countnext = takeCards(location, placementafter);
-//                                locnext = String.valueOf(location) + String.valueOf(countnext);
-//                            }
-//                        }
-//                    } else if (takeCards(location, placement) == count) {
-//                        loclist = locnextlist + loc;
-//                        for (int m = 0; m < loclist.length(); m++) {
-//                            placementafter = newPlacement(loclist.charAt(m), placement);
-//                            if (takeCards(loclist.charAt(m), placementafter) > count) {
-//                                countnext = takeCards(location, placementafter);
-//                                locnext = String.valueOf(location) + String.valueOf(countnext);
-//                            }
-//                        }
-//                    }
-//                    locnextlist = locnextlist + locnext;
-//                    if (locnextlist.length() > 2) {
-//                        for (int k = 1; k < locnextlist.length(); k = k + 2) {
-//                            if (locnextlist.charAt(k) - 48 < countmost) {
-//                                countmost = locnextlist.charAt(k) - 48;
-//                                loc = locnextlist.charAt(k - 1);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//
-//            if (i >= 10 & i < 36) {
-//                if (isMoveLegal(placement, (char) (i + 55))) {
-//                    location = (char) (i + 55);
-//                    if (takeCards(location, placement) > count) {
-//                        count = takeCards(location, placement);
-//                        loc = location;
-//                        loclist = String.valueOf(loc);
-//                        for (int m = 0; m < loclist.length(); m++) {
-//                            placementafter = newPlacement(loclist.charAt(m), placement);
-//                            if (takeCards(loclist.charAt(m), placementafter) > count) {
-//                                countnext = takeCards(location, placementafter);
-//                                locnext = String.valueOf(location) + String.valueOf(countnext);
-//                            }
-//                        }
-//                    } else if (takeCards(location, placement) == count) {
-//                        loclist = locnextlist + loc;
-//                        for (int m = 0; m < loclist.length(); m++) {
-//                            placementafter = newPlacement(loclist.charAt(m), placement);
-//                            if (takeCards(loclist.charAt(m), placementafter) > count) {
-//                                countnext = takeCards(location, placementafter);
-//                                locnext = String.valueOf(location) + String.valueOf(countnext);
-//                            }
-//                        }
-//                    }
-//                    locnextlist = locnextlist + locnext;
-//                    if (locnextlist.length() > 2) {
-//                        for (int k = 1; k < locnextlist.length(); k = k + 2) {
-//                            if (locnextlist.charAt(k) - 55 < countmost) {
-//                                countmost = locnextlist.charAt(k) - 55;
-//                                loc = locnextlist.charAt(k - 1);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return loc;
-//    }
 
 
 
