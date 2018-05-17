@@ -13,4 +13,9 @@ of our project implements the following features:
 
 additional features...
 
+- Rule book for the Game.
+- Sound Clip while playing the Game
+- display error messages and notifications
+
+
 
