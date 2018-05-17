@@ -1,4 +1,4 @@
-Reviewer: vishnuvardhan jasti (u6611178)
+Reviewer: vishnuvardhan jasti (u6611697)
 Component: Task 6 - isMoveSequenceValid
 Author: Danny Feng (u6611178)
 

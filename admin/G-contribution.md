@@ -1,8 +1,9 @@
 We declare that the work toward our submission of Stage G was distributed among the group members as follows:
 
-* u2345678 30
-* u3456789 40
-* u0123456 30
+The whole assinment contribution
+* u6611178 Owned Task 4, Task 6, Task 7 (rewrote parts of the task to fixed bug), Task 8, Task 9, Task 11. Helped fixing bugs in task 5 and task 10;
+* u6555078 Owned Task 2, Task 3, Task 5, Task 10, Task 12;
+* u6611697 Owned Task 7, helped fixing bugs and did documents includes rules book, presentation slider.
 
-Signed: Mary Jones (u2345678), Bob Smith (u3456789), and Sue Black (u0123456)
+Signed: Danny Feng (u6611178), Vishnuvardhan Jasti(u6611697), Chi Ben (u6555078)
 
