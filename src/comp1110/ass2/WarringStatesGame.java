@@ -158,7 +158,7 @@ public class WarringStatesGame {
      * @param placement    the current placement string
      * @param locationChar a location for Zhang Yi to move to
      * @return true if Zhang Yi may move to that location
-     * @author: Ben
+     * @author: Ben wrote this. Vishnu and Danny contributed to fix bug
      */
     public static boolean isMoveLegal(String placement, char locationChar) {
         // FIXME Task 5: determine whether a given move is legal
@@ -508,7 +508,7 @@ public class WarringStatesGame {
      * @param numPlayers   the number of players in the game, must be in the range [2..4]
      * @param playerId     the player number for which to get the list of supporters, [0..(numPlayers-1)]
      * @return the list of supporters for the given player
-     * @author: Vishnu 60 % and Danny 40% (Vishnu first wrote this task but the testGood fails. Danny rewrote 50% of the code to fix the bug.
+     * @author: Vishnu and Danny (Vishnu first wrote this task but the testGood fails. Danny rewrote 50% of the code to fix the bug.
      * Vishnu's method of finding if there is the same kingdom card when zhangyi move is not returning the correct result
      * also he forgot to update the setup string when zhangyi move.)
      */
@@ -654,7 +654,8 @@ public class WarringStatesGame {
      * @param moveSequence a string of location characters representing a sequence of moves
      * @param numPlayers   the number of players in the game, must be in the range [2..4]
      * @return an array containing the player ID who controls each kingdom, where
-     * @author Danny
+     * @author Danny (currently the code is 99% from Danny), Ben make effort to write it but
+     * Danny rewrite it completely.
      * - element 0 contains the player ID of the player who controls the flag of Qin
      * - element 1 contains the player ID of the player who controls the flag of Qi
      * - element 2 contains the player ID of the player who controls the flag of Chu
@@ -927,6 +928,8 @@ public class WarringStatesGame {
         }
         return win;
     }
+
+
 
 /** All the code below is for task 12*/
     /**
