@@ -279,6 +279,7 @@ public class Game extends Application {
     }
 
 
+    
     /**
      * return a location which minimum the upper number of cards of the next move in all legal moves
      * @param placement current placement string
