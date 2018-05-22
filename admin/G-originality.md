@@ -6,6 +6,11 @@ We declare that the work we have submitted for Stage G of this assignment and al
 
 * ....
 
+Danny:
 ScreensController.java
 The way to manage multiple screens is took from https://github.com/acaicedo/JFX-MultiScreen
+
+Ben:
+The idea of using suitable data structure in my tasks are came from a discussion with <Chengji Yang,Chang Liu,Pengxiang Hao>
+
 Signed: Danny Feng (u6611178), Vishnuvardhan Jasti(u6611697) and Chi Ben (u6555078)
