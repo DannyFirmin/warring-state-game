@@ -8,6 +8,4 @@ We declare that the work we have submitted for Stage G of this assignment and al
 
 ScreensController.java
 The way to manage multiple screens is took from https://github.com/acaicedo/JFX-MultiScreen
-Signed: Danny Feng (u6611178)
-
-vishnuvardhan Jasti(u6611697)
+Signed: Danny Feng (u6611178), Vishnuvardhan Jasti(u6611697) and Chi Ben (u6555078)
